@@ -2,22 +2,18 @@
 import { computed, ref } from 'vue'
 import TemplateCard from '../TemplateCard.vue'
 import NumberControl from '../NumberControl.vue'
-import {
-  defaultFeatureItem,
-  FEATURE_VARIANTS,
-  renderFeatures
-} from '../../templates/features.js'
+import { defaultStatItem, STATS_VARIANTS, renderStats } from '../../templates/stats.js'
 
 const countTiles = ref(4)
 const countRail = ref(4)
-const items = ref(Array.from({ length: 4 }, (_, i) => ({ ...defaultFeatureItem(i) })))
+const items = ref(Array.from({ length: 4 }, (_, i) => ({ ...defaultStatItem(i) })))
 
 // Keep items long enough for both variants; trim when both counts shrink.
 function sync() {
   const n = Math.max(1, countTiles.value, countRail.value)
   if (items.value.length < n) {
     const add = Array.from({ length: n - items.value.length }, (_, i) =>
-      defaultFeatureItem(items.value.length + i)
+      defaultStatItem(items.value.length + i)
     )
     items.value = [...items.value, ...add]
   } else if (items.value.length > n) {
@@ -27,9 +23,9 @@ function sync() {
 
 const cards = computed(() => {
   sync()
-  return FEATURE_VARIANTS.map((v) => ({
+  return STATS_VARIANTS.map((v) => ({
     ...v,
-    html: renderFeatures({
+    html: renderStats({
       count: v.id === 'rail' ? countRail.value : countTiles.value,
       items: items.value,
       variant: v.id
@@ -39,10 +35,10 @@ const cards = computed(() => {
 </script>
 
 <template>
-  <section id="features" class="tpl-section">
+  <section id="stats" class="tpl-section">
     <header class="tpl-section__head">
       <span class="tpl-section__num">06</span>
-      <h3 class="tpl-section__title">Features · 特徴データ</h3>
+      <h3 class="tpl-section__title">Stats · 統計</h3>
       <p class="tpl-section__desc">
         タイルは角丸の密グリッド、左ボーダー列は左線＋ flex
         逆順で数値を上に表示。いずれも 640px / 1024px
@@ -54,7 +50,7 @@ const cards = computed(() => {
       v-for="card in cards"
       :key="card.id"
       :name="card.label"
-      badge="pd-features"
+      badge="pd-stats"
       :html="card.html"
     >
       <template #controls>

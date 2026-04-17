@@ -43,7 +43,7 @@
 │   ├── templates/*.js            # 纯函数 HTML 生成器，每类模板一个文件
 │   │   ├── util.js               # esc / indent / placeholderForCols / repeat
 │   │   ├── heading.js / hgroup.js / images.js / media.js / highlights.js
-│   │   ├── features.js / specs.js / steps.js / video.js / compare.js
+│   │   ├── stats.js / specs.js / steps.js / video.js / compare.js
 │   └── components/
 │       ├── TemplateCard.vue      # 统一的预览卡片（preview + code + copy）
 │       ├── CopyButton.vue / NumberControl.vue / SegmentControl.vue / SwitchControl.vue
@@ -104,7 +104,7 @@
 - 新增可调参数：
   - Images：列数（1–6）、图注开关
   - Highlights：项数（1–8）
-  - Features：项数（1–8）+ 逐项字段编辑
+  - Stats：各样式项数（1–8）、双变体平铺；文案在预览内编辑
   - Specs：单品 / 多品切换 + 比较商品数（2–6）
   - Steps：步骤数（1–10）
   - Video：列数（1–2）
@@ -113,7 +113,7 @@
 - 保留 `preview.html` / `preview.css` / `test.html` 作为历史参考，未删除。
 
 **未做的事情**：
-- 没有把字段级编辑加到全部模板（目前只有 Features）。未来若有需要，可以参考 `FeaturesSection.vue` 里 `#fields` slot 的用法。
+- 没有把字段级表单加到全部模板（Stats 等用 `TemplateCard` 的可编辑预览改文案）。未来若要逐项表单，可在对应 `XxxSection.vue` 增加 `#fields` slot，参考 `TemplateCard.vue`。
 - 没有持久化（刷新就丢）。如果未来要让运营保存配置，可以考虑 `localStorage`。
 - 没做国际化框架。目前 UI 文案直接硬编码为日语，对小型内部工具足够；若未来需要中/日/英切换再引入 vue-i18n。
 

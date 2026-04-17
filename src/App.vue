@@ -4,7 +4,7 @@ import HgroupSection from './components/sections/HgroupSection.vue'
 import ImagesSection from './components/sections/ImagesSection.vue'
 import MediaSection from './components/sections/MediaSection.vue'
 import HighlightsSection from './components/sections/HighlightsSection.vue'
-import FeaturesSection from './components/sections/FeaturesSection.vue'
+import StatsSection from './components/sections/StatsSection.vue'
 import SpecsSection from './components/sections/SpecsSection.vue'
 import StepsSection from './components/sections/StepsSection.vue'
 import VideoSection from './components/sections/VideoSection.vue'
@@ -16,7 +16,7 @@ const NAV = [
   { num: '03', id: 'images', label: 'Images 画像グリッド' },
   { num: '04', id: 'media', label: 'Media 画像+テキスト' },
   { num: '05', id: 'highlights', label: 'Highlights ハイライト' },
-  { num: '06', id: 'features', label: 'Features 特徴データ' },
+  { num: '06', id: 'stats', label: 'Stats 統計' },
   { num: '07', id: 'specs', label: 'Specs 仕様' },
   { num: '08', id: 'steps', label: 'Steps ステップ' },
   { num: '09', id: 'video', label: 'Video 動画' },
@@ -56,7 +56,7 @@ const NAV = [
       <ImagesSection />
       <MediaSection />
       <HighlightsSection />
-      <FeaturesSection />
+      <StatsSection />
       <SpecsSection />
       <StepsSection />
       <VideoSection />

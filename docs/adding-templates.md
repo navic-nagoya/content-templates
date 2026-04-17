@@ -115,7 +115,7 @@ src/App.vue                                  # 追加导航 + 挂载组件
 
 - 运营想改什么？列数？项数？左右反向？变体切换？
 - 每个参数的合理范围是什么？（默认值 / min / max）
-- 有没有「每一项」独立的内容编辑需求？（像 Features 那样）
+- 有没有「每一项」独立的内容编辑需求？（像 Stats 用预览内编辑，或单独做 `#fields` 表单）
 
 确定参数决定了你在 Section 组件里要用 `NumberControl` / `SwitchControl` / `SegmentControl` 中的哪一个。
 
@@ -224,7 +224,7 @@ const html = computed(() => renderFaq({ count: count.value }))
 - 所有 `<TemplateCard>` 的 `name` / `label` / 描述文字 **必须是日语**；
 - 控件标签（`label="項目数"`）**必须是日语**；
 - 不要直接在 `<template>` 里写 Shopify 的 HTML 结构，一律通过 `renderFaq()` 生成 → `v-html` 渲染；
-- 如果有逐项字段编辑需求，参考 `FeaturesSection.vue` 的 `#fields` slot 写法。
+- 如果有逐项字段编辑需求，在对应 `XxxSection.vue` 使用 `#fields` slot；或沿用 `TemplateCard` 的可编辑预览（见 `StatsSection.vue`）。
 
 **⑤ 挂到 `src/App.vue`**
 

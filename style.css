@@ -358,15 +358,15 @@
 }
 
 /* ============================================================
-   6. 特性模板 pd-features（tiles / rail 两种变体）
+   6. 统计模板 pd-stats（tiles / rail）
    ============================================================ */
-.pd-section.pd-features {
+.pd-section.pd-stats {
   background: #fff;
   padding: 64px 24px;
 }
 
 /* --- tiles: rounded tight-gap grid --- */
-.pd-features--tiles .pd-features__grid {
+.pd-stats--tiles .pd-stats__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2px;
@@ -378,18 +378,18 @@
 }
 
 @media (min-width: 640px) {
-  .pd-features--tiles .pd-features__grid {
+  .pd-stats--tiles .pd-stats__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .pd-features--tiles .pd-features__grid {
+  .pd-stats--tiles .pd-stats__grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-.pd-features--tiles .pd-features__cell {
+.pd-stats--tiles .pd-stats__cell {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -398,14 +398,14 @@
   background: rgba(156, 163, 175, 0.05);
 }
 
-.pd-features--tiles .pd-features__label {
+.pd-stats--tiles .pd-stats__label {
   font-size: 14px;
   font-weight: 600;
   line-height: 1.5;
   color: #4b5563;
 }
 
-.pd-features--tiles .pd-features__value {
+.pd-stats--tiles .pd-stats__value {
   order: -1;
   font-size: clamp(26px, 4vw, 30px);
   font-weight: 600;
@@ -416,7 +416,7 @@
 }
 
 /* --- rail: left border, column-reverse, loose grid --- */
-.pd-features--rail .pd-features__grid {
+.pd-stats--rail .pd-stats__grid {
   display: grid;
   grid-template-columns: 1fr;
   column-gap: 32px;
@@ -428,7 +428,7 @@
 }
 
 @media (min-width: 640px) {
-  .pd-features--rail .pd-features__grid {
+  .pd-stats--rail .pd-stats__grid {
     grid-template-columns: repeat(2, 1fr);
     margin-top: 80px;
     row-gap: 64px;
@@ -436,13 +436,13 @@
 }
 
 @media (min-width: 1024px) {
-  .pd-features--rail .pd-features__grid {
+  .pd-stats--rail .pd-stats__grid {
     grid-template-columns: repeat(4, 1fr);
     margin-top: 112px;
   }
 }
 
-.pd-features--rail .pd-features__cell {
+.pd-stats--rail .pd-stats__cell {
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-start;
@@ -452,14 +452,14 @@
   text-align: left;
 }
 
-.pd-features--rail .pd-features__label {
+.pd-stats--rail .pd-stats__label {
   font-size: 16px;
   line-height: 1.75;
   font-weight: 400;
   color: #4b5563;
 }
 
-.pd-features--rail .pd-features__value {
+.pd-stats--rail .pd-stats__value {
   font-size: 30px;
   font-weight: 600;
   letter-spacing: -0.025em;
