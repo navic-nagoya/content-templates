@@ -21,7 +21,7 @@ style.css
 src/templates/<模板>.js
 ```
 
-通常 **不需要** 改 Section 组件、App.vue，也不需要运营重新粘贴 Style Block 以外的任何东西 —— 只要 class 是新增的，就不影响线上已有商品。
+通常 **不需要** 改 Section 组件、App.vue，也不需要运营做任何事 —— 只要 class 是新增的，就不影响线上已有商品；样式更新由主题侧统一同步。
 
 ### 步骤
 
@@ -88,9 +88,9 @@ pnpm build     # 确认不报错
 
 新变体会自动出现在画廊里，因为 `HeadingSection.vue` 是基于 `HEADING_VARIANTS` 数组 `v-for` 渲染的 —— 这是组件化带来的红利，加变体 **不用改 Vue 代码**。
 
-**⑤ 通知运营**
+**⑤ 同步样式到 Shopify 主题**
 
-新变体需要对应新 class，运营需要重新粘贴一次 Style Block 到所有要使用 F 风格的商品。旧商品不受影响（它们不用 F 类名）。
+新变体对应了新 class，需要通知主题侧开发把更新后的 `style.css` 同步到各 Shopify 项目（`theme.liquid` 引用的资源目录里）。旧商品不受影响（它们不用 F 类名）。**运营不需要做任何事**。
 
 ---
 
@@ -261,9 +261,10 @@ pnpm build                        # 2. 生产构建不能报错
 - [ ] 点「コードをコピー」复制出来的代码，手动贴到一个 `<html><body><style>…style.css…</style>[粘贴]</body></html>` 临时文件，浏览器打开样式正确；
 - [ ] 响应式：缩小浏览器到手机宽度，布局没崩。
 
-**⑦ 通知运营**
+**⑦ 收尾**
 
-- 必要操作：让运营给还在用的商品重新粘贴一次 Style Block（因为 `style.css` 多了新段）；
+- **同步 `style.css` 到 Shopify 主题**：因为 `style.css` 多了新段，需要主题开发把最新版部署到各 Shopify 项目的资源目录（或更新 `theme.liquid` 引用的 CDN 链接）；
+- **通知运营**：新模板已上线可用，告诉他们画廊里对应位置的入口即可。运营不需要动任何已有商品，也不需要粘 `<style>`；
 - 在 `AGENTS.md` §5 历史任务记录里追加一行「XXXX-XX-XX 新增 FAQ 模板」。
 
 ---

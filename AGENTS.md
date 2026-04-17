@@ -6,7 +6,9 @@
 
 ## 1. 项目本质
 
-这是一个给 **日语公司的 Shopify 运营同学** 使用的商品详情页富文本模板库。运营在 Shopify 后台商品说明编辑器的 HTML 模式里粘贴本仓库提供的 `<style>` + `<section>` 片段，从而获得统一、美观的产品详情排版。
+这是一个给 **日语公司的 Shopify 运营同学** 使用的商品详情页富文本模板库。运营在 Shopify 后台商品说明编辑器的 HTML 模式里粘贴本仓库提供的 `<section>` 片段，从而获得统一、美观的产品详情排版。
+
+**样式引入方式**：`style.css` 由 **开发** 以主题资源的形式引入各 Shopify 项目（例如通过 `theme.liquid` 里的 `<link>`，或打包进主题的资源目录），对运营透明。运营 **不需要** 在商品说明里贴 `<style>` 块，只需要贴 `<section>` 片段。
 
 - **Shopify 侧真正生效的样式**：`/style.css`（class 全部以 `pd-` 开头）。class 命名对现有商品有强依赖，**不能随意改动**。
 - **运营使用的画廊工具**：本仓库自带一个 Vue 3 + Vite 的本地站点，提供每个模板的实时预览、可交互参数调整、一键复制 HTML 代码。画廊站点本身 **不会被部署到 Shopify**，只是运营同学本地跑着用。
@@ -36,7 +38,7 @@
 ├── package.json                  # 用 pnpm 安装（npm 在本机环境有问题，见 §7）
 ├── src/
 │   ├── main.js                   # Vue 入口：依次引入 app.css + 上层 ../style.css
-│   ├── App.vue                   # 侧边导航 + Style Block 卡片 + 各 Section
+│   ├── App.vue                   # 侧边导航 + 各 Section
 │   ├── styles/app.css            # 画廊 UI 样式（不会进 Shopify）
 │   ├── templates/*.js            # 纯函数 HTML 生成器，每类模板一个文件
 │   │   ├── util.js               # esc / indent / placeholderForCols / repeat
@@ -86,7 +88,7 @@
 1. `src/templates/xxx.js` 写 `renderXxx(props)` 纯函数，返回 HTML 字符串。
 2. `src/components/sections/XxxSection.vue` 用 `<TemplateCard>` 包裹，通过 `NumberControl` / `SwitchControl` / `SegmentControl` 暴露参数。
 3. `src/App.vue` 的 `NAV` 追加一项（**label 必须是日语**）并挂载组件。
-4. 若加了新 class，告知运营重新粘贴 Style Block。
+4. 若加了新 class，通知主题侧开发把新版 `style.css` 同步到各 Shopify 项目（不涉及运营）。
 5. `pnpm build` 通过 + 手动在浏览器里验证所有控件。
 
 ## 5. 历史任务记录
@@ -108,7 +110,6 @@
   - Video：列数（1–2）
   - Compare：比较数（2–4）
   - Media：左右反向 + CTA 开关
-- 提供 Style Block 卡片一键复制（fetch `style.css` 并用 `<style>…</style>` 包裹）。
 - 保留 `preview.html` / `preview.css` / `test.html` 作为历史参考，未删除。
 
 **未做的事情**：
@@ -124,13 +125,23 @@
 
 新增 `docs/adding-templates.md`，详细说明三种常见变更（加变体 / 加模板 / 改样式）的 playbook，含代码骨架、风险说明、验证清单。README 和本文件都已挂链接。
 
+### 2026-04-17 移除 Style Block 流程
+
+确认 `style.css` 由开发以主题资源形式引入各 Shopify 项目，运营完全不用关心样式注入。因此：
+
+- 删除了 `App.vue` 里的「★ Style Block」侧边栏导航、顶部 callout、卡片及对应的 `fetch('style.css')` 逻辑。
+- 侧边栏运用フロー从三步（Style Block → 复制 section → 改内容）简化为三步（复制 section → 粘贴 → 改内容）。
+- README §「运营使用流程」去掉「粘贴 Style Block」步骤，新增"前置条件：开发已在各项目引入 style.css"说明。
+- `docs/adding-templates.md` 里所有「通知运营重新粘贴 Style Block」改为「通知主题开发同步 style.css」。
+- **运营使用层面的流程此后都不应再提 Style Block。**
+
 ## 6. 代码风格 / 规则
 
 - 代码注释一律英文（用户规则）。
 - Vue 组件用 `<script setup>` 语法 + JS（项目未引入 TypeScript，不要主动改）。
 - 不要引入新的大型依赖（Tailwind、lodash、axios 等）。项目刻意保持「原生 CSS + 最小依赖」。
 - 画廊站点自身的 class 用 `.app-*` / `.tpl-*` / `.ctl-*` 前缀，避免跟 Shopify 的 `.pd-*` 冲突。
-- 修改 `/style.css` 要谨慎：它是运营已经粘贴到线上商品的样式合同，改 class 名、删属性都可能让已上线商品样式崩溃。
+- 修改 `/style.css` 要谨慎：它是线上商品 HTML 片段依赖的 class 合同（运营已经把 `class="pd-..."` 贴进了大量商品），改 class 名、删属性都可能让已上线商品样式崩溃。`style.css` 由开发统一维护并引入各 Shopify 主题，改完后需要主题侧同步更新。
 
 ## 7. 环境注意事项
 
