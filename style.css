@@ -503,7 +503,7 @@
   color: #6b7280;
 }
 
-/* --- shared: intro typography (hero-specs, spec-grid, stacked, panels, detail) --- */
+/* --- shared: intro typography (hero-specs, spec-grid, stacked, detail) --- */
 .pd-feature__intro-heading {
   font-size: clamp(26px, 3.2vw, 36px);
   font-weight: 700;
@@ -797,77 +797,6 @@
   font-size: 14px;
   line-height: 1.65;
   color: #6b7280;
-}
-
-/* --- variant: panels (stacked category blocks; static substitute for tabs) --- */
-.pd-feature--panels {
-  padding: 64px 24px;
-  background: #fff;
-}
-.pd-feature--panels .pd-feature__panels-wrap {
-  max-width: 1280px;
-  margin: 0 auto;
-}
-.pd-feature--panels .pd-feature__panels-intro {
-  max-width: 48rem;
-}
-.pd-feature--panels .pd-feature__panels-list {
-  margin-top: 32px;
-  padding-top: 28px;
-  border-top: 1px solid #e5e7eb;
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
-@media (min-width: 1024px) {
-  .pd-feature--panels .pd-feature__panels-list {
-    gap: 56px;
-  }
-}
-.pd-feature--panels .pd-feature__panel-label {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--brand-color, #0b62a9);
-  margin: 0 0 12px;
-}
-.pd-feature--panels .pd-feature__panel-row {
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 24px;
-}
-@media (min-width: 1024px) {
-  .pd-feature--panels .pd-feature__panel-row {
-    display: grid;
-    grid-template-columns: 5fr 7fr;
-    gap: 32px;
-    align-items: center;
-  }
-}
-.pd-feature--panels .pd-feature__panel-text h3 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #111827;
-  margin: 0;
-}
-.pd-feature--panels .pd-feature__panel-text p {
-  margin: 10px 0 0;
-  font-size: 14px;
-  line-height: 1.7;
-  color: #6b7280;
-}
-.pd-feature--panels .pd-feature__panel-media img {
-  width: 100%;
-  aspect-ratio: 2 / 1;
-  object-fit: cover;
-  border-radius: 12px;
-  background: #f3f4f6;
-  display: block;
-}
-@media (min-width: 640px) {
-  .pd-feature--panels .pd-feature__panel-media img {
-    aspect-ratio: 5 / 2;
-  }
 }
 
 /* --- variant: detail-gallery (kettle-style) --- */

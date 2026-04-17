@@ -27,9 +27,6 @@ const ITEM_PRESETS = [
   }
 ]
 
-/** Optional panel label for the "panels" variant (stacked category blocks). */
-const PANEL_LABELS = ['デザイン', '素材', '品質', '同梱内容']
-
 export function defaultFeatureItem(i = 0) {
   const preset = ITEM_PRESETS[i % ITEM_PRESETS.length]
   return {
@@ -37,8 +34,7 @@ export function defaultFeatureItem(i = 0) {
     alt: preset.title,
     icon: 'https://placehold.co/64x64',
     title: preset.title,
-    desc: preset.desc,
-    panel: PANEL_LABELS[i % PANEL_LABELS.length]
+    desc: preset.desc
   }
 }
 
@@ -50,7 +46,6 @@ const VARIANT_CLASS = {
   specGrid: 'pd-feature--spec-grid',
   stackedMedia: 'pd-feature--stacked-media',
   heroAside: 'pd-feature--hero-aside',
-  panels: 'pd-feature--panels',
   detailGallery: 'pd-feature--detail-gallery'
 }
 
@@ -63,7 +58,6 @@ export const FEATURE_VARIANTS = [
   { id: 'specGrid', label: '文案＋仕様／画像2×2' },
   { id: 'stackedMedia', label: '大画像＋テキストの積み重ね' },
   { id: 'heroAside', label: '半幅ヒーロー＋サイド仕様' },
-  { id: 'panels', label: 'カテゴリ見出し付き（縦並び）' },
   { id: 'detailGallery', label: 'メイン画像＋サムネ＋仕様' }
 ]
 
@@ -100,7 +94,6 @@ export function renderFeature({ count = 3, items = [], variant = 'cards', split 
   if (variant === 'specGrid') return renderSpecGrid(list, mod, mergedSplit)
   if (variant === 'stackedMedia') return renderStackedMedia(list, mod, mergedSplit)
   if (variant === 'heroAside') return renderHeroAside(list, mod, mergedSplit)
-  if (variant === 'panels') return renderPanels(list, mod, mergedSplit)
   if (variant === 'detailGallery') return renderDetailGallery(list, mod, mergedSplit)
   return renderCards(list, mod)
 }
@@ -292,44 +285,6 @@ function renderHeroAside(list, mod, s) {
       <dl class="pd-feature__aside-dl">
 ${indent(dlHtml, 8)}
       </dl>
-    </div>
-  </div>
-</section>`
-}
-
-/**
- * Stacked blocks with a category label each (Tailwind "tabs" layout as static vertical sections).
- */
-function renderPanels(list, mod, s) {
-  const blocksHtml = list
-    .map(
-      (item, i) => {
-        const label = esc(item.panel || `詳細 ${i + 1}`)
-        return `<div class="pd-feature__panel-block">
-  <p class="pd-feature__panel-label">${label}</p>
-  <div class="pd-feature__panel-row">
-    <div class="pd-feature__panel-text">
-      <h3>${esc(item.title || '')}</h3>
-      <p>${esc(item.desc || '')}</p>
-    </div>
-    <div class="pd-feature__panel-media">
-      <img src="${esc(item.src)}" alt="${esc(item.alt || '')}" />
-    </div>
-  </div>
-</div>`
-      }
-    )
-    .join('\n')
-
-  return `<section class="pd-section pd-feature ${mod}">
-  <div class="pd-feature__panels-wrap">
-    <div class="pd-feature__panels-intro">
-      <p class="pd-feature__eyebrow">${esc(s.eyebrow)}</p>
-      <h2 class="pd-feature__intro-heading">${esc(s.heading)}</h2>
-      <p class="pd-feature__intro-lead">${esc(s.lead)}</p>
-    </div>
-    <div class="pd-feature__panels-list">
-${indent(blocksHtml, 6)}
     </div>
   </div>
 </section>`
