@@ -358,41 +358,60 @@
 }
 
 /* ============================================================
-   6. 特性模板 pd-features
+   6. 特性模板 pd-features（统计式圆角网格）
    ============================================================ */
+.pd-section.pd-features {
+  background: #fff;
+  padding: 64px 24px;
+}
+
 .pd-features__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-@media (max-width: 767px) {
-  .pd-features__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 768px) and (max-width: 1024px) {
-  .pd-features__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.pd-features__item {
+  grid-template-columns: 1fr;
+  gap: 2px;
+  overflow: hidden;
+  border-radius: 16px;
   text-align: center;
-  padding: 24px 16px;
-  border: 1px solid #eee;
+  max-width: 1280px;
+  margin: 0 auto;
 }
-.pd-features__value {
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 800;
-  color: var(--brand-color, #0b62a9);
-  line-height: 1;
-  margin-bottom: 6px;
+
+@media (min-width: 640px) {
+  .pd-features__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
+
+@media (min-width: 1024px) {
+  .pd-features__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.pd-features__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  background: rgba(156, 163, 175, 0.05);
+}
+
 .pd-features__label {
-  font-size: 13px;
-  color: #999;
+  font-size: 14px;
+  font-weight: 600;
   line-height: 1.5;
+  color: #4b5563;
+}
+
+.pd-features__value {
+  order: -1;
+  font-size: clamp(26px, 4vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #111827;
+  line-height: 1.2;
+  margin: 0 0 8px;
 }
 
 /* ============================================================

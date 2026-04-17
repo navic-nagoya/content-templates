@@ -31,7 +31,7 @@ const html = computed(() => {
       <span class="tpl-section__num">06</span>
       <h3 class="tpl-section__title">Features · 特徴データ</h3>
       <p class="tpl-section__desc">
-        CSS で 4 列固定（モバイルでは自動的に 2 列に）。項目ごとに数値編集可
+        角丸グリッド＋細い隙間のスタイル。640px 以上で 2 列、1024px 以上で最大 4 列。項目ごとに編集可
       </p>
     </header>
 

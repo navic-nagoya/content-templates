@@ -17,16 +17,16 @@ export function renderFeatures({ count = 4, items = [] }) {
 
   const itemsHtml = list
     .map(
-      (item) => `<div class="pd-features__item">
-  <div class="pd-features__value">${esc(item.value)}</div>
-  <div class="pd-features__label">${esc(item.label)}</div>
-</div>`
+      (item) => `<div class="pd-features__cell">
+    <dt class="pd-features__label">${esc(item.label)}</dt>
+    <dd class="pd-features__value">${esc(item.value)}</dd>
+  </div>`
     )
     .join('\n')
 
-  return `<section class="pd-section">
-  <div class="pd-features__grid">
+  return `<section class="pd-section pd-features">
+  <dl class="pd-features__grid">
 ${indent(itemsHtml, 4)}
-  </div>
+  </dl>
 </section>`
 }
