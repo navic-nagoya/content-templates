@@ -1,17 +1,19 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import CopyButton from './CopyButton.vue'
+import { highlightShopifyHtml } from '../utils/highlight-html.js'
 
-defineProps({
+const props = defineProps({
   name: { type: String, required: true },
   badge: { type: String, default: '' },
   html: { type: String, required: true }
 })
 
-// Tab state: 'preview' (default) renders the live HTML, 'code' shows the raw
-// HTML string that operators paste into Shopify. Inspired by Tailwind UI's
-// block gallery pattern (tailwindcss.com/plus/ui-blocks).
+// Tab state: 'preview' (default) renders the live HTML, 'code' shows syntax-highlighted
+// source (Highlight.js — same stack as Finsweet Code Highlight).
 const tab = ref('preview')
+
+const highlightedHtml = computed(() => highlightShopifyHtml(props.html))
 </script>
 
 <template>
@@ -56,7 +58,7 @@ const tab = ref('preview')
     ></div>
 
     <div v-show="tab === 'code'" class="tpl-card__code">
-      <pre><code>{{ html }}</code></pre>
+      <pre><code class="hljs" v-html="highlightedHtml"></code></pre>
     </div>
 
     <slot name="fields" />

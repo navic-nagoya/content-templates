@@ -360,7 +360,8 @@ body {
 
 .tpl-card__code {
   background: var(--app-code-bg);
-  color: var(--app-code-ink);
+  /* Token colors come from Highlight.js theme (a11y-dark in main.js), same engine
+     as Finsweet Code Highlight — do not set a flat text color here. */
   font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
   font-size: 12px;
   line-height: 1.55;
@@ -416,7 +417,11 @@ body {
 .tpl-card__code pre code {
   font-family: inherit;
   font-size: inherit;
-  color: inherit;
+}
+
+/* Let Highlight.js theme paint tokens; keep outer panel background from app.css. */
+.tpl-card__code .hljs {
+  background: transparent;
 }
 
 /* ---------------- Optional field editor ---------------- */
