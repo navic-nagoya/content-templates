@@ -285,6 +285,22 @@ body {
   -webkit-appearance: none;
   margin: 0;
 }
+/* Read-only count between +/- (StepControl — table rows/cols only by click). */
+.ctl-number__value {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 26px;
+  padding: 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  background: #fafafa;
+  color: #333;
+}
 
 .ctl-segment {
   display: inline-flex;

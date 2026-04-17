@@ -24,6 +24,22 @@ export function defaultSpecsSingle() {
   return { rows: SINGLE_ROWS.map(([k, v]) => ({ key: k, value: v })) }
 }
 
+/** One placeholder row for single-specs table (gallery editor). */
+export function defaultSpecsSingleRow(i) {
+  const [k, v] = SINGLE_ROWS[i % SINGLE_ROWS.length]
+  return { key: k, value: v }
+}
+
+/** One compare row with `values` length matching product column count (2–6). */
+export function defaultSpecsCompareRow(productCount, rowIndex) {
+  const n = Math.max(2, Math.min(6, productCount | 0))
+  const [k, arr] = COMPARE_ROWS[rowIndex % COMPARE_ROWS.length]
+  return {
+    key: k,
+    values: repeat(n, (j) => arr[j % arr.length])
+  }
+}
+
 export function defaultSpecsCompare(products = 3) {
   const n = Math.max(2, Math.min(6, products | 0))
   return {
