@@ -1,0 +1,646 @@
+/* ============================================================
+   PD TEMPLATES — SHARED STYLESHEET
+   使用方法：将此文件的内容包裹在 <style>...</style> 标签内，
+   粘贴在商品说明的最顶部（仅需一次），之后按需复制下方各 section 模板
+   ============================================================ */
+
+/* ---------- 通用 Reset ---------- */
+.pd-section * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.pd-section img {
+  max-width: 100%;
+  display: block;
+}
+.pd-section {
+  font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ---------- 间距 ---------- */
+.pd-section {
+  margin: 48px 0;
+}
+
+/* ============================================================
+   1. 标题模板 pd-heading
+   ============================================================ */
+
+/* 风格 A：极简左对齐，底部细线 */
+.pd-heading--a {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #111;
+  border-bottom: 4px solid var(--brand-color, #0b62a9);
+  display: inline-block;
+}
+
+/* 风格 B：居中 + 上下装饰线 */
+.pd-heading--b-wrap {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.pd-heading--b-wrap::before,
+.pd-heading--b-wrap::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--brand-color, #0b62a9);
+}
+.pd-heading--b {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #111;
+}
+
+/* 风格 C：左对齐，左侧色块强调 */
+.pd-heading--c-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.pd-heading--c-wrap::before {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 100%;
+  min-height: 36px;
+  background: var(--brand-color, #0b62a9);
+  flex-shrink: 0;
+}
+.pd-heading--c {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  color: #111;
+  line-height: 1.2;
+}
+
+/* 风格 D：居中大字，浅色衬底文字 */
+.pd-heading--d-wrap {
+  text-align: center;
+  position: relative;
+}
+.pd-heading--d-bg {
+  font-size: clamp(48px, 8vw, 80px);
+  font-weight: 900;
+  color: #f0f0f0;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+.pd-heading--d {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  color: #111;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  white-space: nowrap;
+}
+
+/* 风格 E：左对齐，序号前缀 */
+.pd-heading--e-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.pd-heading--e-num {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 900;
+  color: #e8e8e8;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.pd-heading--e {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  color: #111;
+  line-height: 1.2;
+}
+
+/* ============================================================
+   2. 标题组模板 pd-hgroup
+   ============================================================ */
+
+/* 共用 */
+.pd-hgroup__sub {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 8px;
+}
+.pd-hgroup__title {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  color: #111;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.pd-hgroup__desc {
+  font-size: clamp(14px, 1.5vw, 16px);
+  color: #888;
+  line-height: 1.7;
+}
+
+/* 风格 A：居中对齐 */
+.pd-hgroup--a {
+  text-align: center;
+}
+.pd-hgroup--a .pd-hgroup__desc {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* 风格 B：左对齐 */
+.pd-hgroup--b .pd-hgroup__sub {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pd-hgroup--b .pd-hgroup__sub::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: var(--brand-color, #0b62a9);
+}
+
+/* ============================================================
+   3. 图片模板 pd-images
+   ============================================================ */
+.pd-images__grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(1, 1fr);
+}
+.pd-images__grid[data-cols="2"] {
+  grid-template-columns: repeat(2, 1fr);
+}
+.pd-images__grid[data-cols="3"] {
+  grid-template-columns: repeat(3, 1fr);
+}
+.pd-images__grid[data-cols="4"] {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 767px) {
+  .pd-images__grid[data-cols="2"],
+  .pd-images__grid[data-cols="3"],
+  .pd-images__grid[data-cols="4"] {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .pd-images__grid[data-cols="3"],
+  .pd-images__grid[data-cols="4"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pd-images__item img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+.pd-images__caption {
+  padding: 10px 0 0;
+}
+.pd-images__caption h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 4px;
+}
+.pd-images__caption p {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   4. 图文并排模板 pd-media
+   ============================================================ */
+.pd-media__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.pd-media__inner[data-reverse="true"] {
+  direction: rtl;
+}
+.pd-media__inner[data-reverse="true"] > * {
+  direction: ltr;
+}
+
+@media (max-width: 767px) {
+  .pd-media__inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .pd-media__inner[data-reverse="true"] {
+    direction: ltr;
+  }
+}
+
+.pd-media__img img {
+  width: 100%;
+  object-fit: cover;
+}
+.pd-media__body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.pd-media__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+}
+.pd-media__title {
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  color: #111;
+  line-height: 1.25;
+}
+.pd-media__sub {
+  font-size: 15px;
+  font-weight: 600;
+  color: #444;
+}
+.pd-media__text {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.75;
+}
+.pd-media__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  background: linear-gradient(to right, #1a80d9 0%, var(--brand-color, #0b62a9) 50%, #074a85 100%);
+  background-size: 200% 100%;
+  background-position: right center;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  align-self: flex-start;
+  cursor: pointer;
+  transition: background-position 0.4s ease, box-shadow 0.3s ease;
+}
+.pd-media__cta:hover {
+  background-position: left center;
+  box-shadow: 0 4px 14px rgba(11, 98, 169, 0.35);
+}
+.pd-media__cta::after {
+  content: "\2192";
+  transition: transform 0.25s ease;
+}
+.pd-media__cta:hover::after {
+  transform: translateX(3px);
+}
+
+/* ============================================================
+   5. 亮点模板 pd-highlights
+   ============================================================ */
+.pd-highlights__grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.pd-highlights__item {
+  background: #f7f7f7;
+  overflow: hidden;
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+.pd-highlights__item:hover {
+  background: linear-gradient(135deg, #f0f0f0, #fff);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+.pd-highlights__item img {
+  width: 60%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  margin: 20px auto 0;
+  display: block;
+}
+.pd-highlights__item h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  margin: 16px 20px 8px;
+}
+.pd-highlights__item p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.65;
+  margin: 0 20px 20px;
+}
+
+/* ============================================================
+   6. 特性模板 pd-features
+   ============================================================ */
+.pd-features__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 767px) {
+  .pd-features__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .pd-features__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pd-features__item {
+  text-align: center;
+  padding: 24px 16px;
+  border: 1px solid #eee;
+}
+.pd-features__value {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  color: var(--brand-color, #0b62a9);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.pd-features__label {
+  font-size: 13px;
+  color: #999;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   7. 规格参数模板 pd-specs
+   ============================================================ */
+.pd-specs__wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.pd-specs__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+.pd-specs__table thead {
+  display: none;
+}
+.pd-specs__table td {
+  padding: 36px 24px;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+.pd-specs__table td:first-child {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  white-space: nowrap;
+}
+.pd-specs__table td:not(:first-child) {
+  font-size: 14px;
+  font-weight: 400;
+  color: #999;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .pd-specs__table {
+    width: max-content;
+    min-width: 100%;
+  }
+  .pd-specs__table td:first-child {
+    position: sticky;
+    left: 0;
+    background: #fff;
+    z-index: 1;
+  }
+}
+
+/* ============================================================
+   8. 步骤模板 pd-steps
+   ============================================================ */
+.pd-steps__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.pd-steps__item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 24px;
+  position: relative;
+  padding-bottom: 40px;
+}
+.pd-steps__item:last-child {
+  padding-bottom: 0;
+}
+.pd-steps__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pd-steps__num {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--brand-color, #0b62a9);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.pd-steps__line {
+  width: 1px;
+  flex: 1;
+  background: #e0e0e0;
+  margin-top: 8px;
+}
+.pd-steps__item:last-child .pd-steps__line {
+  display: none;
+}
+.pd-steps__body {
+  padding-top: 8px;
+}
+.pd-steps__body h4 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 8px;
+}
+.pd-steps__body p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.pd-steps__body img {
+  width: 100%;
+  max-width: 480px;
+  object-fit: cover;
+}
+
+/* ============================================================
+   10. 产品对比模板 pd-compare
+   ============================================================ */
+
+.pd-compare {
+  overflow: hidden;
+}
+
+/* 卡片行 & 参数行共用网格 */
+.pd-compare__head,
+.pd-compare__row {
+  display: grid;
+}
+.pd-compare[data-cols="2"] .pd-compare__head,
+.pd-compare[data-cols="2"] .pd-compare__row {
+  grid-template-columns: repeat(2, 1fr);
+}
+.pd-compare[data-cols="3"] .pd-compare__head,
+.pd-compare[data-cols="3"] .pd-compare__row {
+  grid-template-columns: repeat(3, 1fr);
+}
+.pd-compare[data-cols="4"] .pd-compare__head,
+.pd-compare[data-cols="4"] .pd-compare__row {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* 产品卡片 */
+.pd-compare__card {
+  padding: 28px 20px 24px;
+  text-align: center;
+}
+.pd-compare__card img {
+  width: 72%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin: 0 auto 16px;
+  display: block;
+}
+.pd-compare__name {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--brand-color, #0b62a9);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.pd-compare__sub {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.pd-compare__price {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--brand-color, #0b62a9);
+}
+
+/* 整体分割线 */
+.pd-compare__divider {
+  height: 1px;
+  background: #e8e8e8;
+}
+
+/* 参数行 */
+.pd-compare__cell {
+  padding: 18px 20px;
+  text-align: center;
+}
+.pd-compare__param {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 4px;
+}
+.pd-compare__hint {
+  display: block;
+  font-size: 14px;
+  color: #aaa;
+  line-height: 1.5;
+}
+
+/* 响应式 */
+@media (max-width: 767px) {
+  .pd-compare[data-cols="3"],
+  .pd-compare[data-cols="4"] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .pd-compare[data-cols="3"] .pd-compare__head,
+  .pd-compare[data-cols="3"] .pd-compare__row {
+    min-width: 520px;
+  }
+  .pd-compare[data-cols="4"] .pd-compare__head,
+  .pd-compare[data-cols="4"] .pd-compare__row {
+    min-width: 700px;
+  }
+}
+
+/* ============================================================
+   9. 视频模板 pd-video
+   ============================================================ */
+.pd-video__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.pd-video__grid[data-cols="2"] {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 767px) {
+  .pd-video__grid[data-cols="2"] {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pd-video__ratio {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  background: #000;
+}
+.pd-video__ratio iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.pd-video__caption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #888;
+}

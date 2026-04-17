@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PD Templates — 全プレビュー</title>
+    <link rel="stylesheet" href="preview.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="preview-header">
+      <h1>PD Templates プレビュー</h1>
+      <p>全セクションを1ページで確認できます</p>
+    </div>
+
+    <!-- ==================== 01 HEADING ==================== -->
+    <div class="preview-divider">
+      01 — Heading<span>pd-heading (5 styles)</span>
+    </div>
+
+    <!-- 风格 A：极简左对齐，底部细线 -->
+    <section class="pd-section">
+      <h2 class="pd-heading--a">商品タイトルテキスト</h2>
+    </section>
+
+    <!-- 风格 B：居中 + 上下装饰线 -->
+    <section class="pd-section" style="text-align: center">
+      <div class="pd-heading--b-wrap">
+        <h2 class="pd-heading--b">商品タイトルテキスト</h2>
+      </div>
+    </section>
+
+    <!-- 风格 C：左对齐，左侧色块强调 -->
+    <section class="pd-section">
+      <div class="pd-heading--c-wrap">
+        <h2 class="pd-heading--c">商品タイトルテキスト</h2>
+      </div>
+    </section>
+
+    <!-- 风格 D：居中大字，浅色衬底装饰 -->
+    <section class="pd-section">
+      <div class="pd-heading--d-wrap">
+        <div class="pd-heading--d-bg">PRODUCT</div>
+        <h2 class="pd-heading--d">商品タイトルテキスト</h2>
+      </div>
+    </section>
+
+    <!-- 风格 E：左对齐，灰色序号前缀 -->
+    <section class="pd-section">
+      <div class="pd-heading--e-wrap">
+        <span class="pd-heading--e-num">01</span>
+        <h2 class="pd-heading--e">商品タイトルテキスト</h2>
+      </div>
+    </section>
+
+    <!-- ==================== 02 HGROUP ==================== -->
+    <div class="preview-divider">
+      02 — Hgroup<span>pd-hgroup (2 styles)</span>
+    </div>
+
+    <!-- 风格 A：居中对齐 -->
+    <section class="pd-section">
+      <hgroup class="pd-hgroup--a">
+        <p class="pd-hgroup__sub">サブタイトル / シリーズ名</p>
+        <h2 class="pd-hgroup__title">商品メインタイトル</h2>
+        <p class="pd-hgroup__desc">
+          ここにメインタイトルを補足する説明文を入力してください。製品のポジショニング、主な訴求ポイント、またはデザインコンセプトをご紹介ください。2行以内に収めることをお勧めします。
+        </p>
+      </hgroup>
+    </section>
+
+    <!-- 风格 B：左对齐 -->
+    <section class="pd-section">
+      <hgroup class="pd-hgroup--b">
+        <p class="pd-hgroup__sub">サブタイトル / シリーズ名</p>
+        <h2 class="pd-hgroup__title">商品メインタイトル</h2>
+        <p class="pd-hgroup__desc">
+          ここにメインタイトルを補足する説明文を入力してください。製品のポジショニング、主な訴求ポイント、またはデザインコンセプトをご紹介ください。2行以内に収めることをお勧めします。
+        </p>
+      </hgroup>
+    </section>
+
+    <!-- ==================== 03 IMAGES ==================== -->
+    <div class="preview-divider">
+      03 — Images<span>pd-images (1/2/3/4 cols)</span>
+    </div>
+
+    <!-- 1列 -->
+    <section class="pd-section">
+      <div class="pd-images__grid" data-cols="1">
+        <div class="pd-images__item">
+          <img src="https://placehold.co/1200x600" alt="画像の説明" />
+          <div class="pd-images__caption">
+            <h4>画像タイトル</h4>
+            <p>画像の説明文（省略可）</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2列 -->
+    <section class="pd-section">
+      <div class="pd-images__grid" data-cols="2">
+        <div class="pd-images__item">
+          <img src="https://placehold.co/800x600" alt="画像の説明" />
+          <div class="pd-images__caption">
+            <h4>画像タイトル</h4>
+            <p>画像の説明文（省略可）</p>
+          </div>
+        </div>
+        <div class="pd-images__item">
+          <img src="https://placehold.co/800x600" alt="画像の説明" />
+          <div class="pd-images__caption">
+            <h4>画像タイトル</h4>
+            <p>画像の説明文（省略可）</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3列 -->
+    <section class="pd-section">
+      <div class="pd-images__grid" data-cols="3">
+        <div class="pd-images__item">
+          <img src="https://placehold.co/600x450" alt="画像の説明" />
+          <div class="pd-images__caption">
+            <h4>画像タイトル</h4>
+            <p>画像の説明文（省略可）</p>
+          </div>
+        </div>
+        <div class="pd-images__item">
+          <img src="https://placehold.co/600x450" alt="画像の説明" />
+          <div class="pd-images__caption">
+            <h4>画像タイトル</h4>
+            <p>画像の説明文（省略可）</p>
+          </div>
+        </div>
+        <div class="pd-images__item">
+          <img src="https://placehold.co/600x450" alt="画像の説明" />
+          <div class="pd-images__caption">
+            <h4>画像タイトル</h4>
+            <p>画像の説明文（省略可）</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4列 -->
+    <section class="pd-section">
+      <div class="pd-images__grid" data-cols="4">
+        <div class="pd-images__item">
+          <img src="https://placehold.co/400x300" alt="画像の説明" />
+          <div class="pd-images__caption">
+            <h4>画像タイトル</h4>
+            <p>画像の説明文（省略可）</p>
+          </div>
+        </div>
+        <div class="pd-images__item">
+          <img src="https://placehold.co/400x300" alt="画像の説明" />
+          <div class="pd-images__caption">
+            <h4>画像タイトル</h4>
+            <p>画像の説明文（省略可）</p>
+          </div>
+        </div>
+        <div class="pd-images__item">
+          <img src="https://placehold.co/400x300" alt="画像の説明" />
+          <div class="pd-images__caption">
+            <h4>画像タイトル</h4>
+            <p>画像の説明文（省略可）</p>
+          </div>
+        </div>
+        <div class="pd-images__item">
+          <img src="https://placehold.co/400x300" alt="画像の説明" />
+          <div class="pd-images__caption">
+            <h4>画像タイトル</h4>
+            <p>画像の説明文（省略可）</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 04 MEDIA ==================== -->
+    <div class="preview-divider">
+      04 — Media<span>pd-media (left/right)</span>
+    </div>
+
+    <!-- 图左文右 -->
+    <section class="pd-section">
+      <div class="pd-media__inner" data-reverse="false">
+        <div class="pd-media__img">
+          <img src="https://placehold.co/800x600" alt="商品画像" />
+        </div>
+        <div class="pd-media__body">
+          <p class="pd-media__label">特性ラベル / Feature</p>
+          <h2 class="pd-media__title">ここにメインタイトルを入力</h2>
+          <p class="pd-media__sub">
+            ここにサブタイトルまたはキャッチコピーを入力
+          </p>
+          <p class="pd-media__text">
+            ここに詳細説明文を入力してください。複数段落も可能です。製品の特性、素材、デザインコンセプト、使用感などを紹介します。レイアウトをシンプルかつ力強く保つため、150字以内を推奨します。
+          </p>
+          <a class="pd-media__cta">詳しくはこちら</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 图右文左 -->
+    <section class="pd-section">
+      <div class="pd-media__inner" data-reverse="true">
+        <div class="pd-media__img">
+          <img src="https://placehold.co/800x600" alt="商品画像" />
+        </div>
+        <div class="pd-media__body">
+          <p class="pd-media__label">特性ラベル / Feature</p>
+          <h2 class="pd-media__title">ここにメインタイトルを入力</h2>
+          <p class="pd-media__sub">
+            ここにサブタイトルまたはキャッチコピーを入力
+          </p>
+          <p class="pd-media__text">
+            ここに詳細説明文を入力してください。複数段落も可能です。製品の特性、素材、デザインコンセプト、使用感などを紹介します。レイアウトをシンプルかつ力強く保つため、150字以内を推奨します。
+          </p>
+          <a class="pd-media__cta">詳しくはこちら</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 05 HIGHLIGHTS ==================== -->
+    <div class="preview-divider">
+      05 — Highlights<span>pd-highlights (auto cols, max 4)</span>
+    </div>
+
+    <section class="pd-section">
+      <div class="pd-highlights__grid">
+        <div class="pd-highlights__item">
+          <img src="https://placehold.co/600x450" alt="ハイライト画像" />
+          <h4>ハイライトタイトル</h4>
+          <p>
+            ここにハイライトの説明文を入力してください。その特性の具体的な価値と体験を紹介します。2〜3文を推奨します。
+          </p>
+        </div>
+        <div class="pd-highlights__item">
+          <img src="https://placehold.co/600x450" alt="ハイライト画像" />
+          <h4>ハイライトタイトル</h4>
+          <p>
+            ここにハイライトの説明文を入力してください。その特性の具体的な価値と体験を紹介します。2〜3文を推奨します。
+          </p>
+        </div>
+        <div class="pd-highlights__item">
+          <img src="https://placehold.co/600x450" alt="ハイライト画像" />
+          <h4>ハイライトタイトル</h4>
+          <p>
+            ここにハイライトの説明文を入力してください。その特性の具体的な価値と体験を紹介します。2〜3文を推奨します。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 06 FEATURES ==================== -->
+    <div class="preview-divider">
+      06 — Features<span>pd-features (data cards)</span>
+    </div>
+
+    <section class="pd-section">
+      <div class="pd-features__grid">
+        <div class="pd-features__item">
+          <div class="pd-features__value">48H</div>
+          <div class="pd-features__label">超長時間バッテリー</div>
+        </div>
+        <div class="pd-features__item">
+          <div class="pd-features__value">120g</div>
+          <div class="pd-features__label">超軽量ボディ</div>
+        </div>
+        <div class="pd-features__item">
+          <div class="pd-features__value">IPX7</div>
+          <div class="pd-features__label">プロ防水等級</div>
+        </div>
+        <div class="pd-features__item">
+          <div class="pd-features__value">3年</div>
+          <div class="pd-features__label">公式保証サービス</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 07 SPECS ==================== -->
+    <div class="preview-divider">
+      07 — Specs<span>pd-specs (single & comparison)</span>
+    </div>
+
+    <!-- 単品スペック表 -->
+    <section class="pd-section">
+      <div class="pd-specs__wrap">
+        <table class="pd-specs__table">
+          <thead>
+            <tr>
+              <th>スペック</th>
+              <th>パラメータ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>カラー</td>
+              <td>マットブラック / パールホワイト</td>
+            </tr>
+            <tr>
+              <td>サイズ</td>
+              <td>120 × 60 × 8 mm</td>
+            </tr>
+            <tr>
+              <td>重量</td>
+              <td>120g</td>
+            </tr>
+            <tr>
+              <td>素材</td>
+              <td>航空アルミ合金 + PC</td>
+            </tr>
+            <tr>
+              <td>バッテリー持続</td>
+              <td>約48時間</td>
+            </tr>
+            <tr>
+              <td>充電方式</td>
+              <td>USB-C 急速充電</td>
+            </tr>
+            <tr>
+              <td>防水等級</td>
+              <td>IPX7</td>
+            </tr>
+            <tr>
+              <td>保証</td>
+              <td>3年公式保証</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 複数製品比較表 -->
+    <section class="pd-section">
+      <div class="pd-specs__wrap">
+        <table class="pd-specs__table">
+          <thead>
+            <tr>
+              <th>スペック</th>
+              <th>製品 A</th>
+              <th>製品 B</th>
+              <th>製品 C</th>
+              <th>製品 D</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>カラー</td>
+              <td>マットブラック</td>
+              <td>パールホワイト</td>
+              <td>スターグレー</td>
+              <td>トワイライトゴールド</td>
+            </tr>
+            <tr>
+              <td>サイズ</td>
+              <td>120 × 60 × 8 mm</td>
+              <td>130 × 65 × 9 mm</td>
+              <td>115 × 58 × 7 mm</td>
+              <td>125 × 62 × 8 mm</td>
+            </tr>
+            <tr>
+              <td>重量</td>
+              <td>120g</td>
+              <td>145g</td>
+              <td>105g</td>
+              <td>132g</td>
+            </tr>
+            <tr>
+              <td>バッテリー持続</td>
+              <td>48H</td>
+              <td>36H</td>
+              <td>60H</td>
+              <td>48H</td>
+            </tr>
+            <tr>
+              <td>防水等級</td>
+              <td>IPX7</td>
+              <td>IPX5</td>
+              <td>IPX7</td>
+              <td>IPX6</td>
+            </tr>
+            <tr>
+              <td>保証</td>
+              <td>3年</td>
+              <td>2年</td>
+              <td>3年</td>
+              <td>2年</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==================== 08 STEPS ==================== -->
+    <div class="preview-divider">
+      08 — Steps<span>pd-steps (timeline)</span>
+    </div>
+
+    <section class="pd-section">
+      <div class="pd-steps__list">
+        <div class="pd-steps__item">
+          <div class="pd-steps__left">
+            <div class="pd-steps__num">1</div>
+            <div class="pd-steps__line"></div>
+          </div>
+          <div class="pd-steps__body">
+            <h4>ステップ名</h4>
+            <p>
+              ここにステップの説明文を入力してください。具体的な操作方法、注意事項、または期待される効果を説明します。
+            </p>
+            <img src="https://placehold.co/800x400" alt="ステップの説明図" />
+          </div>
+        </div>
+        <div class="pd-steps__item">
+          <div class="pd-steps__left">
+            <div class="pd-steps__num">2</div>
+            <div class="pd-steps__line"></div>
+          </div>
+          <div class="pd-steps__body">
+            <h4>ステップ名</h4>
+            <p>
+              ここにステップの説明文を入力してください。具体的な操作方法、注意事項、または期待される効果を説明します。
+            </p>
+            <img src="https://placehold.co/800x400" alt="ステップの説明図" />
+          </div>
+        </div>
+        <div class="pd-steps__item">
+          <div class="pd-steps__left">
+            <div class="pd-steps__num">3</div>
+            <div class="pd-steps__line"></div>
+          </div>
+          <div class="pd-steps__body">
+            <h4>ステップ名</h4>
+            <p>
+              ここにステップの説明文を入力してください。具体的な操作方法、注意事項、または期待される効果を説明します。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 10 COMPARE ==================== -->
+    <div class="preview-divider">
+      10 — Compare<span>pd-compare (2/3/4列、data-colsで列数切替)</span>
+    </div>
+
+    <!-- 2列比較 -->
+    <section class="pd-section">
+      <div class="pd-compare" data-cols="2">
+        <div class="pd-compare__head">
+          <div class="pd-compare__card">
+            <img src="https://placehold.co/400x400" alt="商品画像" />
+            <h3 class="pd-compare__name">製品名 A</h3>
+            <p class="pd-compare__sub">エントリーモデル · 軽量デザイン</p>
+            <p class="pd-compare__price">¥699</p>
+          </div>
+          <div class="pd-compare__card">
+            <img src="https://placehold.co/400x400" alt="商品画像" />
+            <h3 class="pd-compare__name">製品名 B</h3>
+            <p class="pd-compare__sub">
+              スタンダードモデル · オールラウンドな選択
+            </p>
+            <p class="pd-compare__price">¥999</p>
+          </div>
+        </div>
+
+        <div class="pd-compare__divider"></div>
+
+        <div class="pd-compare__body">
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">120g</span>
+              <span class="pd-compare__hint">本体重量</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">135g</span>
+              <span class="pd-compare__hint">本体重量</span>
+            </div>
+          </div>
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">36H</span>
+              <span class="pd-compare__hint">バッテリー持続時間</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">48H</span>
+              <span class="pd-compare__hint">バッテリー持続時間</span>
+            </div>
+          </div>
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">IPX5</span>
+              <span class="pd-compare__hint">防水等級</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">IPX7</span>
+              <span class="pd-compare__hint">防水等級</span>
+            </div>
+          </div>
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">USB-C</span>
+              <span class="pd-compare__hint">充電方式</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">USB-C 急速充電</span>
+              <span class="pd-compare__hint">充電方式</span>
+            </div>
+          </div>
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">1年保証</span>
+              <span class="pd-compare__hint">アフターサービス</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">2年保証</span>
+              <span class="pd-compare__hint">アフターサービス</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3列比較 -->
+    <section class="pd-section">
+      <div class="pd-compare" data-cols="3">
+        <!-- 製品カード -->
+        <div class="pd-compare__head">
+          <div class="pd-compare__card">
+            <img src="https://placehold.co/400x400" alt="商品画像" />
+            <h3 class="pd-compare__name">製品名 A</h3>
+            <p class="pd-compare__sub">エントリーモデル · 軽量デザイン</p>
+            <p class="pd-compare__price">¥699</p>
+          </div>
+          <div class="pd-compare__card">
+            <img src="https://placehold.co/400x400" alt="商品画像" />
+            <h3 class="pd-compare__name">製品名 B</h3>
+            <p class="pd-compare__sub">
+              スタンダードモデル · オールラウンドな選択
+            </p>
+            <p class="pd-compare__price">¥999</p>
+          </div>
+          <div class="pd-compare__card">
+            <img src="https://placehold.co/400x400" alt="商品画像" />
+            <h3 class="pd-compare__name">製品名 C</h3>
+            <p class="pd-compare__sub">フラッグシップモデル · 究極の体験</p>
+            <p class="pd-compare__price">¥1,599</p>
+          </div>
+        </div>
+
+        <!-- 仕切り線 -->
+        <div class="pd-compare__divider"></div>
+
+        <!-- パラメータ比較：太字の値 + グレーの説明 -->
+        <div class="pd-compare__body">
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">120g</span>
+              <span class="pd-compare__hint">本体重量</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">135g</span>
+              <span class="pd-compare__hint">本体重量</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">148g</span>
+              <span class="pd-compare__hint">本体重量</span>
+            </div>
+          </div>
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">36H</span>
+              <span class="pd-compare__hint">バッテリー持続時間</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">48H</span>
+              <span class="pd-compare__hint">バッテリー持続時間</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">72H</span>
+              <span class="pd-compare__hint">バッテリー持続時間</span>
+            </div>
+          </div>
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">IPX5</span>
+              <span class="pd-compare__hint">防水等級</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">IPX7</span>
+              <span class="pd-compare__hint">防水等級</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">IPX8</span>
+              <span class="pd-compare__hint">防水等級</span>
+            </div>
+          </div>
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">USB-C</span>
+              <span class="pd-compare__hint">充電方式</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">USB-C 急速充電</span>
+              <span class="pd-compare__hint">充電方式</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">ワイヤレス充電</span>
+              <span class="pd-compare__hint">充電方式</span>
+            </div>
+          </div>
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">1年保証</span>
+              <span class="pd-compare__hint">アフターサービス</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">2年保証</span>
+              <span class="pd-compare__hint">アフターサービス</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">3年保証</span>
+              <span class="pd-compare__hint">アフターサービス</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4列比較 -->
+    <section class="pd-section">
+      <div class="pd-compare" data-cols="4">
+        <div class="pd-compare__head">
+          <div class="pd-compare__card">
+            <img src="https://placehold.co/400x400" alt="商品画像" />
+            <h3 class="pd-compare__name">製品名 A</h3>
+            <p class="pd-compare__sub">エントリーモデル</p>
+            <p class="pd-compare__price">¥499</p>
+          </div>
+          <div class="pd-compare__card">
+            <img src="https://placehold.co/400x400" alt="商品画像" />
+            <h3 class="pd-compare__name">製品名 B</h3>
+            <p class="pd-compare__sub">アドバンスモデル</p>
+            <p class="pd-compare__price">¥799</p>
+          </div>
+          <div class="pd-compare__card">
+            <img src="https://placehold.co/400x400" alt="商品画像" />
+            <h3 class="pd-compare__name">製品名 C</h3>
+            <p class="pd-compare__sub">プロフェッショナルモデル</p>
+            <p class="pd-compare__price">¥1,199</p>
+          </div>
+          <div class="pd-compare__card">
+            <img src="https://placehold.co/400x400" alt="商品画像" />
+            <h3 class="pd-compare__name">製品名 D</h3>
+            <p class="pd-compare__sub">フラッグシップモデル</p>
+            <p class="pd-compare__price">¥1,999</p>
+          </div>
+        </div>
+        <div class="pd-compare__divider"></div>
+        <div class="pd-compare__body">
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">108MP</span
+              ><span class="pd-compare__hint">メインカメラ画素数</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">200MP</span
+              ><span class="pd-compare__hint">メインカメラ画素数</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">200MP</span
+              ><span class="pd-compare__hint">メインカメラ画素数</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">200MP</span
+              ><span class="pd-compare__hint">メインカメラ画素数</span>
+            </div>
+          </div>
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">4500mAh</span
+              ><span class="pd-compare__hint">バッテリー容量</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">5000mAh</span
+              ><span class="pd-compare__hint">バッテリー容量</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">5500mAh</span
+              ><span class="pd-compare__hint">バッテリー容量</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">6000mAh</span
+              ><span class="pd-compare__hint">バッテリー容量</span>
+            </div>
+          </div>
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">33W</span
+              ><span class="pd-compare__hint">急速充電出力</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">67W</span
+              ><span class="pd-compare__hint">急速充電出力</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">120W</span
+              ><span class="pd-compare__hint">急速充電出力</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">150W</span
+              ><span class="pd-compare__hint">急速充電出力</span>
+            </div>
+          </div>
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">8GB</span
+              ><span class="pd-compare__hint">RAM</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">12GB</span
+              ><span class="pd-compare__hint">RAM</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">16GB</span
+              ><span class="pd-compare__hint">RAM</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">24GB</span
+              ><span class="pd-compare__hint">RAM</span>
+            </div>
+          </div>
+          <div class="pd-compare__row">
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">IP53</span
+              ><span class="pd-compare__hint">防水等級</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">IP67</span
+              ><span class="pd-compare__hint">防水等級</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">IP68</span
+              ><span class="pd-compare__hint">防水等級</span>
+            </div>
+            <div class="pd-compare__cell">
+              <span class="pd-compare__param">IP68</span
+              ><span class="pd-compare__hint">防水等級</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 09 VIDEO ==================== -->
+    <div class="preview-divider">
+      09 — Video<span>pd-video (1/2 cols)</span>
+    </div>
+
+    <!-- 1列動画 -->
+    <section class="pd-section">
+      <div class="pd-video__grid" data-cols="1">
+        <div class="pd-video__item">
+          <div class="pd-video__ratio">
+            <iframe
+              src="https://www.youtube.com/embed/2GJfWMYCWY0?si=mfbEGoOMR4xOsR-T"
+              title="YouTube video player"
+              frameborder="0"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+                web-share;
+              "
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p class="pd-video__caption">動画の説明文（省略可）</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2列動画 -->
+    <section class="pd-section">
+      <div class="pd-video__grid" data-cols="2">
+        <div class="pd-video__item">
+          <div class="pd-video__ratio">
+            <iframe
+              src="https://www.youtube.com/embed/CgCVZdcKcqY?si=EyoiG4HxKIUURfeE"
+              title="YouTube video player"
+              frameborder="0"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+                web-share;
+              "
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p class="pd-video__caption">動画の説明文（省略可）</p>
+        </div>
+        <div class="pd-video__item">
+          <div class="pd-video__ratio">
+            <iframe
+              src="https://www.youtube.com/embed/ZgLlabyz7oY?si=_tzdHM2UvgqBtitz"
+              title="YouTube video player"
+              frameborder="0"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+                web-share;
+              "
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p class="pd-video__caption">動画の説明文（省略可）</p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
