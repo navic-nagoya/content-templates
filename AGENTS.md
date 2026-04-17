@@ -46,7 +46,10 @@
 │       ├── TemplateCard.vue      # 统一的预览卡片（preview + code + copy）
 │       ├── CopyButton.vue / NumberControl.vue / SegmentControl.vue / SwitchControl.vue
 │       └── sections/             # 每种模板的可交互区块，一一对应 templates/*.js
-└── AGENTS.md                     # 本文件
+├── docs/
+│   └── adding-templates.md       # 新增模板 / 新增样式 详细流程（面向开发者）
+├── README.md                     # 面向人类开发者的项目说明（中文）
+└── AGENTS.md                     # 本文件（面向 AI 助手）
 ```
 
 ### 3.1 核心架构约定 —— 单一真相来源
@@ -70,20 +73,21 @@
 - 枚举变体：用 `SegmentControl`。
 - 多种互斥结构（如 Specs 的单品 / 多品）：在生成器里用 `variant` 字段分派。
 
-## 4. 如何新增一个模板类型
+## 4. 如何新增模板 / 新增样式
 
-1. `src/templates/xxx.js`
-   - 导出 `renderXxx(props)` 返回 HTML 字符串
-   - 如果涉及多项，提供一个 `defaultXxxItem(i)` 便于 Section 组件自动填充
-   - 用 `util.js` 里的 `esc` 转义文本，用 `indent` 控制缩进
-2. `src/components/sections/XxxSection.vue`
-   - 用 `<TemplateCard>` 包裹
-   - 用 `NumberControl` / `SwitchControl` / `SegmentControl` 暴露参数
-   - `computed` 出 `html` 传给 `TemplateCard`
-3. `src/App.vue`
-   - `NAV` 数组追加一项（**label 必须是日语**）
-   - `<template>` 里 `import` + `<XxxSection />`
-4. 若需要新样式：加到 `/style.css`，并在画廊顶部的 Style Block 说明里提示运营重新粘贴一次。
+**完整流程文档在 [`docs/adding-templates.md`](./docs/adding-templates.md)**，包含三种场景的代码骨架和验证清单：
+
+- 场景 A：给已有模板加一个样式变体
+- 场景 B：新增一个完整的模板类型
+- 场景 C：修改已上线模板的样式 / class 名（高风险）
+
+快速版（场景 B）：
+
+1. `src/templates/xxx.js` 写 `renderXxx(props)` 纯函数，返回 HTML 字符串。
+2. `src/components/sections/XxxSection.vue` 用 `<TemplateCard>` 包裹，通过 `NumberControl` / `SwitchControl` / `SegmentControl` 暴露参数。
+3. `src/App.vue` 的 `NAV` 追加一项（**label 必须是日语**）并挂载组件。
+4. 若加了新 class，告知运营重新粘贴 Style Block。
+5. `pnpm build` 通过 + 手动在浏览器里验证所有控件。
 
 ## 5. 历史任务记录
 
@@ -115,6 +119,10 @@
 ### 2026-04-17 全站日语化
 
 把所有面向运营的 UI 文案从中文改成日语，同时把 `app.css` 的中文分区注释改成英文（遵守用户规则：代码注释一律英文）。
+
+### 2026-04-17 新增贡献流程文档
+
+新增 `docs/adding-templates.md`，详细说明三种常见变更（加变体 / 加模板 / 改样式）的 playbook，含代码骨架、风险说明、验证清单。README 和本文件都已挂链接。
 
 ## 6. 代码风格 / 规则
 
