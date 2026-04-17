@@ -1,2 +1,6 @@
+# Root-only "workspace" so pnpm accepts this file (allowBuilds requires a valid workspace).
+packages:
+  - '.'
+
 allowBuilds:
   esbuild: true
