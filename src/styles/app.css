@@ -204,6 +204,35 @@ body {
   flex-wrap: wrap;
 }
 
+/* Preview / Code tab switcher in the card head.
+   Inspired by Tailwind UI block gallery. */
+.tpl-card__tabs {
+  display: inline-flex;
+  padding: 3px;
+  background: #eef0f2;
+  border-radius: 8px;
+  gap: 2px;
+}
+.tpl-card__tabs button {
+  border: 0;
+  background: transparent;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+.tpl-card__tabs button:hover {
+  color: #111;
+}
+.tpl-card__tabs button.is-active {
+  background: #fff;
+  color: var(--app-accent);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
 /* ---------------- Controls: number / switch / segment ---------------- */
 .ctl {
   display: inline-flex;
@@ -330,31 +359,12 @@ body {
 }
 
 .tpl-card__code {
-  border-top: 1px dashed var(--app-border);
   background: var(--app-code-bg);
   color: var(--app-code-ink);
   font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
   font-size: 12px;
   line-height: 1.55;
   position: relative;
-}
-.tpl-card__code-head {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-.tpl-card__code-head .tpl-card__code-title {
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #94a3b8;
-}
-.tpl-card__code-head .tpl-card__code-actions {
-  margin-left: auto;
-  display: flex;
-  gap: 8px;
 }
 
 .btn {
