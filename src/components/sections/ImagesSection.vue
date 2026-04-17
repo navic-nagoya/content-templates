@@ -43,7 +43,7 @@ const html = computed(() => {
 
     <TemplateCard name="レスポンシブ画像グリッド" badge="pd-images" :html="html">
       <template #controls>
-        <NumberControl v-model="cols" :min="1" :max="6" label="列数" />
+        <NumberControl v-model="cols" :min="1" :max="4" label="列数" />
         <SwitchControl v-model="showCaption" label="キャプション表示" />
       </template>
     </TemplateCard>
