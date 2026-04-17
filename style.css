@@ -318,39 +318,39 @@
 }
 
 /* ============================================================
-   5. 亮点模板 pd-highlights
+   5. Feature 模板 pd-feature（画像＋見出し＋本文）
    ============================================================ */
-.pd-highlights__grid {
+.pd-feature__grid {
   display: grid;
   gap: 24px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
-.pd-highlights__item {
+.pd-feature__item {
   background: #f7f7f7;
   overflow: hidden;
   transition:
     background 0.35s ease,
     box-shadow 0.35s ease;
 }
-.pd-highlights__item:hover {
+.pd-feature__item:hover {
   background: linear-gradient(135deg, #f0f0f0, #fff);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
-.pd-highlights__item img {
+.pd-feature__item img {
   width: 60%;
   aspect-ratio: 3/4;
   object-fit: cover;
   margin: 20px auto 0;
   display: block;
 }
-.pd-highlights__item h4 {
+.pd-feature__item h4 {
   font-size: 16px;
   font-weight: 700;
   color: #111;
   margin: 16px 20px 8px;
 }
-.pd-highlights__item p {
+.pd-feature__item p {
   font-size: 14px;
   color: #666;
   line-height: 1.65;

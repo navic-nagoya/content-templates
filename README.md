@@ -54,7 +54,7 @@ pnpm preview        # 本地预览生产版
 │   │   ├── hgroup.js
 │   │   ├── images.js
 │   │   ├── media.js
-│   │   ├── highlights.js
+│   │   ├── feature.js
 │   │   ├── stats.js
 │   │   ├── specs.js
 │   │   ├── steps.js
@@ -71,7 +71,7 @@ pnpm preview        # 本地预览生产版
 │           ├── HgroupSection.vue
 │           ├── ImagesSection.vue
 │           ├── MediaSection.vue
-│           ├── HighlightsSection.vue
+│           ├── FeatureSection.vue
 │           ├── StatsSection.vue
 │           ├── SpecsSection.vue
 │           ├── StepsSection.vue
@@ -86,7 +86,7 @@ pnpm preview        # 本地预览生产版
 
 - **单一真相来源**：每个模板都由 `src/templates/*.js` 中的纯函数生成 HTML 字符串。`TemplateCard.vue` 用 `v-html` 把同一串 HTML 渲染成「所见」，`<pre>` 渲染成「所得」，保证预览和复制出来的代码永远一致。
 - **原生 CSS**：所有 Shopify 侧样式全部写在 `style.css`。站点 UI 样式写在 `src/styles/app.css`。没有引入任何 CSS 框架 / 预处理器 / CSS-in-JS。
-- **列数通用化**：图片、亮点、统计、视频、对比、步骤等模板都改造成了接受数字参数的通用组件。原先的「1/2/3/4 列各写一遍」被统一替换为「输入数字 → 组件自行生成」。
+- **列数通用化**：图片、Feature、统计、视频、对比、步骤等模板都改造成了接受数字参数的通用组件。原先的「1/2/3/4 列各写一遍」被统一替换为「输入数字 → 组件自行生成」。
 
 ---
 

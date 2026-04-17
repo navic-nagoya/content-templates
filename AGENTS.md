@@ -42,7 +42,7 @@
 │   ├── styles/app.css            # 画廊 UI 样式（不会进 Shopify）
 │   ├── templates/*.js            # 纯函数 HTML 生成器，每类模板一个文件
 │   │   ├── util.js               # esc / indent / placeholderForCols / repeat
-│   │   ├── heading.js / hgroup.js / images.js / media.js / highlights.js
+│   │   ├── heading.js / hgroup.js / images.js / media.js / feature.js
 │   │   ├── stats.js / specs.js / steps.js / video.js / compare.js
 │   └── components/
 │       ├── TemplateCard.vue      # 统一的预览卡片（preview + code + copy）
@@ -103,7 +103,7 @@
 - 把「1/2/3/4 列各写一份」统一改成「输入数字 → 动态生成」。
 - 新增可调参数：
   - Images：列数（1–6）、图注开关
-  - Highlights：项数（1–8）
+  - Feature：项数（1–8）
   - Stats：各样式项数（1–8）、双变体平铺；文案在预览内编辑
   - Specs：单品 / 多品切换 + 比较商品数（2–6）
   - Steps：步骤数（1–10）
