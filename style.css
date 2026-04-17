@@ -1231,3 +1231,58 @@
   font-size: 13px;
   color: #888;
 }
+
+/* ============================================================
+   11. レイアウトコンテナ pd-layout
+   ============================================================ */
+.pd-layout__grid {
+  display: grid;
+  gap: 24px;
+}
+
+.pd-layout__grid[data-variant="equal"][data-cols="2"] {
+  grid-template-columns: repeat(2, 1fr);
+}
+.pd-layout__grid[data-variant="equal"][data-cols="3"] {
+  grid-template-columns: repeat(3, 1fr);
+}
+.pd-layout__grid[data-variant="equal"][data-cols="4"] {
+  grid-template-columns: repeat(4, 1fr);
+}
+.pd-layout__grid[data-variant="asymmetric"][data-orient="main-left"] {
+  grid-template-columns: 2fr 1fr;
+}
+.pd-layout__grid[data-variant="asymmetric"][data-orient="main-right"] {
+  grid-template-columns: 1fr 2fr;
+}
+.pd-layout__grid[data-variant="center"] {
+  grid-template-columns: 1fr 2fr 1fr;
+}
+.pd-layout__grid[data-variant="compact"] {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 767px) {
+  .pd-layout__grid[data-variant="equal"][data-cols="2"],
+  .pd-layout__grid[data-variant="equal"][data-cols="3"],
+  .pd-layout__grid[data-variant="equal"][data-cols="4"],
+  .pd-layout__grid[data-variant="asymmetric"],
+  .pd-layout__grid[data-variant="center"] {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .pd-layout__grid[data-variant="equal"][data-cols="3"],
+  .pd-layout__grid[data-variant="equal"][data-cols="4"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pd-layout__cell > p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #6b7280;
+  margin: 0;
+}

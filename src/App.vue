@@ -9,6 +9,7 @@ import SpecsSection from './components/sections/SpecsSection.vue'
 import StepsSection from './components/sections/StepsSection.vue'
 import VideoSection from './components/sections/VideoSection.vue'
 import CompareSection from './components/sections/CompareSection.vue'
+import LayoutSection from './components/sections/LayoutSection.vue'
 
 const NAV = [
   { num: '01', id: 'heading', label: 'Heading 見出し' },
@@ -20,7 +21,8 @@ const NAV = [
   { num: '07', id: 'specs', label: 'Specs 仕様' },
   { num: '08', id: 'steps', label: 'Steps ステップ' },
   { num: '09', id: 'video', label: 'Video 動画' },
-  { num: '10', id: 'compare', label: 'Compare 比較' }
+  { num: '10', id: 'compare', label: 'Compare 比較' },
+  { num: '11', id: 'layout', label: 'Layout レイアウト' }
 ]
 </script>
 
@@ -66,6 +68,7 @@ const NAV = [
       <StepsSection />
       <VideoSection />
       <CompareSection />
+      <LayoutSection />
     </main>
   </div>
 </template>
