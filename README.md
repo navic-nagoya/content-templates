@@ -89,12 +89,15 @@ pnpm preview        # 本地预览生产版
 
 ---
 
-## 新增模板怎么做
+## 新增模板 / 新增样式
 
-1. 在 `src/templates/` 下新增一个 `xxx.js`，导出 `renderXxx(props)` 返回可粘贴的 HTML 字符串。
-2. 在 `src/components/sections/` 下新增一个 `XxxSection.vue`，通过 `TemplateCard` 渲染预览 + 代码，并通过 `NumberControl` / `SegmentControl` / `SwitchControl` 暴露可交互参数。
-3. 在 `src/App.vue` 的 `NAV` 数组和 `<template>` 中插入对应导航与组件。
-4. 如涉及新样式，把规则加入 `style.css`，并告知运营重新粘贴一次 Style Block。
+详细流程见 **[`docs/adding-templates.md`](./docs/adding-templates.md)**。文档包含三种典型场景的 playbook：
+
+- 场景 A：给已有模板加一个样式变体（最常见，5 分钟）
+- 场景 B：新增一个完整的模板类型（带代码骨架和验证清单）
+- 场景 C：修改已上线模板的样式 / class 名（⚠️ 高风险）
+
+AI 助手请先阅读 [`AGENTS.md`](./AGENTS.md)，里面有项目基础约定（特别是语言约定）。
 
 ---
 
