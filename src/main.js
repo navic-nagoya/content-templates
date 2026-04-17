@@ -4,9 +4,10 @@ import App from './App.vue'
 // Gallery/operator UI styles (scoped to the preview site, never shipped to Shopify)
 import './styles/app.css'
 
-// Shopify-side product detail stylesheet. Imported here ONLY so the live preview
-// in the gallery looks the same as on the real store page. Operators still copy
-// the contents of `style.css` at the repo root into their Shopify HTML editor.
+// Shopify-side product detail stylesheet. Imported here so the live preview in
+// the gallery visually matches the real store page. The canonical file lives at
+// the repo root (`/style.css`) and is deployed into each Shopify theme by the
+// dev team — operators never touch it.
 import '../style.css'
 
 createApp(App).mount('#app')
