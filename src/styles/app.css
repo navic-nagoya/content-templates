@@ -348,9 +348,26 @@ body {
 }
 
 /* ---------------- Preview + code block ---------------- */
+.tpl-card__hint {
+  margin: 0;
+  padding: 8px 20px 0;
+  font-size: 11px;
+  line-height: 1.55;
+  color: #888;
+}
+
 .tpl-card__preview {
   padding: 16px 20px;
   background: #ffffff;
+}
+
+.tpl-card__preview--editable {
+  min-height: 80px;
+  cursor: text;
+  outline: none;
+}
+.tpl-card__preview--editable:focus-visible {
+  box-shadow: inset 0 0 0 2px rgba(11, 98, 169, 0.25);
 }
 /* The live preview re-uses `.pd-section` spacing from style.css; trim the
    huge 48px vertical margin so cards stay compact inside the gallery. */

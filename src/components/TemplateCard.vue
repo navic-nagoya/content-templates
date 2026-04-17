@@ -1,19 +1,55 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import CopyButton from './CopyButton.vue'
 import { highlightShopifyHtml } from '../utils/highlight-html.js'
 
 const props = defineProps({
   name: { type: String, required: true },
   badge: { type: String, default: '' },
-  html: { type: String, required: true }
+  html: { type: String, required: true },
+  /** When true, preview is contenteditable; edits sync to code tab + copy (raw HTML). */
+  editablePreview: { type: Boolean, default: true }
 })
 
 // Tab state: 'preview' (default) renders the live HTML, 'code' shows syntax-highlighted
 // source (Highlight.js — same stack as Finsweet Code Highlight).
 const tab = ref('preview')
 
-const highlightedHtml = computed(() => highlightShopifyHtml(props.html))
+// Manual edits in the preview DOM (innerHTML). Cleared whenever generated `html` changes.
+const previewRoot = ref(null)
+const draftHtml = ref(null)
+
+const effectiveHtml = computed(() =>
+  props.editablePreview && draftHtml.value !== null ? draftHtml.value : props.html
+)
+
+const highlightedHtml = computed(() => highlightShopifyHtml(effectiveHtml.value))
+
+function syncPreviewFromProp() {
+  draftHtml.value = null
+  nextTick(() => {
+    const el = previewRoot.value
+    if (el && props.editablePreview) el.innerHTML = props.html
+  })
+}
+
+onMounted(() => {
+  if (props.editablePreview && previewRoot.value) {
+    previewRoot.value.innerHTML = props.html
+  }
+})
+
+watch(
+  () => props.html,
+  () => {
+    if (props.editablePreview) syncPreviewFromProp()
+  }
+)
+
+function onPreviewInput() {
+  if (!props.editablePreview || !previewRoot.value) return
+  draftHtml.value = previewRoot.value.innerHTML
+}
 </script>
 
 <template>
@@ -47,11 +83,26 @@ const highlightedHtml = computed(() => highlightShopifyHtml(props.html))
         </button>
       </div>
 
-      <CopyButton :text="html" label="コードをコピー" />
+      <CopyButton :text="effectiveHtml" label="コードをコピー" />
     </div>
 
-    <!-- Live preview renders the exact HTML operators will paste into Shopify. -->
+    <p v-if="editablePreview" class="tpl-card__hint">
+      プレビュー内をクリックして編集できます。コードタブと「コピー」に即反映されます。上部のパラメータを変更すると、手動編集は破棄されます。
+    </p>
+
+    <!-- Editable preview: DOM is driven by innerHTML so contenteditable + Vue stay in sync. -->
     <div
+      v-if="editablePreview"
+      v-show="tab === 'preview'"
+      ref="previewRoot"
+      contenteditable="true"
+      spellcheck="false"
+      tabindex="0"
+      class="tpl-card__preview tpl-card__preview--editable"
+      @input="onPreviewInput"
+    ></div>
+    <div
+      v-else
       v-show="tab === 'preview'"
       class="tpl-card__preview"
       v-html="html"
