@@ -1857,13 +1857,13 @@
 }
 
 /* ---- §5 pd-feature: split ---- */
-@container (max-width: 1023.98px) {
+@container (max-width: 767.98px) {
   .pd-feature--split .pd-feature__split {
     grid-template-columns: 1fr;
     gap: 40px;
   }
 }
-@container (min-width: 1024px) {
+@container (min-width: 768px) {
   .pd-feature--split .pd-feature__split {
     grid-template-columns: 1.05fr 1fr;
     gap: 64px;
