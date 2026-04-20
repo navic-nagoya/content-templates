@@ -41,10 +41,10 @@
   --danger-tint: #f3dcd6;
 
   /* Shadows — warm-tinted */
-  --shadow-card: 0 1px 0 rgba(28, 26, 22, 0.04),
-    0 12px 28px -16px rgba(28, 26, 22, 0.18);
-  --shadow-card-hover: 0 1px 0 rgba(28, 26, 22, 0.06),
-    0 22px 44px -20px rgba(28, 26, 22, 0.24);
+  --shadow-card:
+    0 1px 0 rgba(28, 26, 22, 0.04), 0 12px 28px -16px rgba(28, 26, 22, 0.18);
+  --shadow-card-hover:
+    0 1px 0 rgba(28, 26, 22, 0.06), 0 22px 44px -20px rgba(28, 26, 22, 0.24);
   --shadow-pop: 0 8px 24px rgba(28, 26, 22, 0.14);
   --shadow-drawer: -16px 0 48px -12px rgba(28, 26, 22, 0.22);
 
@@ -56,13 +56,16 @@
   --r-xl: 20px;
 
   /* Type */
-  --font-sans: "Noto Sans JP", -apple-system, BlinkMacSystemFont,
-    "Helvetica Neue", "Segoe UI", "Hiragino Sans", "PingFang SC",
-    "Hiragino Sans GB", Arial, sans-serif;
-  --font-serif: "Shippori Mincho", "Noto Serif JP", "Hiragino Mincho ProN",
-    "Yu Mincho", "Songti SC", serif;
-  --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas,
-    "Liberation Mono", monospace;
+  --font-sans:
+    "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    "Segoe UI", "Hiragino Sans", "PingFang SC", "Hiragino Sans GB", Arial,
+    sans-serif;
+  --font-serif:
+    "Shippori Mincho", "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho",
+    "Songti SC", serif;
+  --font-mono:
+    "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono",
+    monospace;
 
   /* Motion */
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -145,7 +148,7 @@ body {
   justify-content: space-between;
   gap: 16px;
   padding: 14px 32px;
-  max-width: 1480px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 .app-topbar__brand {
@@ -196,7 +199,8 @@ body {
   letter-spacing: 0.02em;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.16s var(--ease-out),
+  transition:
+    background 0.16s var(--ease-out),
     color 0.16s var(--ease-out);
 }
 .app-preview-modes__btn:hover {
@@ -224,9 +228,12 @@ body {
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.18s var(--ease-out),
-    color 0.18s var(--ease-out), border-color 0.18s var(--ease-out),
-    transform 0.18s var(--ease-out), box-shadow 0.18s var(--ease-out);
+  transition:
+    background 0.18s var(--ease-out),
+    color 0.18s var(--ease-out),
+    border-color 0.18s var(--ease-out),
+    transform 0.18s var(--ease-out),
+    box-shadow 0.18s var(--ease-out);
   box-shadow: 0 1px 0 rgba(28, 26, 22, 0.04);
 }
 .app-cart:hover {
@@ -266,7 +273,7 @@ body {
 .app-shell {
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
-  max-width: 1480px;
+  max-width: 1600px;
   margin: 0 auto;
   min-height: calc(100vh - 56px);
 }
@@ -336,7 +343,9 @@ body {
   font-weight: 500;
   position: relative;
   border-bottom: 1px solid var(--line-soft);
-  transition: color 0.16s var(--ease-out), padding 0.18s var(--ease-out);
+  transition:
+    color 0.16s var(--ease-out),
+    padding 0.18s var(--ease-out);
 }
 /* Vertical accent bar on hover/focus — slides in from the left. */
 .app-sidebar nav a::before {
@@ -391,7 +400,6 @@ body {
 /* ---------------- Main content area ---------------- */
 .app-main {
   padding: 56px 56px 96px;
-  max-width: 1100px;
   width: 100%;
 }
 
@@ -506,8 +514,10 @@ body {
   overflow: hidden;
   margin-bottom: 24px;
   box-shadow: var(--shadow-card);
-  transition: box-shadow 0.25s var(--ease-out),
-    transform 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+  transition:
+    box-shadow 0.25s var(--ease-out),
+    transform 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out);
 }
 .tpl-card:hover {
   box-shadow: var(--shadow-card-hover);
@@ -626,7 +636,9 @@ body {
   cursor: pointer;
   font-size: 14px;
   color: var(--ink-muted);
-  transition: background 0.15s var(--ease-out), color 0.15s var(--ease-out);
+  transition:
+    background 0.15s var(--ease-out),
+    color 0.15s var(--ease-out);
 }
 .ctl-number button:hover:not(:disabled) {
   background: var(--bg-subtle);
@@ -689,7 +701,9 @@ body {
   cursor: pointer;
   height: 28px;
   font-family: inherit;
-  transition: background 0.15s var(--ease-out), color 0.15s var(--ease-out);
+  transition:
+    background 0.15s var(--ease-out),
+    color 0.15s var(--ease-out);
 }
 .ctl-segment button:hover {
   color: var(--ink);
@@ -730,7 +744,8 @@ body {
   height: 14px;
   border-radius: 50%;
   background: #fff;
-  transition: transform 0.22s var(--ease-out),
+  transition:
+    transform 0.22s var(--ease-out),
     box-shadow 0.22s var(--ease-out);
   box-shadow: 0 1px 3px rgba(28, 26, 22, 0.25);
 }
@@ -758,7 +773,9 @@ body {
    inside cards that are narrower than the simulated viewport. */
 .tpl-card__canvas {
   background: var(--bg-elevated);
-  transition: background 0.2s var(--ease-out), padding 0.2s var(--ease-out);
+  transition:
+    background 0.2s var(--ease-out),
+    padding 0.2s var(--ease-out);
 }
 :root:not([data-preview-mode="fluid"]) .tpl-card__canvas {
   background: var(--bg-subtle);
@@ -793,7 +810,8 @@ body {
 .tpl-card__preview--editable:focus-visible {
   box-shadow: inset 0 0 0 2px var(--accent-tint-strong);
 }
-:root:not([data-preview-mode="fluid"]) .tpl-card__preview--editable:focus-visible {
+:root:not([data-preview-mode="fluid"])
+  .tpl-card__preview--editable:focus-visible {
   outline: 1px solid var(--accent);
   box-shadow: inset 0 0 0 2px var(--accent-tint-strong);
 }
@@ -826,9 +844,12 @@ body {
   font-family: inherit;
   cursor: pointer;
   letter-spacing: 0.01em;
-  transition: background 0.18s var(--ease-out),
-    color 0.18s var(--ease-out), border-color 0.18s var(--ease-out),
-    transform 0.18s var(--ease-out), box-shadow 0.18s var(--ease-out);
+  transition:
+    background 0.18s var(--ease-out),
+    color 0.18s var(--ease-out),
+    border-color 0.18s var(--ease-out),
+    transform 0.18s var(--ease-out),
+    box-shadow 0.18s var(--ease-out);
 }
 .btn:hover {
   background: rgba(255, 255, 255, 0.12);
@@ -841,7 +862,8 @@ body {
   background: var(--accent);
   color: var(--accent-ink);
   border-color: var(--accent);
-  box-shadow: 0 1px 0 rgba(125, 51, 34, 0.35) inset,
+  box-shadow:
+    0 1px 0 rgba(125, 51, 34, 0.35) inset,
     0 1px 0 rgba(255, 255, 255, 0.12) inset,
     0 4px 12px -4px rgba(179, 81, 56, 0.45);
 }
@@ -849,7 +871,8 @@ body {
   background: var(--accent-hover);
   border-color: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 1px 0 rgba(125, 51, 34, 0.35) inset,
+  box-shadow:
+    0 1px 0 rgba(125, 51, 34, 0.35) inset,
     0 1px 0 rgba(255, 255, 255, 0.14) inset,
     0 6px 16px -4px rgba(179, 81, 56, 0.55);
 }
@@ -946,7 +969,8 @@ body {
   background: var(--bg-elevated);
   outline: none;
   color: var(--ink-strong);
-  transition: border-color 0.16s var(--ease-out),
+  transition:
+    border-color 0.16s var(--ease-out),
     box-shadow 0.16s var(--ease-out);
 }
 .tpl-field input:focus,
@@ -993,7 +1017,8 @@ body {
   color: var(--ink-muted);
   cursor: pointer;
   z-index: 1;
-  transition: background 0.16s var(--ease-out),
+  transition:
+    background 0.16s var(--ease-out),
     color 0.16s var(--ease-out);
   display: inline-flex;
   align-items: center;
@@ -1102,7 +1127,8 @@ body {
   margin: 0;
   overflow: hidden;
   box-shadow: var(--shadow-card);
-  transition: box-shadow 0.22s var(--ease-out),
+  transition:
+    box-shadow 0.22s var(--ease-out),
     border-color 0.22s var(--ease-out);
 }
 .ed-block:hover {
@@ -1163,8 +1189,10 @@ body {
   border-radius: var(--r-sm);
   cursor: pointer;
   color: var(--ink-muted);
-  transition: background 0.15s var(--ease-out),
-    border-color 0.15s var(--ease-out), color 0.15s var(--ease-out);
+  transition:
+    background 0.15s var(--ease-out),
+    border-color 0.15s var(--ease-out),
+    color 0.15s var(--ease-out);
 }
 .ed-block__btn:hover:not(:disabled) {
   background: var(--bg-subtle);
@@ -1182,7 +1210,9 @@ body {
 }
 .ed-block__canvas {
   background: var(--bg-elevated);
-  transition: background 0.2s var(--ease-out), padding 0.2s var(--ease-out);
+  transition:
+    background 0.2s var(--ease-out),
+    padding 0.2s var(--ease-out);
 }
 :root:not([data-preview-mode="fluid"]) .ed-block__canvas {
   background: var(--bg-subtle);
@@ -1263,8 +1293,10 @@ body {
   font-family: inherit;
   cursor: pointer;
   letter-spacing: 0.02em;
-  transition: background 0.16s var(--ease-out),
-    color 0.16s var(--ease-out), border-color 0.16s var(--ease-out),
+  transition:
+    background 0.16s var(--ease-out),
+    color 0.16s var(--ease-out),
+    border-color 0.16s var(--ease-out),
     border-style 0s linear 0.16s;
 }
 .ed-insert__btn:hover {
@@ -1272,8 +1304,10 @@ body {
   color: var(--accent-ink);
   border-color: var(--accent);
   border-style: solid;
-  transition: background 0.16s var(--ease-out),
-    color 0.16s var(--ease-out), border-color 0.16s var(--ease-out),
+  transition:
+    background 0.16s var(--ease-out),
+    color 0.16s var(--ease-out),
+    border-color 0.16s var(--ease-out),
     border-style 0s linear 0s;
 }
 .ed-insert__btn--ghost {
@@ -1314,8 +1348,10 @@ body {
   font-size: 13px;
   color: var(--ink);
   font-family: inherit;
-  transition: background 0.15s var(--ease-out),
-    border-color 0.15s var(--ease-out), color 0.15s var(--ease-out);
+  transition:
+    background 0.15s var(--ease-out),
+    border-color 0.15s var(--ease-out),
+    color 0.15s var(--ease-out);
 }
 .rte__toolbar button:hover {
   background: var(--bg-elevated);
@@ -1357,7 +1393,8 @@ body {
   cursor: pointer;
   position: relative;
   border: 1px solid transparent;
-  transition: background 0.15s var(--ease-out),
+  transition:
+    background 0.15s var(--ease-out),
     border-color 0.15s var(--ease-out);
 }
 .rte__color-picker:hover {
