@@ -14,10 +14,10 @@ const STORAGE_KEY = 'shopify-editor.previewMode.v1'
 // canvas wrapper (`.tpl-card__canvas` / `.ed-block__canvas`) handles
 // horizontal scrolling — see app.css.
 export const PREVIEW_MODES = [
-  { id: 'fluid', label: '流動', width: null },
-  { id: 'desktop', label: 'PC', width: 1280 },
-  { id: 'tablet', label: 'タブレット', width: 768 },
-  { id: 'mobile', label: 'スマホ', width: 390 }
+  { id: 'fluid', label: '流動', icon: 'devices', width: null },
+  { id: 'desktop', label: 'PC', icon: 'desktop', width: 1280 },
+  { id: 'tablet', label: 'タブレット', icon: 'device-tablet-speaker', width: 768 },
+  { id: 'mobile', label: 'スマホ', icon: 'device-mobile-camera', width: 390 }
 ]
 
 function load() {

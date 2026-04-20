@@ -47,10 +47,12 @@ watch(drawerOpen, (open) => {
             type="button"
             role="tab"
             :aria-selected="previewState.mode === m.id"
+            :aria-label="m.label"
+            :title="m.label"
             :class="['app-preview-modes__btn', { 'is-active': previewState.mode === m.id }]"
             @click="setPreviewMode(m.id)"
           >
-            {{ m.label }}
+            <Icon :name="m.icon" :size="18" />
           </button>
         </div>
         <button
