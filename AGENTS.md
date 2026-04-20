@@ -139,6 +139,26 @@
 
 新增 `docs/adding-templates.md`，详细说明三种常见变更（加变体 / 加模板 / 改样式）的 playbook，含代码骨架、风险说明、验证清单。README 和本文件都已挂链接。
 
+### 2026-04-20 新增 3 个 section + 2 个变体
+
+**背景**：日本 EC 详情页常见但仓库未覆盖的场景补齐。用户明确拒绝了 FAQ（由结构化数据模块另行处理）。
+
+**新增 section**：
+- **Package（同梱物・セット内容）** `pd-package`：2 个变体 `grid` / `list`。字段 `img / name / qty / note`。
+- **Trust（安心ポイント・認証）** `pd-trust`：2 个变体 `band`（横排轻量） / `cards`（角丸卡片）。与 `pd-feature--icons` 的区别是文字更短、密度更高。
+- **Notice（注意事項）** `pd-notice`：3 个 tone `info`（青）/ `warn`（黄，默认）/ `caution`（红）。字段 `title / items`。
+
+**现有 section 追加变体**：
+- **Feature** 加 `checklist`：✓ 标记 + 单行 title，1〜2 列列表，用于「こんな方におすすめ」。`desc` 字段有意不输出。
+- **Steps** 从单一布局改为 `vertical`（既定，保留原样）+ `horizontal` 两个变体切换。横型带箭头连接符，3〜5 ステップの購入フロー向け。
+
+**导航编号**：Package/Trust/Notice 插在 Compare 之后、Layout 之前，Layout/Divider 重新编号为 14/15。
+
+**影响**：
+- 全部是「新增 class」，不改已有 class 的定义或语义，线上已上架商品不受影响。
+- `style.css` 末尾追加了 3 个 section 的样式区块（§13〜§15）以及 Feature checklist / Steps horizontal 两个新变体的规则，主题侧需同步新版 `style.css`。
+- `StepsSection.vue` 从单一 `renderSteps({ count })` 改为 variant 驱动的多卡片渲染，画廊里 Steps 现在显示两张卡。
+
 ### 2026-04-17 移除 Style Block 流程
 
 确认 `style.css` 由开发以主题资源形式引入各 Shopify 项目，运营完全不用关心样式注入。因此：
