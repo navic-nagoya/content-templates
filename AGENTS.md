@@ -200,7 +200,9 @@
 
 - 代码注释一律英文（用户规则）。
 - Vue 组件用 `<script setup>` 语法 + JS（项目未引入 TypeScript，不要主动改）。
-- 不要引入新的大型依赖（Tailwind、lodash、axios 等）。项目刻意保持「原生 CSS + 最小依赖」。
+- **依赖策略（⚠️ 请分清两侧）**：
+  - **Shopify 侧（`/style.css` 里实现的效果）**：不得依赖任何外部库。动画用原生 CSS（`@keyframes` / `transition`），不要 framer-motion / GSAP / AOS 等运行时动画库；交互效果用 CSS 伪类和 `:has()` 等现代选择器，避免引入 JS。这是硬性约束：`style.css` 会作为主题资源被导入到 Shopify，必须保持自包含且体积可控。
+  - **画廊 / 编辑器站点（`src/` 下的 Vite 应用）**：本身就是本地工具，引入依赖的门槛是普通水平（有用即可用）。Tiptap、vue-router、各种 UI 库都 OK。不要再按过去那条「零大依赖」标准来评审站点本身的依赖。
 - 画廊站点自身的 class 用 `.app-*` / `.tpl-*` / `.ctl-*` 前缀，避免跟 Shopify 的 `.pd-*` 冲突。
 - 修改 `/style.css` 要谨慎：它是线上商品 HTML 片段依赖的 class 合同（运营已经把 `class="pd-..."` 贴进了大量商品），改 class 名、删属性都可能让已上线商品样式崩溃。`style.css` 由开发统一维护并引入各 Shopify 主题，改完后需要主题侧同步更新。
 
