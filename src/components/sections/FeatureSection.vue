@@ -12,7 +12,8 @@ const counts = reactive({
   specGrid: 6,
   stackedMedia: 3,
   heroAside: 4,
-  detailGallery: 4
+  detailGallery: 4,
+  checklist: 6
 })
 const items = reactive(Array.from({ length: 6 }, (_, i) => ({ ...defaultFeatureItem(i) })))
 
@@ -27,7 +28,8 @@ function syncedItems() {
     counts.specGrid,
     counts.stackedMedia,
     counts.heroAside,
-    counts.detailGallery
+    counts.detailGallery,
+    counts.checklist
   )
   if (items.length < n) {
     for (let i = items.length; i < n; i++) items.push(defaultFeatureItem(i))

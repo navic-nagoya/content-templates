@@ -46,7 +46,8 @@ const VARIANT_CLASS = {
   specGrid: 'pd-feature--spec-grid',
   stackedMedia: 'pd-feature--stacked-media',
   heroAside: 'pd-feature--hero-aside',
-  detailGallery: 'pd-feature--detail-gallery'
+  detailGallery: 'pd-feature--detail-gallery',
+  checklist: 'pd-feature--checklist'
 }
 
 /** Gallery labels; `id` is passed to renderFeature({ variant }). */
@@ -58,7 +59,8 @@ export const FEATURE_VARIANTS = [
   { id: 'specGrid', label: '文案＋仕様／画像2×2' },
   { id: 'stackedMedia', label: '大画像＋テキストの積み重ね' },
   { id: 'heroAside', label: '半幅ヒーロー＋サイド仕様' },
-  { id: 'detailGallery', label: 'メイン画像＋サムネ＋仕様' }
+  { id: 'detailGallery', label: 'メイン画像＋サムネ＋仕様' },
+  { id: 'checklist', label: 'チェックリスト（こんな方におすすめ）' }
 ]
 
 /** Build item list: trim to n, pad with defaults, or synthesize when empty. */
@@ -95,6 +97,7 @@ export function renderFeature({ count = 3, items = [], variant = 'cards', split 
   if (variant === 'stackedMedia') return renderStackedMedia(list, mod, mergedSplit)
   if (variant === 'heroAside') return renderHeroAside(list, mod, mergedSplit)
   if (variant === 'detailGallery') return renderDetailGallery(list, mod, mergedSplit)
+  if (variant === 'checklist') return renderChecklist(list, mod)
   return renderCards(list, mod)
 }
 
@@ -294,6 +297,25 @@ ${indent(dlHtml, 8)}
       </dl>
     </div>
   </div>
+</section>`
+}
+
+/** Checklist: ✓ mark + single-line title, 1–2 column list. desc is intentionally dropped. */
+function renderChecklist(list, mod) {
+  const colsD = Math.min(list.length, 2)
+  const itemsHtml = list
+    .map(
+      (item) => `<li class="pd-feature__check-item">
+  <span class="pd-feature__check-mark" aria-hidden="true">&#10003;</span>
+  <span class="pd-feature__check-text">${esc(item.title || '')}</span>
+</li>`
+    )
+    .join('\n')
+
+  return `<section class="pd-section pd-feature ${mod}">
+  <ul class="pd-feature__check-list" style="--cols-d:${colsD};">
+${indent(itemsHtml, 4)}
+  </ul>
 </section>`
 }
 
