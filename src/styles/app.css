@@ -785,7 +785,7 @@ body {
 }
 
 .tpl-card__preview {
-  padding: 24px 26px;
+  padding: 24px;
   background: var(--bg-elevated);
   margin-inline: auto;
   transition: width 0.28s var(--ease-out);

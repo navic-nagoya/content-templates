@@ -339,10 +339,6 @@
 /* ============================================================
    5. Feature 模板 pd-feature（cards / icons / split + 拡張バリアント）
    ============================================================ */
-.pd-section.pd-feature {
-  padding: 64px 24px;
-}
-
 .pd-feature__grid {
   display: grid;
   gap: 28px;
@@ -620,6 +616,11 @@
 .pd-feature--spec-grid {
   padding: 64px 24px;
   background: #fff;
+}
+@media (max-width: 1023px) {
+  .pd-feature--spec-grid {
+    padding: 40px 20px;
+  }
 }
 .pd-feature--spec-grid .pd-feature__spec-grid-wrap {
   display: grid;
@@ -1907,6 +1908,9 @@
 
 /* ---- §5 pd-feature: spec-grid ---- */
 @container (max-width: 1023.98px) {
+  .pd-feature--spec-grid {
+    padding: 40px 20px;
+  }
   .pd-feature--spec-grid .pd-feature__spec-grid-wrap {
     grid-template-columns: 1fr;
     gap: 48px;
