@@ -126,16 +126,17 @@ watch(
       </button>
     </div>
 
-    <div
-      v-if="block.kind === 'section'"
-      ref="previewRoot"
-      class="ed-block__preview ed-block__preview--editable"
-      contenteditable="true"
-      spellcheck="false"
-      tabindex="0"
-      @input="onPreviewInput"
-      @click="onPreviewClick"
-    />
+    <div v-if="block.kind === 'section'" class="ed-block__canvas">
+      <div
+        ref="previewRoot"
+        class="ed-block__preview ed-block__preview--editable"
+        contenteditable="true"
+        spellcheck="false"
+        tabindex="0"
+        @input="onPreviewInput"
+        @click="onPreviewClick"
+      />
+    </div>
 
     <RichTextEditor
       v-else

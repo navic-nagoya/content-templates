@@ -159,6 +159,18 @@
 - `style.css` 末尾追加了 3 个 section 的样式区块（§13〜§15）以及 Feature checklist / Steps horizontal 两个新变体的规则，主题侧需同步新版 `style.css`。
 - `StepsSection.vue` 从单一 `renderSteps({ count })` 改为 variant 驱动的多卡片渲染，画廊里 Steps 现在显示两张卡。
 
+### 2026-04-20 Container Query 预览模式
+
+**背景**：之前所有 section 的响应式布局都由 `@media` 驱动，运营要在画廊里预览移动端效果必须拖窗口宽度，不便。
+
+**改动**：
+- 在 `style.css` 末尾追加「Container Query Overlay」区块，把 §3〜§15 里所有和内部布局有关的 `@media` 规则镜像为 `@container` 规则（带必要的 reset 以应对渐进增强的 `min-width` 分档）。
+- 画廊侧 `.tpl-card__preview` / `.ed-block__preview` 在非 fluid 模式下启用 `container-type: inline-size` + `max-width: var(--preview-max-w)`，把预览区变成一个"设备视窗"，外层 `.tpl-card__canvas` / `.ed-block__canvas` 提供中性画布背景。
+- 顶部栏新增「流動 / タブレット / スマホ」三挡切换，持久化到 localStorage（`src/store/previewMode.js`）。切到 tablet/mobile 会立即把所有预览收窄到 768 / 390 px，由 container query 触发对应 breakpoint，无需调整浏览器窗口。
+- fluid 模式下 **不** 挂 `container-type`，保留原有媒体查询的表现，不改变默认体验。
+
+**Shopify 侧的影响**：**零**。Shopify 端没有任何元素声明 `container-type`，所有 `@container` 规则会求值为"unknown"而永不匹配，现有商品依然完全走 `@media` 路径。
+
 ### 2026-04-17 移除 Style Block 流程
 
 确认 `style.css` 由开发以主题资源形式引入各 Shopify 项目，运营完全不用关心样式注入。因此：

@@ -170,6 +170,48 @@ body {
   border-radius: 2px;
 }
 
+/* Preview-viewport toggle (topbar) — fluid / tablet / mobile simulator. */
+.app-preview-modes {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-elevated);
+  border-radius: 999px;
+}
+.app-preview-modes__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-muted);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.16s var(--ease-out),
+    color 0.16s var(--ease-out);
+}
+.app-preview-modes__btn:hover {
+  color: var(--ink-strong);
+}
+.app-preview-modes__btn.is-active {
+  background: var(--ink);
+  color: var(--ink-inverse);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+}
+.app-preview-modes .icon {
+  width: 14px;
+  height: 14px;
+}
+
 .app-cart {
   display: inline-flex;
   align-items: center;
@@ -710,9 +752,33 @@ body {
   font-family: var(--font-serif);
 }
 
+/* Canvas wraps the preview so the "device viewport" sits on a neutral
+   background when `.tpl-card__preview` is narrowed via a preview mode. */
+.tpl-card__canvas {
+  background: var(--bg-elevated);
+  transition: background 0.2s var(--ease-out), padding 0.2s var(--ease-out);
+}
+:root:not([data-preview-mode="fluid"]) .tpl-card__canvas {
+  background: var(--bg-subtle);
+  padding: 16px;
+}
+
 .tpl-card__preview {
   padding: 24px 26px;
   background: var(--bg-elevated);
+  margin-inline: auto;
+  transition: max-width 0.28s var(--ease-out);
+}
+/* Activating any non-fluid mode switches the preview from viewport-based
+   media queries to section-width container queries (see style.css §CQ
+   overlay), and caps the preview width to simulate the target device. */
+:root:not([data-preview-mode="fluid"]) .tpl-card__preview {
+  container-type: inline-size;
+  max-width: var(--preview-max-w, none);
+  outline: 1px solid var(--line-strong);
+  outline-offset: -1px;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
 }
 
 .tpl-card__preview--editable {
@@ -721,6 +787,10 @@ body {
   outline: none;
 }
 .tpl-card__preview--editable:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--accent-tint-strong);
+}
+:root:not([data-preview-mode="fluid"]) .tpl-card__preview--editable:focus-visible {
+  outline: 1px solid var(--accent);
   box-shadow: inset 0 0 0 2px var(--accent-tint-strong);
 }
 /* The live preview re-uses `.pd-section` spacing from style.css; trim the
@@ -1106,9 +1176,27 @@ body {
   border-color: transparent;
   color: var(--danger);
 }
+.ed-block__canvas {
+  background: var(--bg-elevated);
+  transition: background 0.2s var(--ease-out), padding 0.2s var(--ease-out);
+}
+:root:not([data-preview-mode="fluid"]) .ed-block__canvas {
+  background: var(--bg-subtle);
+  padding: 14px;
+}
 .ed-block__preview {
   padding: 22px 26px;
   background: var(--bg-elevated);
+  margin-inline: auto;
+  transition: max-width 0.28s var(--ease-out);
+}
+:root:not([data-preview-mode="fluid"]) .ed-block__preview {
+  container-type: inline-size;
+  max-width: var(--preview-max-w, none);
+  outline: 1px solid var(--line-strong);
+  outline-offset: -1px;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
 }
 .ed-block__preview .pd-section {
   margin: 0;

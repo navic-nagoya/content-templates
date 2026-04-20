@@ -4,6 +4,7 @@ import LibraryView from './views/LibraryView.vue'
 import EditorView from './views/EditorView.vue'
 import Icon from './components/Icon.vue'
 import { draftStore } from './store/draft.js'
+import { PREVIEW_MODES, previewState, setPreviewMode } from './store/previewMode.js'
 
 const drawerOpen = ref(false)
 const count = computed(() => draftStore.blocks.length)
@@ -34,6 +35,24 @@ watch(drawerOpen, (open) => {
     <div class="app-topbar">
       <div class="app-topbar__inner">
         <strong class="app-topbar__brand">Shopify Editor</strong>
+        <div
+          class="app-preview-modes"
+          role="tablist"
+          aria-label="プレビュー幅"
+          :title="`プレビュー幅：セクションの container query を切り替えて、ウィンドウ幅を変えずに各デバイスのレイアウトを確認できます`"
+        >
+          <button
+            v-for="m in PREVIEW_MODES"
+            :key="m.id"
+            type="button"
+            role="tab"
+            :aria-selected="previewState.mode === m.id"
+            :class="['app-preview-modes__btn', { 'is-active': previewState.mode === m.id }]"
+            @click="setPreviewMode(m.id)"
+          >
+            {{ m.label }}
+          </button>
+        </div>
         <button
           type="button"
           class="app-cart"

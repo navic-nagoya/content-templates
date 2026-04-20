@@ -117,23 +117,23 @@ function addToDraft() {
       <CopyButton :text="effectiveHtml" label="コードをコピー" variant="ghost" />
     </div>
 
-    <!-- Editable preview: DOM is driven by innerHTML so contenteditable + Vue stay in sync. -->
-    <div
-      v-if="editablePreview"
-      v-show="tab === 'preview'"
-      ref="previewRoot"
-      contenteditable="true"
-      spellcheck="false"
-      tabindex="0"
-      class="tpl-card__preview tpl-card__preview--editable"
-      @input="onPreviewInput"
-    ></div>
-    <div
-      v-else
-      v-show="tab === 'preview'"
-      class="tpl-card__preview"
-      v-html="html"
-    ></div>
+    <!-- Editable preview: DOM is driven by innerHTML so contenteditable + Vue stay in sync.
+         The outer canvas stays full-card-wide and carries the neutral
+         "around the device" background when a preview mode narrows the
+         inner `.tpl-card__preview`. -->
+    <div v-if="editablePreview" v-show="tab === 'preview'" class="tpl-card__canvas">
+      <div
+        ref="previewRoot"
+        contenteditable="true"
+        spellcheck="false"
+        tabindex="0"
+        class="tpl-card__preview tpl-card__preview--editable"
+        @input="onPreviewInput"
+      ></div>
+    </div>
+    <div v-else v-show="tab === 'preview'" class="tpl-card__canvas">
+      <div class="tpl-card__preview" v-html="html"></div>
+    </div>
 
     <div v-show="tab === 'code'" class="tpl-card__code">
       <pre><code class="hljs" v-html="highlightedHtml"></code></pre>
