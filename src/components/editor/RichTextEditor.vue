@@ -311,8 +311,12 @@ const tableActive = computed(() => isActive('table'))
         <button type="button" @click="chain()?.addColumnAfter().run()" title="右に列追加">
           <Icon name="columns-plus-right" />
         </button>
-        <button type="button" @click="chain()?.deleteRow().run()" title="行削除">行−</button>
-        <button type="button" @click="chain()?.deleteColumn().run()" title="列削除">列−</button>
+        <button type="button" @click="chain()?.deleteRow().run()" title="行削除">
+          <Icon name="rows-remove-bottom" />
+        </button>
+        <button type="button" @click="chain()?.deleteColumn().run()" title="列削除">
+          <Icon name="columns-remove-right" />
+        </button>
         <button type="button" @click="chain()?.deleteTable().run()" title="表削除">
           <Icon name="trash" />
         </button>
