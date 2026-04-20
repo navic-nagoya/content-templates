@@ -140,24 +140,25 @@ function isActive(name, attrs) {
   return editor.value?.isActive(name, attrs)
 }
 
-const PRESET_COLORS = [
-  { v: '#111111', n: '黒' },
-  { v: '#666666', n: 'グレー' },
-  { v: '#0b62a9', n: '青' },
-  { v: '#c0392b', n: '赤' },
-  { v: '#1e8449', n: '緑' },
-  { v: '#b7791f', n: '橙' }
-]
-
 function setHeading(level) {
   if (level === 0) chain()?.setParagraph().run()
   else chain()?.toggleHeading({ level }).run()
 }
 
+// Color extension already emits inline `style="color: …"` on a span around the
+// selection — we just feed it whatever the native picker returns.
 function setColor(value) {
   if (!value) chain()?.unsetColor().run()
   else chain()?.setColor(value).run()
 }
+
+// Reflect the current selection's color into the picker so it opens at the
+// right value. Falls back to black when nothing is set, since `<input type=color>`
+// requires a valid #rrggbb.
+const currentColor = computed(() => {
+  const c = editor.value?.getAttributes('textStyle')?.color
+  return /^#[0-9a-fA-F]{6}$/.test(c) ? c : '#000000'
+})
 
 // Indent: in a list, Tab/Shift-Tab handle nesting via listKeymap. For
 // paragraphs we mutate the indent attr on the current paragraph node.
@@ -251,15 +252,14 @@ const tableActive = computed(() => isActive('table'))
       <span class="rte__sep" />
 
       <span class="rte__color">
-        <button
-          v-for="c in PRESET_COLORS"
-          :key="c.v"
-          type="button"
-          class="rte__color-swatch"
-          :style="{ background: c.v }"
-          :title="`色: ${c.n}`"
-          @click="setColor(c.v)"
-        />
+        <label class="rte__color-picker" :title="`文字色: ${currentColor}`">
+          <span class="rte__color-dot" :style="{ background: currentColor }" />
+          <input
+            type="color"
+            :value="currentColor"
+            @input="setColor($event.target.value)"
+          />
+        </label>
         <button type="button" class="rte__color-clear" title="色を解除" @click="setColor('')">×</button>
       </span>
 

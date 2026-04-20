@@ -849,14 +849,41 @@ body {
   align-items: center;
   gap: 2px;
 }
-.rte__color-swatch {
-  width: 18px !important;
-  height: 18px !important;
-  min-width: 18px !important;
-  padding: 0 !important;
-  border: 1px solid rgba(0, 0, 0, 0.15) !important;
-  border-radius: 50% !important;
+.rte__color-picker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
   cursor: pointer;
+  position: relative;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.rte__color-picker:hover {
+  background: #ebeef1;
+  border-color: #d0d4d8;
+}
+.rte__color-picker input[type='color'] {
+  /* Native picker triggers on label click; the input itself stays invisible
+     so the visible swatch dot is what the operator sees. */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.rte__color-dot {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 0 0 1px #fff;
 }
 .rte__color-clear {
   font-size: 14px !important;
