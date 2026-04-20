@@ -540,7 +540,6 @@
 /* --- variant: hero-specs (full bleed hero + gradient + spec sheet) --- */
 .pd-feature--hero-specs {
   padding: 0 0 64px;
-  background: #fff;
 }
 .pd-feature--hero-specs .pd-feature__hero-band {
   position: relative;
@@ -615,7 +614,6 @@
 /* --- variant: spec-grid (copy + dl | 2×2 images) --- */
 .pd-feature--spec-grid {
   padding: 64px 24px;
-  background: #fff;
 }
 @media (max-width: 1023px) {
   .pd-feature--spec-grid {
@@ -686,7 +684,6 @@
 /* --- variant: stacked-media --- */
 .pd-feature--stacked-media {
   padding: 64px 24px;
-  background: #fff;
 }
 .pd-feature--stacked-media .pd-feature__stack-wrap {
   max-width: 1280px;
@@ -753,7 +750,6 @@
 /* --- variant: hero-aside (image + panel) --- */
 .pd-feature--hero-aside {
   padding: 0;
-  background: #fff;
 }
 .pd-feature--hero-aside .pd-feature__aside-layout {
   max-width: 1280px;
@@ -830,7 +826,6 @@
 /* --- variant: detail-gallery (kettle-style) --- */
 .pd-feature--detail-gallery {
   padding: 64px 24px;
-  background: #fff;
 }
 .pd-feature--detail-gallery .pd-feature__detail-wrap {
   max-width: 1280px;
@@ -950,7 +945,6 @@
    6. 统计模板 pd-stats（tiles / rail）
    ============================================================ */
 .pd-section.pd-stats {
-  background: #fff;
   padding: 64px 24px;
 }
 
@@ -1010,7 +1004,6 @@
   grid-template-columns: 1fr;
   column-gap: 32px;
   row-gap: 48px;
-  margin-top: 64px;
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
@@ -1019,7 +1012,6 @@
 @media (min-width: 640px) {
   .pd-stats--rail .pd-stats__grid {
     grid-template-columns: repeat(var(--cols-t), 1fr);
-    margin-top: 80px;
     row-gap: 64px;
   }
 }
@@ -1027,7 +1019,6 @@
 @media (min-width: 1024px) {
   .pd-stats--rail .pd-stats__grid {
     grid-template-columns: repeat(var(--cols-d), 1fr);
-    margin-top: 112px;
   }
 }
 
@@ -2069,21 +2060,18 @@
 @container (max-width: 639.98px) {
   .pd-stats--rail .pd-stats__grid {
     grid-template-columns: 1fr;
-    margin-top: 64px;
     row-gap: 48px;
   }
 }
 @container (min-width: 640px) {
   .pd-stats--rail .pd-stats__grid {
     grid-template-columns: repeat(var(--cols-t), 1fr);
-    margin-top: 80px;
     row-gap: 64px;
   }
 }
 @container (min-width: 1024px) {
   .pd-stats--rail .pd-stats__grid {
     grid-template-columns: repeat(var(--cols-d), 1fr);
-    margin-top: 112px;
   }
 }
 
