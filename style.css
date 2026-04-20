@@ -269,6 +269,7 @@
 
 .pd-media__img img {
   width: 100%;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 .pd-media__body {
@@ -723,7 +724,7 @@
 }
 .pd-feature--stacked-media .pd-feature__stack-visual img {
   width: 100%;
-  aspect-ratio: 5 / 2;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 12px;
   background: #f3f4f6;
@@ -1146,6 +1147,7 @@
 .pd-steps__body img {
   width: 100%;
   max-width: 480px;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
