@@ -409,15 +409,12 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  border-radius: 12px;
-  background: var(--brand-color, #0b62a9);
   margin-bottom: 18px;
-  overflow: hidden;
   flex-shrink: 0;
 }
 .pd-feature--icons .pd-feature__icon img {
-  width: 28px;
-  height: 28px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   display: block;
 }
@@ -1637,15 +1634,11 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  background: rgba(11, 98, 169, 0.08);
-  color: var(--brand-color, #0b62a9);
   flex-shrink: 0;
-  overflow: hidden;
 }
 .pd-trust__icon img {
-  width: 26px;
-  height: 26px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   display: block;
 }
@@ -1690,13 +1683,13 @@
 .pd-trust--cards .pd-trust__icon {
   width: 52px;
   height: 52px;
-  border-radius: 12px;
-  background: var(--brand-color, #0b62a9);
-  color: #fff;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
 }
 .pd-trust--cards .pd-trust__icon img {
-  width: 28px;
-  height: 28px;
+  width: 100%;
+  height: 100%;
 }
 .pd-trust--cards .pd-trust__title {
   font-size: 15px;
