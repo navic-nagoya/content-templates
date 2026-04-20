@@ -23,6 +23,17 @@
   margin: 48px 0;
 }
 
+/* ---------- Container query context ----------
+   Each section establishes its own container so the responsive rules
+   in the §"CONTAINER QUERY OVERLAY" block at the bottom of this file
+   can react to SECTION WIDTH instead of viewport width. Browsers that
+   don't support container queries silently ignore both this property
+   and the @container rules, so the @media-based fallback below kicks
+   in automatically. No @supports wrapper needed. */
+.pd-section {
+  container-type: inline-size;
+}
+
 /* ============================================================
    1. 标题模板 pd-heading
    ============================================================ */
@@ -1212,7 +1223,15 @@
    ============================================================ */
 
 .pd-compare {
-  overflow: hidden;
+  /* `overflow-x: auto` (instead of `overflow: hidden`) lets the head/row
+     scroll horizontally whenever they exceed the section width — required
+     because a section cannot establish a query container against ITSELF,
+     so the @container rule below (which only targets descendants like
+     .pd-compare__head/__row with min-width) needs the section to allow
+     scrolling on its own. Auto means the scrollbar only appears when
+     content actually overflows. */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* 卡片行 & 参数行共用网格 */
@@ -1289,13 +1308,8 @@
   line-height: 1.5;
 }
 
-/* 响应式 */
+/* 响应式 — overflow is handled at the .pd-compare base above. */
 @media (max-width: 767px) {
-  .pd-compare[data-cols="3"],
-  .pd-compare[data-cols="4"] {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
   .pd-compare[data-cols="3"] .pd-compare__head,
   .pd-compare[data-cols="3"] .pd-compare__row {
     min-width: 520px;
@@ -2127,12 +2141,9 @@
 }
 
 /* ---- §10 pd-compare ---- */
+/* The section itself can't be queried via @container (it IS the container),
+   so .pd-compare's overflow-x: auto stays as a base rule above. */
 @container (max-width: 767.98px) {
-  .pd-compare[data-cols="3"],
-  .pd-compare[data-cols="4"] {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
   .pd-compare[data-cols="3"] .pd-compare__head,
   .pd-compare[data-cols="3"] .pd-compare__row {
     min-width: 520px;

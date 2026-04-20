@@ -769,11 +769,10 @@ body {
   margin-inline: auto;
   transition: max-width 0.28s var(--ease-out);
 }
-/* Activating any non-fluid mode switches the preview from viewport-based
-   media queries to section-width container queries (see style.css §CQ
-   overlay), and caps the preview width to simulate the target device. */
+/* Container-type lives on `.pd-section` itself (style.css), so all we need
+   to do here is shrink the preview width to the simulated device — the
+   nested `.pd-section` will follow and its @container rules will fire. */
 :root:not([data-preview-mode="fluid"]) .tpl-card__preview {
-  container-type: inline-size;
   max-width: var(--preview-max-w, none);
   outline: 1px solid var(--line-strong);
   outline-offset: -1px;
@@ -1191,7 +1190,6 @@ body {
   transition: max-width 0.28s var(--ease-out);
 }
 :root:not([data-preview-mode="fluid"]) .ed-block__preview {
-  container-type: inline-size;
   max-width: var(--preview-max-w, none);
   outline: 1px solid var(--line-strong);
   outline-offset: -1px;
