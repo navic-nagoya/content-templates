@@ -753,7 +753,9 @@ body {
 }
 
 /* Canvas wraps the preview so the "device viewport" sits on a neutral
-   background when `.tpl-card__preview` is narrowed via a preview mode. */
+   background when `.tpl-card__preview` is narrowed via a preview mode.
+   `overflow-x: auto` lets the desktop preset (1280px) horizontally scroll
+   inside cards that are narrower than the simulated viewport. */
 .tpl-card__canvas {
   background: var(--bg-elevated);
   transition: background 0.2s var(--ease-out), padding 0.2s var(--ease-out);
@@ -761,19 +763,22 @@ body {
 :root:not([data-preview-mode="fluid"]) .tpl-card__canvas {
   background: var(--bg-subtle);
   padding: 16px;
+  overflow-x: auto;
 }
 
 .tpl-card__preview {
   padding: 24px 26px;
   background: var(--bg-elevated);
   margin-inline: auto;
-  transition: max-width 0.28s var(--ease-out);
+  transition: width 0.28s var(--ease-out);
 }
 /* Container-type lives on `.pd-section` itself (style.css), so all we need
-   to do here is shrink the preview width to the simulated device — the
-   nested `.pd-section` will follow and its @container rules will fire. */
+   to do here is force the preview width to match the simulated device —
+   the nested `.pd-section` will follow and its @container rules will fire.
+   Using `width` (not `max-width`) ensures even the desktop preset (1280px)
+   keeps its full width inside narrower gallery cards; the canvas scrolls. */
 :root:not([data-preview-mode="fluid"]) .tpl-card__preview {
-  max-width: var(--preview-max-w, none);
+  width: var(--preview-max-w, auto);
   outline: 1px solid var(--line-strong);
   outline-offset: -1px;
   border-radius: var(--r-md);
@@ -1182,15 +1187,16 @@ body {
 :root:not([data-preview-mode="fluid"]) .ed-block__canvas {
   background: var(--bg-subtle);
   padding: 14px;
+  overflow-x: auto;
 }
 .ed-block__preview {
   padding: 22px 26px;
   background: var(--bg-elevated);
   margin-inline: auto;
-  transition: max-width 0.28s var(--ease-out);
+  transition: width 0.28s var(--ease-out);
 }
 :root:not([data-preview-mode="fluid"]) .ed-block__preview {
-  max-width: var(--preview-max-w, none);
+  width: var(--preview-max-w, auto);
   outline: 1px solid var(--line-strong);
   outline-offset: -1px;
   border-radius: var(--r-md);

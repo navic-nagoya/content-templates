@@ -159,17 +159,22 @@
 - `style.css` 末尾追加了 3 个 section 的样式区块（§13〜§15）以及 Feature checklist / Steps horizontal 两个新变体的规则，主题侧需同步新版 `style.css`。
 - `StepsSection.vue` 从单一 `renderSteps({ count })` 改为 variant 驱动的多卡片渲染，画廊里 Steps 现在显示两张卡。
 
-### 2026-04-20 Container Query 预览模式
+### 2026-04-20 Container Query 预览模式 + Shopify 端启用
 
-**背景**：之前所有 section 的响应式布局都由 `@media` 驱动，运营要在画廊里预览移动端效果必须拖窗口宽度，不便。
+**背景**：之前所有 section 的响应式布局都由 `@media` 驱动。运营在画廊里预览移动端效果必须拖窗口宽度；Shopify 端的 section 也只能根据 viewport 决定布局，无法感知自身实际可用宽度（例如左右栏布局里被压缩的 section 仍按 viewport 选 desktop 排版）。
 
 **改动**：
 - 在 `style.css` 末尾追加「Container Query Overlay」区块，把 §3〜§15 里所有和内部布局有关的 `@media` 规则镜像为 `@container` 规则（带必要的 reset 以应对渐进增强的 `min-width` 分档）。
-- 画廊侧 `.tpl-card__preview` / `.ed-block__preview` 在非 fluid 模式下启用 `container-type: inline-size` + `max-width: var(--preview-max-w)`，把预览区变成一个"设备视窗"，外层 `.tpl-card__canvas` / `.ed-block__canvas` 提供中性画布背景。
-- 顶部栏新增「流動 / タブレット / スマホ」三挡切换，持久化到 localStorage（`src/store/previewMode.js`）。切到 tablet/mobile 会立即把所有预览收窄到 768 / 390 px，由 container query 触发对应 breakpoint，无需调整浏览器窗口。
-- fluid 模式下 **不** 挂 `container-type`，保留原有媒体查询的表现，不改变默认体验。
+- **`.pd-section` 直接声明 `container-type: inline-size`**（在 §1 间距规则旁边），所有 section 自身就是查询容器。这样 Shopify 端也按"section 实际宽度"驱动布局；老浏览器（Chrome <105 / Safari <16 / Firefox <110）不识别 `container-type` 与 `@container`，会被 CSS 静默忽略，自动回退到原本的 `@media` 路径，**无需 `@supports` 包装**。
+- `.pd-compare` 由 `overflow: hidden` 改为 `overflow-x: auto`：因为 section 不能查询自身，要让窄 container 下的 head/row `min-width` 能正常滚动，overflow 必须由基础规则常态开启（auto 模式下没有溢出时不出现滚动条）。
+- 画廊侧 `.tpl-card__preview` / `.ed-block__preview` 不再自挂 `container-type`（已由 `.pd-section` 提供），非 fluid 模式只需 `max-width: var(--preview-max-w)` 把预览收窄即可触发对应分档；外层 `.tpl-card__canvas` / `.ed-block__canvas` 提供中性画布背景。
+- 顶部栏「流動 / PC / タブレット / スマホ」四挡切换持久化到 localStorage（`src/store/previewMode.js`）：
+  - 流動：不强制宽度，预览随卡片自然宽度（~850px → tablet 分档）。
+  - PC（1280px）/ タブレット（768px）/ スマホ（390px）：通过 `width: var(--preview-max-w)` **强制**预览到指定宽度。当强制宽度超过卡片宽度（PC 模式必然如此），由 `.tpl-card__canvas` / `.ed-block__canvas` 上的 `overflow-x: auto` 提供横向滚动。
 
-**Shopify 侧的影响**：**零**。Shopify 端没有任何元素声明 `container-type`，所有 `@container` 规则会求值为"unknown"而永不匹配，现有商品依然完全走 `@media` 路径。
+**Shopify 侧的影响**：**会更智能但也属于行为变化**。当 `.pd-section` 在被压缩的位置（左右两栏、嵌套布局）时，原本 `@media` 仍判 desktop 但其实空间已不够；现在会按 section 自身宽度切换到 tablet / mobile 排版，更贴近实际可用空间。如果某个客户主题的 section 容器宽度刚好处在原 `@media` 临界点稍下方（例如 vp 1024 但 section 仅 ~960），他看到的将是 tablet 而非 desktop 排版——这是设计预期内的"修正"，不是 bug。
+
+**画廊 fluid 模式**：因为 `.pd-section` 也是容器了，画廊卡片宽度（~850px）会触发 tablet 分档，而不像之前按 viewport 显示 desktop。要确认 desktop 排版可切到「PC」预设（1280px，超出卡片宽度，canvas 横向滚动）。
 
 ### 2026-04-17 移除 Style Block 流程
 

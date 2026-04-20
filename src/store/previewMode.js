@@ -9,8 +9,13 @@ import { reactive, watch } from 'vue'
 
 const STORAGE_KEY = 'shopify-editor.previewMode.v1'
 
+// `desktop` width is intentionally larger than a typical gallery card
+// (~850px wide). When the simulated viewport overflows the card, the
+// canvas wrapper (`.tpl-card__canvas` / `.ed-block__canvas`) handles
+// horizontal scrolling — see app.css.
 export const PREVIEW_MODES = [
   { id: 'fluid', label: '流動', width: null },
+  { id: 'desktop', label: 'PC', width: 1280 },
   { id: 'tablet', label: 'タブレット', width: 768 },
   { id: 'mobile', label: 'スマホ', width: 390 }
 ]
