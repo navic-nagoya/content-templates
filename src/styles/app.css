@@ -769,6 +769,7 @@ body {
    inside cards that are narrower than the simulated viewport. */
 .tpl-card__canvas {
   background: var(--bg-elevated);
+  position: relative;
   transition:
     background 0.2s var(--ease-out),
     padding 0.2s var(--ease-out);
@@ -778,12 +779,26 @@ body {
   padding: 16px;
   overflow-x: auto;
 }
+:root[data-preview-mode="fluid"] .tpl-card__canvas {
+  display: flex;
+  align-items: flex-start;
+}
 
 .tpl-card__preview {
   padding: 24px 26px;
   background: var(--bg-elevated);
   margin-inline: auto;
   transition: width 0.28s var(--ease-out);
+}
+:root[data-preview-mode="fluid"] .tpl-card__preview {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: calc(100% - 10px);
+  min-width: 280px;
+  margin-inline: 0;
+}
+.tpl-card__canvas.is-resizing .tpl-card__preview {
+  transition: none;
 }
 /* Container-type lives on `.pd-section` itself (style.css), so all we need
    to do here is force the preview width to match the simulated device —
@@ -1206,6 +1221,7 @@ body {
 }
 .ed-block__canvas {
   background: var(--bg-elevated);
+  position: relative;
   transition:
     background 0.2s var(--ease-out),
     padding 0.2s var(--ease-out);
@@ -1215,11 +1231,25 @@ body {
   padding: 14px;
   overflow-x: auto;
 }
+:root[data-preview-mode="fluid"] .ed-block__canvas {
+  display: flex;
+  align-items: flex-start;
+}
 .ed-block__preview {
   padding: 22px 26px;
   background: var(--bg-elevated);
   margin-inline: auto;
   transition: width 0.28s var(--ease-out);
+}
+:root[data-preview-mode="fluid"] .ed-block__preview {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: calc(100% - 10px);
+  min-width: 280px;
+  margin-inline: 0;
+}
+.ed-block__canvas.is-resizing .ed-block__preview {
+  transition: none;
 }
 :root:not([data-preview-mode="fluid"]) .ed-block__preview {
   width: var(--preview-max-w, auto);
@@ -1628,6 +1658,83 @@ body {
   .ed-shell {
     padding: 20px 18px 60px;
   }
+}
+
+/* ---------------- Fluid-mode resize handle + width readout ----------------
+   Siblings of the preview element in fluid mode: drag the handle to narrow
+   the preview and watch @container queries react. Width readout is fed by
+   a ResizeObserver in the composable so it also tracks window/canvas
+   resizes, not just user drags. */
+.preview-resizer {
+  flex: 0 0 10px;
+  align-self: stretch;
+  position: relative;
+  cursor: ew-resize;
+  background: transparent;
+  touch-action: none;
+}
+.preview-resizer::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  right: 4px;
+  height: 36px;
+  background: var(--line-strong);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  transition:
+    height 0.18s var(--ease-out),
+    background 0.16s var(--ease-out),
+    top 0.18s var(--ease-out);
+}
+.preview-resizer:hover::before {
+  background: var(--accent);
+  height: 72px;
+}
+.preview-resizer.is-active::before {
+  background: var(--accent);
+  top: 0;
+  height: 100%;
+  border-radius: 0;
+  transform: none;
+}
+
+/* Warm-paper pill that stays pinned to the handle's vertical center.
+   tabular-nums keeps digit width stable so the badge doesn't jitter
+   as the user drags. Semi-transparent bg lets content show through
+   on narrow canvases where the badge overlaps the preview. */
+.preview-width-badge {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translate(8px, -50%);
+  padding: 5px 11px;
+  background: rgba(255, 253, 248, 0.92);
+  backdrop-filter: saturate(160%) blur(8px);
+  -webkit-backdrop-filter: saturate(160%) blur(8px);
+  color: var(--ink-muted);
+  font: 500 12px/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 3;
+  white-space: nowrap;
+  box-shadow: var(--shadow-card);
+  transition:
+    color 0.16s var(--ease-out),
+    border-color 0.16s var(--ease-out),
+    background 0.16s var(--ease-out),
+    transform 0.18s var(--ease-out);
+}
+.is-resizing .preview-width-badge {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(255, 253, 248, 0.98);
+  transform: translate(8px, -50%) scale(1.04);
+  transition-duration: 0.1s;
 }
 
 /* ---------------- Reduced motion ---------------- */
