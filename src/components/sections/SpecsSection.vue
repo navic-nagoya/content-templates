@@ -91,7 +91,7 @@ const html = computed(() => {
       <span class="tpl-section__num">07</span>
       <h3 class="tpl-section__title">Specs · 仕様</h3>
       <p class="tpl-section__desc">
-        プレビュー内でセル文言を編集。上部の ± で表の行（tr）・比較列（td）を増減
+        プレビュー内でセル文言を編集。上部の ± で行数・比較商品数を調整
       </p>
     </header>
 
@@ -107,20 +107,20 @@ const html = computed(() => {
           v-model="singleRowCount"
           :min="1"
           :max="16"
-          label="tbody の行（tr）"
+          label="項目数"
         />
         <template v-if="variant === 'compare'">
           <StepControl
             v-model="productCount"
             :min="2"
             :max="6"
-            label="商品列（thead th / tbody td）"
+            label="比較商品数"
           />
           <StepControl
             v-model="compareRowCount"
             :min="1"
             :max="16"
-            label="スペック行（tbody tr）"
+            label="仕様項目数"
           />
         </template>
       </template>
