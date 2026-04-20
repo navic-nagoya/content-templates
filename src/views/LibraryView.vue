@@ -34,7 +34,7 @@ defineEmits(['open-draft'])
 <template>
   <div class="app-shell">
     <aside class="app-sidebar">
-      <h1>PD Templates</h1>
+      <h1>Shopify Editor</h1>
       <p class="app-sidebar__sub">Shopify 商品詳細ページ テンプレートギャラリー</p>
       <nav>
         <a v-for="n in NAV" :key="n.id" :href="`#${n.id}`">

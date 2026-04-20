@@ -33,7 +33,7 @@ watch(drawerOpen, (open) => {
   <div class="app-root">
     <div class="app-topbar">
       <div class="app-topbar__inner">
-        <strong class="app-topbar__brand">PD Templates</strong>
+        <strong class="app-topbar__brand">Shopify Editor</strong>
         <button
           type="button"
           class="app-cart"

@@ -1,7 +1,7 @@
 {
-  "name": "pd-templates",
+  "name": "shopify-editor",
   "version": "1.0.0",
-  "description": "Shopify product detail page templates — componentized preview & code generator",
+  "description": "Shopify Editor — product description templates, rich text, draft assembly, and HTML export",
   "private": true,
   "type": "module",
   "scripts": {

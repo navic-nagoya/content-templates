@@ -1,4 +1,4 @@
-# PD Templates — Shopify 商品详情页模板画廊
+# Shopify Editor — Shopify 商品详情页模板画廊
 
 面向运营的 Shopify 商品说明富文本模板库。通过 Vue 3 + Vite 提供组件化的实时预览与代码复制页面，样式使用原生 CSS 编写，可直接粘贴到 Shopify 商品说明的 HTML 模式。
 

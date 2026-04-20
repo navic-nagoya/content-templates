@@ -4,7 +4,8 @@ import { reactive, watch } from 'vue'
 // from the gallery (kind: 'section') and inline rich-text fills (kind: 'richtext').
 // The combined HTML can be copied once and pasted into Shopify's HTML mode.
 
-const STORAGE_KEY = 'pd-templates.draft.v1'
+const STORAGE_KEY = 'shopify-editor.draft.v1'
+const LEGACY_STORAGE_KEY = 'pd-templates.draft.v1'
 
 function uid() {
   return Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4)
@@ -12,7 +13,14 @@ function uid() {
 
 function load() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    let raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) {
+      raw = localStorage.getItem(LEGACY_STORAGE_KEY)
+      if (raw) {
+        localStorage.setItem(STORAGE_KEY, raw)
+        localStorage.removeItem(LEGACY_STORAGE_KEY)
+      }
+    }
     if (!raw) return null
     const parsed = JSON.parse(raw)
     if (!parsed || !Array.isArray(parsed.blocks)) return null
