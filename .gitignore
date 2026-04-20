@@ -1,7 +1,6 @@
-node_modules
+node_modules/
 dist
 .DS_Store
 .vite
 *.log
 .pnpm-store/
-node_modules/.pnpm/lock.yaml
