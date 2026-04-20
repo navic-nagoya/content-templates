@@ -20,6 +20,22 @@
   box-sizing: border-box;
 }
 
+/* ---------------- Inline SVG icons ---------------- */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 0;
+  color: inherit;
+}
+.icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: currentColor;
+}
+
 html,
 body {
   margin: 0;
@@ -255,6 +271,9 @@ body {
 .ctl-number button {
   width: 26px;
   height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   background: #fff;
   cursor: pointer;
@@ -555,10 +574,6 @@ body {
   color: #fff;
   border-color: var(--app-accent);
 }
-.app-cart__icon {
-  font-size: 15px;
-  line-height: 1;
-}
 .app-cart__count {
   display: inline-flex;
   align-items: center;
@@ -831,6 +846,9 @@ body {
   background: var(--app-border);
 }
 .ed-insert__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   border: 1px dashed #c4c4c4;
   background: #fff;
   color: #555;
@@ -870,9 +888,12 @@ body {
   border-bottom: 1px solid var(--app-border);
 }
 .rte__toolbar button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 28px;
   height: 28px;
-  padding: 0 8px;
+  padding: 0 6px;
   border: 1px solid transparent;
   background: transparent;
   border-radius: 6px;
