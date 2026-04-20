@@ -703,7 +703,6 @@
 .pd-feature--stacked-media .pd-feature__stack-rows {
   margin-top: 40px;
   padding-top: 32px;
-  border-top: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
   gap: 48px;
@@ -1374,6 +1373,11 @@
 .pd-layout__grid {
   display: grid;
   gap: 24px;
+  align-items: start;
+}
+
+.pd-layout__grid[data-variant="equal"] {
+  align-items: start;
 }
 
 .pd-layout__grid[data-variant="equal"][data-cols="2"] {
@@ -1708,6 +1712,10 @@
   grid-template-columns: 40px 1fr;
   gap: 14px;
   align-items: start;
+  justify-items: start;
+  align-content: start;
+  justify-content: start;
+  height: auto;
   padding: 18px 20px;
   border-radius: 10px;
   border: 0.5px solid #ececec;
