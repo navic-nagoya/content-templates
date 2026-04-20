@@ -8,10 +8,27 @@ export function defaultStepItem(i) {
   }
 }
 
-export function renderSteps({ count = 3, items = [] }) {
+const VARIANT_CLASS = {
+  vertical: 'pd-steps--vertical',
+  horizontal: 'pd-steps--horizontal'
+}
+
+/** Gallery labels; `id` is passed to renderSteps({ variant }). */
+export const STEPS_VARIANTS = [
+  { id: 'vertical', label: '縦型（番号サークル＋接続線）' },
+  { id: 'horizontal', label: '横型（3〜5 ステップの購入フロー向け）' }
+]
+
+export function renderSteps({ count = 3, items = [], variant = 'vertical' } = {}) {
   const n = Math.max(1, count | 0)
   const list = items.length ? items : repeat(n, (i) => defaultStepItem(i))
+  const mod = VARIANT_CLASS[variant] ?? VARIANT_CLASS.vertical
 
+  if (variant === 'horizontal') return renderHorizontal(list, mod)
+  return renderVertical(list, mod)
+}
+
+function renderVertical(list, mod) {
   const itemsHtml = list
     .map((item, i) => {
       const img = item.img
@@ -30,9 +47,29 @@ export function renderSteps({ count = 3, items = [] }) {
     })
     .join('\n')
 
-  return `<section class="pd-section">
+  return `<section class="pd-section pd-steps ${mod}">
   <div class="pd-steps__list">
 ${indent(itemsHtml, 4)}
   </div>
+</section>`
+}
+
+function renderHorizontal(list, mod) {
+  // Cap at 5 visual columns desktop to keep each card readable; more steps wrap.
+  const colsD = Math.min(list.length, 5)
+  const itemsHtml = list
+    .map(
+      (item, i) => `<li class="pd-steps__h-item">
+  <div class="pd-steps__num">${i + 1}</div>
+  <h4>${esc(item.title)}</h4>
+  <p>${esc(item.desc)}</p>
+</li>`
+    )
+    .join('\n')
+
+  return `<section class="pd-section pd-steps ${mod}">
+  <ol class="pd-steps__row" style="--cols-d:${colsD};">
+${indent(itemsHtml, 4)}
+  </ol>
 </section>`
 }

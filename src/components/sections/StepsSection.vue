@@ -1,12 +1,20 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, reactive } from 'vue'
 import TemplateCard from '../TemplateCard.vue'
 import NumberControl from '../NumberControl.vue'
-import { renderSteps } from '../../templates/steps.js'
+import { STEPS_VARIANTS, renderSteps } from '../../templates/steps.js'
 
-const count = ref(3)
+const counts = reactive({
+  vertical: 3,
+  horizontal: 4
+})
 
-const html = computed(() => renderSteps({ count: count.value }))
+const cards = computed(() =>
+  STEPS_VARIANTS.map((v) => ({
+    ...v,
+    html: renderSteps({ count: counts[v.id], variant: v.id })
+  }))
+)
 </script>
 
 <template>
@@ -14,12 +22,21 @@ const html = computed(() => renderSteps({ count: count.value }))
     <header class="tpl-section__head">
       <span class="tpl-section__num">08</span>
       <h3 class="tpl-section__title">Steps · ステップフロー</h3>
-      <p class="tpl-section__desc">番号付きサークルと接続線付き。ステップ数を入力してください</p>
+      <p class="tpl-section__desc">
+        縦型は番号サークルと接続線で詳しい手順を、横型は 3〜5
+        ステップの購入フローや利用ガイド向けです。文言はプレビュー内を直接編集してください。
+      </p>
     </header>
 
-    <TemplateCard name="ステップリスト" badge="pd-steps" :html="html">
+    <TemplateCard
+      v-for="card in cards"
+      :key="card.id"
+      :name="card.label"
+      badge="pd-steps"
+      :html="card.html"
+    >
       <template #controls>
-        <NumberControl v-model="count" :min="1" :max="10" label="ステップ数" />
+        <NumberControl v-model="counts[card.id]" :min="1" :max="10" label="ステップ数" />
       </template>
     </TemplateCard>
   </section>
