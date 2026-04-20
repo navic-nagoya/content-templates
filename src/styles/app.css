@@ -81,6 +81,13 @@ body {
   margin: 0;
   padding: 0;
 }
+/* Reserve scrollbar space at all times so pages with short content (few
+   cards) and pages with tall content (many cards) render at exactly the
+   same viewport width — no horizontal jump when navigating between
+   component pages. */
+html {
+  scrollbar-gutter: stable;
+}
 
 body {
   background: var(--bg);
@@ -273,7 +280,7 @@ body {
 .app-shell {
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
-  max-width: 1600px;
+  max-width: 1280px;
   margin: 0 auto;
   min-height: calc(100vh - 56px);
 }
@@ -405,7 +412,6 @@ body {
   text-decoration: none;
   color: inherit;
 }
-.app-sidebar__brand-link:hover .app-sidebar h1,
 .app-sidebar__brand-link:hover h1 {
   color: var(--accent);
 }
