@@ -1,8 +1,9 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, watch } from 'vue'
 import RichTextEditor from './RichTextEditor.vue'
 import Icon from '../Icon.vue'
 import { pastePlainText } from '../../utils/paste-plain-text.js'
+import { usePreviewResize } from '../../utils/use-preview-resize.js'
 import {
   draftStore,
   removeBlock,
@@ -32,7 +33,7 @@ function confirmRemove() {
 // Section blocks: contenteditable preview, mirrors TemplateCard's pattern.
 // DOM is initialized once via innerHTML so contenteditable + Vue stay in sync,
 // then user edits get pushed back into the store via input events.
-const previewRoot = ref(null)
+const { previewEl: previewRoot, width: previewWidth, isFluid, isResizing, onPointerDown } = usePreviewResize()
 let suppressNextWatch = false
 
 function setDomFromBlock() {
@@ -127,7 +128,7 @@ watch(
       </button>
     </div>
 
-    <div v-if="block.kind === 'section'" class="ed-block__canvas">
+    <div v-if="block.kind === 'section'" class="ed-block__canvas" :class="{ 'is-resizing': isResizing }">
       <div
         ref="previewRoot"
         class="ed-block__preview ed-block__preview--editable"
@@ -138,6 +139,17 @@ watch(
         @click="onPreviewClick"
         @paste="pastePlainText"
       />
+      <div
+        v-if="isFluid"
+        class="preview-resizer"
+        :class="{ 'is-active': isResizing }"
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="プレビュー幅を調整"
+        title="ドラッグして幅を変更"
+        @pointerdown="onPointerDown"
+      />
+      <div v-if="isFluid" class="preview-width-badge">{{ previewWidth }}px</div>
     </div>
 
     <RichTextEditor

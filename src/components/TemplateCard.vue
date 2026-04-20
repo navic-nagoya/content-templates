@@ -4,6 +4,7 @@ import CopyButton from "./CopyButton.vue";
 import Icon from "./Icon.vue";
 import { highlightShopifyHtml } from "../utils/highlight-html.js";
 import { pastePlainText } from "../utils/paste-plain-text.js";
+import { usePreviewResize } from "../utils/use-preview-resize.js";
 import { addSectionBlock } from "../store/draft.js";
 
 const props = defineProps({
@@ -19,7 +20,7 @@ const props = defineProps({
 const tab = ref("preview");
 
 // Manual edits in the preview DOM (innerHTML). Cleared whenever generated `html` changes.
-const previewRoot = ref(null);
+const { previewEl: previewRoot, width: previewWidth, isFluid, isResizing, onPointerDown } = usePreviewResize();
 const draftHtml = ref(null);
 
 const effectiveHtml = computed(() =>
@@ -122,7 +123,12 @@ function addToDraft() {
          The outer canvas stays full-card-wide and carries the neutral
          "around the device" background when a preview mode narrows the
          inner `.tpl-card__preview`. -->
-    <div v-if="editablePreview" v-show="tab === 'preview'" class="tpl-card__canvas">
+    <div
+      v-if="editablePreview"
+      v-show="tab === 'preview'"
+      class="tpl-card__canvas"
+      :class="{ 'is-resizing': isResizing }"
+    >
       <div
         ref="previewRoot"
         contenteditable="true"
@@ -132,9 +138,36 @@ function addToDraft() {
         @input="onPreviewInput"
         @paste="pastePlainText"
       ></div>
+      <div
+        v-if="isFluid"
+        class="preview-resizer"
+        :class="{ 'is-active': isResizing }"
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="プレビュー幅を調整"
+        title="ドラッグして幅を変更"
+        @pointerdown="onPointerDown"
+      />
+      <div v-if="isFluid" class="preview-width-badge">{{ previewWidth }}px</div>
     </div>
-    <div v-else v-show="tab === 'preview'" class="tpl-card__canvas">
-      <div class="tpl-card__preview" v-html="html"></div>
+    <div
+      v-else
+      v-show="tab === 'preview'"
+      class="tpl-card__canvas"
+      :class="{ 'is-resizing': isResizing }"
+    >
+      <div ref="previewRoot" class="tpl-card__preview" v-html="html"></div>
+      <div
+        v-if="isFluid"
+        class="preview-resizer"
+        :class="{ 'is-active': isResizing }"
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="プレビュー幅を調整"
+        title="ドラッグして幅を変更"
+        @pointerdown="onPointerDown"
+      />
+      <div v-if="isFluid" class="preview-width-badge">{{ previewWidth }}px</div>
     </div>
 
     <div v-show="tab === 'code'" class="tpl-card__code">
