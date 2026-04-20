@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onBeforeUnmount, watch } from 'vue'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
+import { Node } from '@tiptap/core'
 import { StarterKit } from '@tiptap/starter-kit'
 import { TextStyle } from '@tiptap/extension-text-style'
 import { Color } from '@tiptap/extension-color'
@@ -10,6 +11,59 @@ import { TableRow } from '@tiptap/extension-table-row'
 import { TableCell } from '@tiptap/extension-table-cell'
 import { TableHeader } from '@tiptap/extension-table-header'
 import { Paragraph } from '@tiptap/extension-paragraph'
+
+// Custom block node that mirrors the HTML shape used by the video template
+// (`<div class="pd-video__ratio"><iframe ...></div>`). Defining it as a real
+// schema node — rather than inserting raw HTML — is required because Tiptap's
+// ProseMirror schema otherwise strips unknown tags on insert.
+const VideoEmbed = Node.create({
+  name: 'videoEmbed',
+  group: 'block',
+  atom: true,
+  draggable: true,
+  selectable: true,
+  addAttributes() {
+    return {
+      src: { default: '' }
+    }
+  },
+  parseHTML() {
+    return [
+      {
+        tag: 'div.pd-video__ratio',
+        getAttrs: (el) => ({
+          src: el.querySelector('iframe')?.getAttribute('src') || ''
+        })
+      }
+    ]
+  },
+  renderHTML({ node }) {
+    return [
+      'div',
+      { class: 'pd-video__ratio' },
+      [
+        'iframe',
+        {
+          src: node.attrs.src,
+          title: 'YouTube video player',
+          frameborder: '0',
+          allow:
+            'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share',
+          referrerpolicy: 'strict-origin-when-cross-origin',
+          allowfullscreen: 'true'
+        }
+      ]
+    ]
+  },
+  addCommands() {
+    return {
+      setVideoEmbed:
+        (attrs) =>
+        ({ commands }) =>
+          commands.insertContent({ type: 'videoEmbed', attrs })
+    }
+  }
+})
 
 // Custom indentable paragraph: stores an integer `indent` attr that maps to
 // padding-left so an operator can produce the same indent visual Shopify's RTE
@@ -58,7 +112,8 @@ const editor = useEditor({
     Table.configure({ resizable: false, HTMLAttributes: { class: 'pd-rte-table' } }),
     TableRow,
     TableHeader,
-    TableCell
+    TableCell,
+    VideoEmbed
   ],
   onUpdate: ({ editor }) => {
     emit('update:modelValue', editor.getHTML())
@@ -145,13 +200,7 @@ function promptVideo() {
     'https://www.youtube.com/embed/'
   )
   if (!url || url.endsWith('embed/')) return
-  // Match the existing pd-video iframe markup so styling matches.
-  const html = `<div class="pd-video__ratio"><iframe src="${escapeAttr(url)}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`
-  chain()?.insertContent(html).run()
-}
-
-function escapeAttr(v) {
-  return String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+  chain()?.setVideoEmbed({ src: url }).run()
 }
 
 function insertTable() {

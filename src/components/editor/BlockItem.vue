@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted, ref, watch } from 'vue'
 import RichTextEditor from './RichTextEditor.vue'
 import {
   draftStore,
@@ -25,6 +26,43 @@ function confirmRemove() {
     removeBlock(props.block.id)
   }
 }
+
+// Section blocks: contenteditable preview, mirrors TemplateCard's pattern.
+// DOM is initialized once via innerHTML so contenteditable + Vue stay in sync,
+// then user edits get pushed back into the store via input events.
+const previewRoot = ref(null)
+let suppressNextWatch = false
+
+function setDomFromBlock() {
+  const el = previewRoot.value
+  if (!el) return
+  if (el.innerHTML !== props.block.html) {
+    el.innerHTML = props.block.html
+  }
+}
+
+function onPreviewInput() {
+  if (!previewRoot.value) return
+  suppressNextWatch = true
+  updateBlockHtml(props.block.id, previewRoot.value.innerHTML)
+}
+
+onMounted(() => {
+  if (props.block.kind === 'section') setDomFromBlock()
+})
+
+// React to external html changes (e.g., after duplicate / store load) but
+// ignore the round-trip from our own input events.
+watch(
+  () => props.block.html,
+  () => {
+    if (suppressNextWatch) {
+      suppressNextWatch = false
+      return
+    }
+    if (props.block.kind === 'section') setDomFromBlock()
+  }
+)
 </script>
 
 <template>
@@ -40,7 +78,15 @@ function confirmRemove() {
       <button type="button" class="ed-block__btn ed-block__btn--danger" @click="confirmRemove" title="削除">🗑</button>
     </div>
 
-    <div v-if="block.kind === 'section'" class="ed-block__preview" v-html="block.html" />
+    <div
+      v-if="block.kind === 'section'"
+      ref="previewRoot"
+      class="ed-block__preview ed-block__preview--editable"
+      contenteditable="true"
+      spellcheck="false"
+      tabindex="0"
+      @input="onPreviewInput"
+    />
 
     <RichTextEditor
       v-else

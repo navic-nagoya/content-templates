@@ -91,6 +91,20 @@
 4. 若加了新 class，通知主题侧开发把新版 `style.css` 同步到各 Shopify 项目（不涉及运营）。
 5. `pnpm build` 通过 + 手动在浏览器里验证所有控件。
 
+## 4.5 エディター（下书き装配台）— 第二个核心功能
+
+除了「ライブラリ」（原本的画廊 + 单卡复制）之外，仓库现在还有「エディター」视图：运营把多个 section 攒进一个有序的"下书き"，在 section 之间插入富文本块（自由文案），最后一键复制整段 HTML 一次性贴进 Shopify。
+
+- **状态层**：`src/store/draft.js`（Vue `reactive` + localStorage 自动保存，无 Pinia）。Block: `{ id, kind: 'section'|'richtext', html, label?, badge? }`。Section block 存的是 HTML 快照（要再调参数得删掉重加）。
+- **入口**：`src/App.vue` 顶部 tab 切换 `LibraryView` / `EditorView`。
+- **加入下书き**：`TemplateCard.vue` 上的「下書きに追加」按钮调用 `addSectionBlock`。
+- **RTE**：`src/components/editor/RichTextEditor.vue`，基于 **Tiptap v3**（StarterKit + TextStyle/Color/Image/Table 系列 + 自定义 `IndentableParagraph` + 自定义 `VideoEmbed` 节点）。视频用自定义 schema 节点产出 `<div class="pd-video__ratio"><iframe ...></div>`，与 `templates/video.js` 的 markup 保持一致。
+- **缩进**：在 list 内部用 listKeymap 的 Tab/Shift-Tab；在普通段落上修改 `paragraph` 节点的 `indent` 数字属性，输出 `data-indent` + `style="padding-left: Xem"`。
+- **输出**：`combinedHtml()` 把所有块按顺序拼接，richtext 块外面包一层 `<section class="pd-section pd-richtext">` 让 Shopify 端的间距一致。
+- **依赖新增**：`@tiptap/core`、`@tiptap/vue-3`、`@tiptap/starter-kit`、`@tiptap/extension-paragraph`、`@tiptap/extension-text-style`、`@tiptap/extension-color`、`@tiptap/extension-image`、`@tiptap/extension-table` 系列、`@tiptap/extension-link`/`underline`（StarterKit 默认带，不要再单独装一份）。这是项目第一次破例引入大型依赖，以后再加东西仍要谨慎。
+
+> ⚠️ Tiptap 的 ProseMirror schema 会丢弃未注册的标签。如果将来想在 RTE 里支持新的 Shopify 自定义结构（如自定义按钮、卡片），**必须** 给它注册一个 Node 扩展，不能直接 `insertContent('<div class="...">...')`。
+
 ## 5. 历史任务记录
 
 ### 2026-04-17 组件化改造（首次重构）

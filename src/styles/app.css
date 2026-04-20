@@ -726,6 +726,13 @@ body {
 .ed-block__preview .pd-section {
   margin: 0;
 }
+.ed-block__preview--editable {
+  cursor: text;
+  outline: none;
+}
+.ed-block__preview--editable:focus-visible {
+  box-shadow: inset 0 0 0 2px rgba(11, 98, 169, 0.25);
+}
 
 /* ---------------- Insert bar ---------------- */
 .ed-insert {
