@@ -1,50 +1,82 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import LibraryView from './views/LibraryView.vue'
 import EditorView from './views/EditorView.vue'
 import { draftStore } from './store/draft.js'
 
-const view = ref('library') // 'library' | 'editor'
+const drawerOpen = ref(false)
+const count = computed(() => draftStore.blocks.length)
 
-function switchView(next) {
-  view.value = next
-  // Scroll to top so each view feels fresh.
-  window.scrollTo({ top: 0 })
+function openDrawer() {
+  drawerOpen.value = true
 }
+function closeDrawer() {
+  drawerOpen.value = false
+}
+
+// ESC closes the drawer — matches typical "side panel" affordance.
+function onKeydown(e) {
+  if (e.key === 'Escape' && drawerOpen.value) closeDrawer()
+}
+window.addEventListener('keydown', onKeydown)
+onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
+
+// Body scroll lock while the drawer is open so background gallery doesn't
+// move under the panel.
+watch(drawerOpen, (open) => {
+  document.body.style.overflow = open ? 'hidden' : ''
+})
 </script>
 
 <template>
   <div class="app-root">
-    <div class="app-viewbar">
-      <div class="app-viewbar__inner">
-        <strong class="app-viewbar__brand">PD Templates</strong>
-        <div class="app-viewbar__tabs" role="tablist">
-          <button
-            type="button"
-            role="tab"
-            :aria-selected="view === 'library'"
-            :class="{ 'is-active': view === 'library' }"
-            @click="switchView('library')"
-          >
-            ライブラリ
-          </button>
-          <button
-            type="button"
-            role="tab"
-            :aria-selected="view === 'editor'"
-            :class="{ 'is-active': view === 'editor' }"
-            @click="switchView('editor')"
-          >
-            エディター
-            <span v-if="draftStore.blocks.length" class="app-viewbar__count">
-              {{ draftStore.blocks.length }}
-            </span>
-          </button>
-        </div>
+    <div class="app-topbar">
+      <div class="app-topbar__inner">
+        <strong class="app-topbar__brand">PD Templates</strong>
+        <button
+          type="button"
+          class="app-cart"
+          :class="{ 'is-active': drawerOpen }"
+          :aria-expanded="drawerOpen"
+          aria-controls="draft-drawer"
+          @click="openDrawer"
+        >
+          <span class="app-cart__icon" aria-hidden="true">🛒</span>
+          <span>下書き</span>
+          <span v-if="count" class="app-cart__count">{{ count }}</span>
+        </button>
       </div>
     </div>
 
-    <LibraryView v-if="view === 'library'" @switch-view="switchView" />
-    <EditorView v-else @switch-view="switchView" />
+    <LibraryView @open-draft="openDrawer" />
+
+    <Transition name="drawer-fade">
+      <div
+        v-if="drawerOpen"
+        class="app-drawer__backdrop"
+        @click="closeDrawer"
+      />
+    </Transition>
+    <Transition name="drawer-slide">
+      <aside
+        v-show="drawerOpen"
+        id="draft-drawer"
+        class="app-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-label="下書き"
+      >
+        <button
+          type="button"
+          class="app-drawer__close"
+          @click="closeDrawer"
+          title="閉じる (Esc)"
+          aria-label="閉じる"
+        >
+          ×
+        </button>
+        <EditorView @close-drawer="closeDrawer" />
+      </aside>
+    </Transition>
   </div>
 </template>

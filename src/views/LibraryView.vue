@@ -28,7 +28,7 @@ const NAV = [
   { num: '12', id: 'divider', label: 'Divider 区切り線' }
 ]
 
-defineEmits(['switch-view'])
+defineEmits(['open-draft'])
 </script>
 
 <template>
@@ -44,8 +44,8 @@ defineEmits(['switch-view'])
       </nav>
       <div class="app-sidebar__footer">
         運用フロー：<br />
-        ① 各テンプレートの「下書きに追加」でエディターに集める<br />
-        ② エディターで並び替え・テキスト挿入<br />
+        ① 各テンプレートの「下書きに追加」で右上のカートに集める<br />
+        ② カートを開いて並び替え・テキスト挿入<br />
         ③ 「全 HTML をコピー」して Shopify の HTML モードに貼り付け
       </div>
     </aside>
@@ -54,14 +54,14 @@ defineEmits(['switch-view'])
       <header class="app-header">
         <h2>ライブラリ · コンポーネントプレビューと下書き追加</h2>
         <p>
-          目的のテンプレートを選び、「下書きに追加」でエディターに集めます。
+          目的のテンプレートを選び、「下書きに追加」で右上のカートに集めます。
           パラメータ（列数など）はカード上部で調整でき、プレビュー内のテキストは直接編集できます。
           コードを単独でコピーすることもできます。
         </p>
         <div v-if="draftStore.blocks.length" class="app-draft-banner">
           <span>現在の下書き: <strong>{{ draftStore.blocks.length }}</strong> ブロック</span>
-          <button type="button" class="btn btn--ghost" @click="$emit('switch-view', 'editor')">
-            エディターを開く →
+          <button type="button" class="btn btn--ghost" @click="$emit('open-draft')">
+            カートを開く →
           </button>
         </div>
       </header>
