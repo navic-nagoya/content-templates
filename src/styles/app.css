@@ -503,62 +503,63 @@ body {
   resize: vertical;
 }
 
-/* ---------------- View shell + top tabs ---------------- */
+/* ---------------- App shell + top bar (cart trigger) ---------------- */
 .app-root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
-.app-viewbar {
+.app-topbar {
   position: sticky;
   top: 0;
-  z-index: 50;
-  background: #fff;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(160%) blur(8px);
   border-bottom: 1px solid var(--app-border);
 }
-.app-viewbar__inner {
+.app-topbar__inner {
   display: flex;
   align-items: center;
-  gap: 24px;
+  justify-content: space-between;
+  gap: 16px;
   padding: 8px 24px;
   max-width: 1360px;
   margin: 0 auto;
 }
-.app-viewbar__brand {
+.app-topbar__brand {
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.02em;
 }
-.app-viewbar__tabs {
-  display: inline-flex;
-  padding: 3px;
-  background: #eef0f2;
-  border-radius: 8px;
-  gap: 2px;
-}
-.app-viewbar__tabs button {
+.app-cart {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  border: 0;
-  background: transparent;
-  padding: 5px 14px;
+  gap: 8px;
+  border: 1px solid var(--app-border);
+  background: #fff;
+  color: #222;
+  padding: 6px 14px 6px 12px;
+  border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
-  color: #555;
-  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.app-viewbar__tabs button:hover {
-  color: #111;
-}
-.app-viewbar__tabs button.is-active {
-  background: #fff;
+.app-cart:hover {
+  border-color: var(--app-accent);
   color: var(--app-accent);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
-.app-viewbar__count {
+.app-cart.is-active {
+  background: var(--app-accent);
+  color: #fff;
+  border-color: var(--app-accent);
+}
+.app-cart__icon {
+  font-size: 15px;
+  line-height: 1;
+}
+.app-cart__count {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -570,6 +571,68 @@ body {
   border-radius: 999px;
   font-size: 11px;
   font-weight: 700;
+}
+.app-cart.is-active .app-cart__count {
+  background: #fff;
+  color: var(--app-accent);
+}
+
+/* ---------------- Drawer ---------------- */
+.app-drawer__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 32, 0.42);
+  z-index: 60;
+}
+.app-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(640px, 100vw);
+  background: #fafbfc;
+  z-index: 70;
+  box-shadow: -12px 0 32px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.app-drawer__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #555;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 1;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.app-drawer__close:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #111;
+}
+
+.drawer-fade-enter-active,
+.drawer-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.drawer-fade-enter-from,
+.drawer-fade-leave-to {
+  opacity: 0;
+}
+.drawer-slide-enter-active,
+.drawer-slide-leave-active {
+  transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.drawer-slide-enter-from,
+.drawer-slide-leave-to {
+  transform: translateX(100%);
 }
 
 .app-draft-banner {
@@ -586,19 +649,16 @@ body {
   color: #15467a;
 }
 
-/* ---------------- Editor view ---------------- */
+/* ---------------- Editor view (rendered inside the drawer panel) ---------------- */
 .ed-shell {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 24px 24px 80px;
   width: 100%;
+  padding: 20px 22px 80px;
 }
 .ed-toolbar {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 24px;
-  padding-bottom: 16px;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 36px 16px 0;
   margin-bottom: 12px;
   border-bottom: 1px solid var(--app-border);
 }
@@ -616,7 +676,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-shrink: 0;
+  flex-wrap: wrap;
 }
 .ed-toolbar__count {
   font-size: 12px;
@@ -1087,9 +1147,5 @@ body {
   }
   .ed-shell {
     padding: 16px 16px 60px;
-  }
-  .ed-toolbar {
-    flex-direction: column;
-    align-items: stretch;
   }
 }
