@@ -68,13 +68,12 @@ function renderGridItem(it) {
 }
 
 function renderGrid(list, mod) {
-  // Cap columns at 4 desktop / 2 tablet so partial rows don't leave empty cells.
-  const colsD = Math.min(list.length, 4)
-  const colsT = Math.min(list.length, 2)
+  // Always 4 desktop / 2 tablet columns — package thumbnails shouldn't balloon
+  // when there are only 1–3 items.
   const itemsHtml = list.map(renderGridItem).join('\n')
 
   return `<section class="pd-section pd-package ${mod}">
-  <div class="pd-package__grid" style="--cols-d:${colsD};--cols-t:${colsT};">
+  <div class="pd-package__grid" style="--cols-d:4;--cols-t:2;">
 ${indent(itemsHtml, 4)}
   </div>
 </section>`
