@@ -6,6 +6,11 @@ import { previewState } from '../store/previewMode.js'
 // drag, we set an inline width on the preview element; ResizeObserver keeps
 // `width` in sync so the badge tracks canvas resizes too (e.g., drawer open).
 //
+// The reported width is the inner `.pd-section`'s width (the @container
+// query host), not the outer preview — that way the badge matches the
+// breakpoints in style.css directly. Falls back to preview width if no
+// `.pd-section` is present.
+//
 // The ref returned by this composable is meant to be assigned via `ref=` on
 // the preview element the user resizes.
 
@@ -20,17 +25,28 @@ export function usePreviewResize() {
   let observer = null
   let drag = null
 
+  function reportWidth(el) {
+    const section = el.querySelector?.('.pd-section')
+    const target = section || el
+    width.value = Math.round(target.getBoundingClientRect().width)
+  }
+
   function observe(el) {
     if (observer) {
       observer.disconnect()
       observer = null
     }
     if (!el) return
-    observer = new ResizeObserver(() => {
-      width.value = Math.round(el.getBoundingClientRect().width)
-    })
+    // Observe the preview: any width change propagates to the inner section,
+    // and we re-query for `.pd-section` on each tick (it may be injected
+    // after mount via innerHTML).
+    observer = new ResizeObserver(() => reportWidth(el))
     observer.observe(el)
-    width.value = Math.round(el.getBoundingClientRect().width)
+    reportWidth(el)
+    // Section content is often injected post-mount (onMounted → innerHTML).
+    // Nudge once the browser has processed that frame, in case the preview's
+    // min-height swallowed the resize tick.
+    requestAnimationFrame(() => reportWidth(el))
   }
 
   watch(previewEl, (el) => observe(el), { immediate: true })
