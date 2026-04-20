@@ -98,6 +98,13 @@ export function renderFeature({ count = 3, items = [], variant = 'cards', split 
   return renderCards(list, mod)
 }
 
+// Match grid columns to actual item count (capped at 3 desktop / 2 tablet)
+// so partial rows don't leave hanging empty cells.
+function gridColsStyle(list) {
+  const n = list.length
+  return `--cols-d:${Math.min(n, 3)};--cols-t:${Math.min(n, 2)};`
+}
+
 function renderCards(list, mod) {
   const itemsHtml = list
     .map(
@@ -112,7 +119,7 @@ function renderCards(list, mod) {
     .join('\n')
 
   return `<section class="pd-section pd-feature ${mod}">
-  <div class="pd-feature__grid">
+  <div class="pd-feature__grid" style="${gridColsStyle(list)}">
 ${indent(itemsHtml, 4)}
   </div>
 </section>`
@@ -132,7 +139,7 @@ function renderIcons(list, mod) {
     .join('\n')
 
   return `<section class="pd-section pd-feature ${mod}">
-  <div class="pd-feature__grid">
+  <div class="pd-feature__grid" style="${gridColsStyle(list)}">
 ${indent(itemsHtml, 4)}
   </div>
 </section>`

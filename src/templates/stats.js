@@ -34,6 +34,12 @@ export function renderStats({ count = 4, items = [], variant = 'tiles' } = {}) {
   const list = listForStats(n, items)
   const mod = VARIANT_CLASS[variant] ?? VARIANT_CLASS.tiles
 
+  // Match grid columns to actual item count (capped at 4 desktop / 2 tablet)
+  // so partial rows never leave empty cells with mismatched corner radii.
+  const colsD = Math.min(n, 4)
+  const colsT = Math.min(n, 2)
+  const gridStyle = `--cols-d:${colsD};--cols-t:${colsT};`
+
   const rowsHtml = list
     .map(
       (item) => `<div class="pd-stats__cell">
@@ -44,7 +50,7 @@ export function renderStats({ count = 4, items = [], variant = 'tiles' } = {}) {
     .join('\n')
 
   return `<section class="pd-section pd-stats ${mod}">
-  <dl class="pd-stats__grid">
+  <dl class="pd-stats__grid" style="${gridStyle}">
 ${indent(rowsHtml, 4)}
   </dl>
 </section>`

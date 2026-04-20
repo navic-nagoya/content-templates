@@ -335,14 +335,14 @@
 @media (min-width: 640px) {
   .pd-feature--cards .pd-feature__grid,
   .pd-feature--icons .pd-feature__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(var(--cols-t), 1fr);
   }
 }
 
 @media (min-width: 1024px) {
   .pd-feature--cards .pd-feature__grid,
   .pd-feature--icons .pd-feature__grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(var(--cols-d), 1fr);
     gap: 32px;
   }
 }
@@ -893,13 +893,13 @@
 
 @media (min-width: 640px) {
   .pd-stats--tiles .pd-stats__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(var(--cols-t), 1fr);
   }
 }
 
 @media (min-width: 1024px) {
   .pd-stats--tiles .pd-stats__grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--cols-d), 1fr);
   }
 }
 
@@ -943,7 +943,7 @@
 
 @media (min-width: 640px) {
   .pd-stats--rail .pd-stats__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(var(--cols-t), 1fr);
     margin-top: 80px;
     row-gap: 64px;
   }
@@ -951,7 +951,7 @@
 
 @media (min-width: 1024px) {
   .pd-stats--rail .pd-stats__grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--cols-d), 1fr);
     margin-top: 112px;
   }
 }
