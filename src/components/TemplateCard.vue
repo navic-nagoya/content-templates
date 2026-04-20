@@ -2,6 +2,7 @@
 import { computed, nextTick, onMounted, ref, watch } from "vue";
 import CopyButton from "./CopyButton.vue";
 import { highlightShopifyHtml } from "../utils/highlight-html.js";
+import { addSectionBlock } from "../store/draft.js";
 
 const props = defineProps({
   name: { type: String, required: true },
@@ -54,6 +55,19 @@ function onPreviewInput() {
   if (!props.editablePreview || !previewRoot.value) return;
   draftHtml.value = previewRoot.value.innerHTML;
 }
+
+const added = ref(false);
+let addedTimer = null;
+function addToDraft() {
+  addSectionBlock({
+    html: effectiveHtml.value,
+    label: props.name,
+    badge: props.badge,
+  });
+  added.value = true;
+  clearTimeout(addedTimer);
+  addedTimer = setTimeout(() => (added.value = false), 1400);
+}
 </script>
 
 <template>
@@ -87,7 +101,15 @@ function onPreviewInput() {
         </button>
       </div>
 
-      <CopyButton :text="effectiveHtml" label="コードをコピー" />
+      <button
+        type="button"
+        class="btn btn--primary"
+        :class="{ 'is-copied': added }"
+        @click="addToDraft"
+      >
+        {{ added ? '追加しました ✓' : '下書きに追加' }}
+      </button>
+      <CopyButton :text="effectiveHtml" label="コードをコピー" variant="ghost" />
     </div>
 
     <!-- Editable preview: DOM is driven by innerHTML so contenteditable + Vue stay in sync. -->
