@@ -47,6 +47,22 @@ function onPreviewInput() {
   updateBlockHtml(props.block.id, previewRoot.value.innerHTML)
 }
 
+// Click on an <img> inside a section block opens prompts for src and alt.
+// Operators supply image URLs from Shopify's CDN (upload happens in Shopify
+// itself), so editing in place is just two text fields — no file picker here.
+function onPreviewClick(e) {
+  const el = e.target
+  if (!el || el.tagName !== 'IMG') return
+  e.preventDefault()
+  const nextSrc = window.prompt('画像 URL（Shopify CDN 推奨）', el.getAttribute('src') || '')
+  if (nextSrc === null) return
+  const nextAlt = window.prompt('alt テキスト（SEO 用、空欄可）', el.getAttribute('alt') || '')
+  if (nextAlt === null) return
+  el.setAttribute('src', nextSrc)
+  el.setAttribute('alt', nextAlt)
+  onPreviewInput()
+}
+
 onMounted(() => {
   if (props.block.kind === 'section') setDomFromBlock()
 })
@@ -86,6 +102,7 @@ watch(
       spellcheck="false"
       tabindex="0"
       @input="onPreviewInput"
+      @click="onPreviewClick"
     />
 
     <RichTextEditor
