@@ -159,6 +159,16 @@
 - `style.css` 末尾追加了 3 个 section 的样式区块（§13〜§15）以及 Feature checklist / Steps horizontal 两个新变体的规则，主题侧需同步新版 `style.css`。
 - `StepsSection.vue` 从单一 `renderSteps({ count })` 改为 variant 驱动的多卡片渲染，画廊里 Steps 现在显示两张卡。
 
+### 2026-04-20 粘贴 = 纯文本
+
+**背景**：在「下书 / 草稿箱」编辑器里编辑 section 文本时，从 Word / Notion / 网页复制过来的内容会带样式（color / font-family / 行内 style 等），污染目标段落，破坏统一排版。
+
+**改动**：
+- `src/utils/paste-plain-text.js`：通用 `paste` 处理器，给 `contenteditable` 用。读取 `text/plain` 内容、`preventDefault`、用 `document.execCommand('insertText')` 插入纯文本（保留撤销栈 + 自动触发 `input` 事件），并附带选区 API 的回退路径。
+- `TemplateCard.vue`、`editor/BlockItem.vue`：section 预览的 `contenteditable` 元素绑定 `@paste="pastePlainText"`。
+- `editor/RichTextEditor.vue`（Tiptap）：通过 `editorProps.handlePaste` 自定义粘贴行为。读取 `text/plain`，按换行切成多个空属性 `paragraph` 节点，组成 `Slice` 后 `replaceRange` 插入。这样所有外部样式（包括 Tiptap 自身能识别的 bold / heading / color 等）都被丢弃，只保留段落结构。
+- 新增直接依赖 `@tiptap/pm`（之前是 transitive；要直接 import `Slice` / `Fragment`）。
+
 ### 2026-04-20 Container Query 预览模式 + Shopify 端启用
 
 **背景**：之前所有 section 的响应式布局都由 `@media` 驱动。运营在画廊里预览移动端效果必须拖窗口宽度；Shopify 端的 section 也只能根据 viewport 决定布局，无法感知自身实际可用宽度（例如左右栏布局里被压缩的 section 仍按 viewport 选 desktop 排版）。
