@@ -3,16 +3,23 @@ import { computed, ref } from 'vue'
 import TemplateCard from '../TemplateCard.vue'
 import NumberControl from '../NumberControl.vue'
 import SwitchControl from '../SwitchControl.vue'
+import SegmentControl from '../SegmentControl.vue'
 import { renderImages } from '../../templates/images.js'
 
 const cols = ref(2)
 const showCaption = ref(true)
+const width = ref('full')
+
+const widthOptions = [
+  { id: 'full', label: '全幅' },
+  { id: 'half', label: '半幅' }
+]
 
 const html = computed(() => {
   // Passing empty items lets the generator auto-fill with defaults matching `cols`.
   // When the operator toggles captions off we re-hydrate items with `showCaption: false`.
   if (showCaption.value) {
-    return renderImages({ cols: cols.value })
+    return renderImages({ cols: cols.value, width: width.value })
   }
   const size =
     cols.value <= 1
@@ -27,7 +34,7 @@ const html = computed(() => {
     alt: '画像の説明',
     showCaption: false
   }))
-  return renderImages({ cols: cols.value, items })
+  return renderImages({ cols: cols.value, items, width: width.value })
 })
 </script>
 
@@ -45,6 +52,12 @@ const html = computed(() => {
       <template #controls>
         <NumberControl v-model="cols" :min="1" :max="4" label="列数" />
         <SwitchControl v-model="showCaption" label="キャプション表示" />
+        <SegmentControl
+          v-if="cols === 1"
+          v-model="width"
+          :options="widthOptions"
+          label="幅"
+        />
       </template>
     </TemplateCard>
   </section>

@@ -11,9 +11,10 @@ export function defaultImageItem(i, cols) {
   }
 }
 
-export function renderImages({ cols = 1, items = [] }) {
+export function renderImages({ cols = 1, items = [], width = 'full' }) {
   const safeCols = Math.max(1, cols | 0)
   const list = items.length ? items : repeat(safeCols, (i) => defaultImageItem(i, safeCols))
+  const widthAttr = safeCols === 1 && width === 'half' ? ' data-width="half"' : ''
 
   const itemsHtml = list
     .map((item) => {
@@ -31,7 +32,7 @@ export function renderImages({ cols = 1, items = [] }) {
     .join('\n')
 
   return `<section class="pd-section">
-  <div class="pd-images__grid" data-cols="${safeCols}">
+  <div class="pd-images__grid" data-cols="${safeCols}"${widthAttr}>
 ${indent(itemsHtml, 4)}
   </div>
 </section>`

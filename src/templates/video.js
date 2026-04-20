@@ -13,9 +13,10 @@ export function defaultVideoItem(i) {
   }
 }
 
-export function renderVideo({ cols = 1, items = [] }) {
+export function renderVideo({ cols = 1, items = [], width = 'full' }) {
   const safeCols = Math.max(1, Math.min(2, cols | 0))
   const list = items.length ? items : repeat(safeCols, (i) => defaultVideoItem(i))
+  const widthAttr = safeCols === 1 && width === 'half' ? ' data-width="half"' : ''
 
   const itemsHtml = list
     .map(
@@ -36,7 +37,7 @@ export function renderVideo({ cols = 1, items = [] }) {
     .join('\n')
 
   return `<section class="pd-section">
-  <div class="pd-video__grid" data-cols="${safeCols}">
+  <div class="pd-video__grid" data-cols="${safeCols}"${widthAttr}>
 ${indent(itemsHtml, 4)}
   </div>
 </section>`

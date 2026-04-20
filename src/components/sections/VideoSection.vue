@@ -2,11 +2,18 @@
 import { computed, ref } from 'vue'
 import TemplateCard from '../TemplateCard.vue'
 import NumberControl from '../NumberControl.vue'
+import SegmentControl from '../SegmentControl.vue'
 import { renderVideo } from '../../templates/video.js'
 
 const cols = ref(1)
+const width = ref('full')
 
-const html = computed(() => renderVideo({ cols: cols.value }))
+const widthOptions = [
+  { id: 'full', label: '全幅' },
+  { id: 'half', label: '半幅' }
+]
+
+const html = computed(() => renderVideo({ cols: cols.value, width: width.value }))
 </script>
 
 <template>
@@ -22,6 +29,12 @@ const html = computed(() => renderVideo({ cols: cols.value }))
     <TemplateCard name="動画グリッド" badge="pd-video" :html="html">
       <template #controls>
         <NumberControl v-model="cols" :min="1" :max="2" label="列数" />
+        <SegmentControl
+          v-if="cols === 1"
+          v-model="width"
+          :options="widthOptions"
+          label="幅"
+        />
       </template>
     </TemplateCard>
   </section>
