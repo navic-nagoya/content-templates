@@ -3,6 +3,7 @@ import { computed, nextTick, onMounted, ref, watch } from "vue";
 import CopyButton from "./CopyButton.vue";
 import Icon from "./Icon.vue";
 import { highlightShopifyHtml } from "../utils/highlight-html.js";
+import { pastePlainText } from "../utils/paste-plain-text.js";
 import { addSectionBlock } from "../store/draft.js";
 
 const props = defineProps({
@@ -129,6 +130,7 @@ function addToDraft() {
         tabindex="0"
         class="tpl-card__preview tpl-card__preview--editable"
         @input="onPreviewInput"
+        @paste="pastePlainText"
       ></div>
     </div>
     <div v-else v-show="tab === 'preview'" class="tpl-card__canvas">

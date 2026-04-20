@@ -2,6 +2,7 @@
 import { onMounted, ref, watch } from 'vue'
 import RichTextEditor from './RichTextEditor.vue'
 import Icon from '../Icon.vue'
+import { pastePlainText } from '../../utils/paste-plain-text.js'
 import {
   draftStore,
   removeBlock,
@@ -135,6 +136,7 @@ watch(
         tabindex="0"
         @input="onPreviewInput"
         @click="onPreviewClick"
+        @paste="pastePlainText"
       />
     </div>
 

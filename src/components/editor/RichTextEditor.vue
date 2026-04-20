@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, watch } from 'vue'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { Node } from '@tiptap/core'
+import { Fragment, Slice } from '@tiptap/pm/model'
 import { StarterKit } from '@tiptap/starter-kit'
 import { TextStyle } from '@tiptap/extension-text-style'
 import { Color } from '@tiptap/extension-color'
@@ -92,6 +93,25 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue'])
 
+// Strip every mark/inline-style from pasted content. We always read the
+// `text/plain` representation of the clipboard, split it on newlines, and
+// build a slice of bare paragraph nodes — so styles, fonts, colors, headings,
+// lists, etc. coming from Word / Notion / web pages never leak into the doc.
+function pastePlainText(view, event) {
+  const text = event.clipboardData?.getData('text/plain') ?? ''
+  if (!text) return false
+  event.preventDefault()
+
+  const { state } = view
+  const { schema, tr, selection } = state
+  const blocks = text.split(/\r?\n/).map((line) =>
+    schema.nodes.paragraph.create(null, line ? schema.text(line) : null)
+  )
+  const slice = new Slice(Fragment.fromArray(blocks), 1, 1)
+  view.dispatch(tr.replaceRange(selection.from, selection.to, slice).scrollIntoView())
+  return true
+}
+
 const editor = useEditor({
   content: props.modelValue || '<p></p>',
   extensions: [
@@ -116,6 +136,9 @@ const editor = useEditor({
     TableCell,
     VideoEmbed
   ],
+  editorProps: {
+    handlePaste: pastePlainText
+  },
   onUpdate: ({ editor }) => {
     emit('update:modelValue', editor.getHTML())
   }
