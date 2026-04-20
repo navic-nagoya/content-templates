@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import { router } from "./router/index.js";
 
 // Gallery/operator UI styles (scoped to the preview site, never shipped to Shopify)
 import "./styles/app.css";
@@ -14,4 +15,4 @@ import "highlight.js/styles/tokyo-night-dark.css";
 // dev team — operators never touch it.
 import "../style.css";
 
-createApp(App).mount("#app");
+createApp(App).use(router).mount("#app");

@@ -159,6 +159,10 @@ body {
   color: var(--ink-strong);
   position: relative;
   padding-left: 14px;
+  text-decoration: none;
+}
+.app-topbar__brand:hover {
+  color: var(--accent);
 }
 /* Vermilion accent ribbon to the left of the wordmark — tiny "stamp" feel. */
 .app-topbar__brand::before {
@@ -380,6 +384,29 @@ body {
   flex-shrink: 0;
 }
 .app-sidebar nav a:hover .app-nav__num {
+  color: var(--accent);
+}
+
+/* Active state — marks the section whose route is currently rendered. */
+.app-sidebar nav a.is-active {
+  color: var(--ink-strong);
+  padding-left: 18px;
+}
+.app-sidebar nav a.is-active::before {
+  height: 60%;
+}
+.app-sidebar nav a.is-active .app-nav__num {
+  color: var(--accent);
+}
+
+/* Wordmark wrap as a home link — strip default anchor styling. */
+.app-sidebar__brand-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.app-sidebar__brand-link:hover .app-sidebar h1,
+.app-sidebar__brand-link:hover h1 {
   color: var(--accent);
 }
 
@@ -1737,6 +1764,257 @@ body {
   background: rgba(255, 253, 248, 0.98);
   transform: translate(8px, -50%) scale(1.04);
   transition-duration: 0.1s;
+}
+
+/* ---------------- Home / landing page ---------------- */
+/* The homepage stands outside the sidebar shell: centered content column,
+   editorial spacing, serif display type for hero — distinct from the library
+   layout so users understand "this is the guide, not a component". */
+.home-root {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 72px 56px 120px;
+}
+
+.home-hero {
+  margin-bottom: 88px;
+}
+.home-hero__inner {
+  max-width: 760px;
+}
+.home-hero__eyebrow {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0 0 20px;
+}
+.home-hero__title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  color: var(--ink-strong);
+  margin: 0 0 24px;
+}
+.home-hero__lead {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink);
+  margin: 0 0 32px;
+  max-width: 660px;
+}
+.home-hero__cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.home-hero__cta .btn {
+  text-decoration: none;
+}
+.home-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  margin-left: 6px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.home-section-head {
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.home-section-head__num {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+.home-section-head h2 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: -0.005em;
+  color: var(--ink-strong);
+  margin: 0;
+}
+.home-section-head__desc {
+  margin: 12px 0 0;
+  font-size: 13.5px;
+  color: var(--ink-muted);
+  line-height: 1.75;
+}
+
+.home-flow {
+  margin-bottom: 88px;
+}
+.home-flow__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+.home-flow__item {
+  position: relative;
+  padding: 28px 26px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
+}
+.home-flow__step {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--accent);
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+}
+.home-flow__item h3 {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink-strong);
+  margin: 0 0 10px;
+}
+.home-flow__item p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.8;
+}
+
+.home-grid-section {
+  margin-bottom: 88px;
+}
+.home-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.home-grid__card {
+  display: block;
+  position: relative;
+  padding: 24px 22px 48px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color 0.18s var(--ease-out),
+    transform 0.18s var(--ease-out),
+    box-shadow 0.18s var(--ease-out);
+}
+.home-grid__card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+.home-grid__num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+}
+.home-grid__card:hover .home-grid__num {
+  color: var(--accent);
+}
+.home-grid__label {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--ink-strong);
+  margin: 6px 0 8px;
+  line-height: 1.4;
+}
+.home-grid__summary {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--ink-muted);
+  line-height: 1.7;
+}
+.home-grid__arrow {
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+  font-size: 16px;
+  color: var(--ink-faint);
+  transition: transform 0.18s var(--ease-out), color 0.16s var(--ease-out);
+}
+.home-grid__card:hover .home-grid__arrow {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.home-notes__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.home-notes__list li {
+  position: relative;
+  padding: 14px 16px 14px 34px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-sm, 6px);
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--ink);
+}
+.home-notes__list li::before {
+  content: "※";
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.home-notes__list code {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 12px;
+  padding: 1px 6px;
+  background: var(--bg);
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+}
+
+@media (max-width: 900px) {
+  .home-root {
+    padding: 48px 24px 80px;
+  }
+  .home-hero__title {
+    font-size: 32px;
+  }
+  .home-flow__list,
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------------- Reduced motion ---------------- */

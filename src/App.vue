@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import LibraryView from './views/LibraryView.vue'
+import { RouterView } from 'vue-router'
 import EditorView from './views/EditorView.vue'
 import Icon from './components/Icon.vue'
 import { draftStore } from './store/draft.js'
@@ -34,7 +34,7 @@ watch(drawerOpen, (open) => {
   <div class="app-root">
     <div class="app-topbar">
       <div class="app-topbar__inner">
-        <strong class="app-topbar__brand">Shopify Editor</strong>
+        <RouterLink to="/" class="app-topbar__brand">Shopify Editor</RouterLink>
         <div
           class="app-preview-modes"
           role="tablist"
@@ -70,7 +70,9 @@ watch(drawerOpen, (open) => {
       </div>
     </div>
 
-    <LibraryView @open-draft="openDrawer" />
+    <RouterView v-slot="{ Component }">
+      <component :is="Component" @open-draft="openDrawer" />
+    </RouterView>
 
     <Transition name="drawer-fade">
       <div
