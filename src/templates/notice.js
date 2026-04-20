@@ -1,4 +1,6 @@
 import { esc, indent, repeat } from './util.js'
+import infoIcon from '../assets/icons/info-fill.svg?raw'
+import warningIcon from '../assets/icons/warning-fill.svg?raw'
 
 // Notice block: bordered callout with optional title + bullet list.
 // Three tones control the color palette: info (blue), warn (amber, default), caution (red).
@@ -19,10 +21,18 @@ const TONE_CLASS = {
   caution: 'pd-notice--caution'
 }
 
+// Strip hard-coded fill/size so CSS can drive color (currentColor) and dimensions.
+function prepIcon(raw) {
+  return raw
+    .replace(/\sfill="[^"]*"/g, '')
+    .replace(/\swidth="[^"]*"/g, '')
+    .replace(/\sheight="[^"]*"/g, '')
+}
+
 const TONE_ICON = {
-  info: 'i',
-  warn: '!',
-  caution: '!'
+  info: prepIcon(infoIcon),
+  warn: prepIcon(warningIcon),
+  caution: prepIcon(warningIcon)
 }
 
 const TONE_DEFAULT_TITLE = {
@@ -57,7 +67,7 @@ export function renderNotice({ tone = 'warn', title, count = 3, items = [] } = {
   const itemsHtml = list.map((it) => `<li>${esc(it)}</li>`).join('\n')
 
   return `<section class="pd-section pd-notice ${mod}">
-  <div class="pd-notice__icon" aria-hidden="true">${esc(icon)}</div>
+  <div class="pd-notice__icon" aria-hidden="true">${icon}</div>
   <div class="pd-notice__body">
     <p class="pd-notice__title">${esc(headingText)}</p>
     <ul class="pd-notice__list">
