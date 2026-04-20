@@ -742,6 +742,21 @@ body {
 .ed-block__preview--editable img:hover {
   outline-color: var(--app-accent);
 }
+.ed-block__preview--editable .pd-video__ratio {
+  cursor: pointer;
+  transition: outline-color 0.15s ease;
+  outline: 2px dashed transparent;
+  outline-offset: 2px;
+}
+.ed-block__preview--editable .pd-video__ratio:hover {
+  outline-color: var(--app-accent);
+}
+/* Iframes swallow pointer events; disabling them lets the wrapper catch clicks
+   so the URL-edit prompt opens. Video preview/playback is intentionally
+   sacrificed in the editor — the operator just needs to swap URLs. */
+.ed-block__preview--editable .pd-video__ratio iframe {
+  pointer-events: none;
+}
 
 /* ---------------- Insert bar ---------------- */
 .ed-insert {

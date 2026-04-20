@@ -47,20 +47,43 @@ function onPreviewInput() {
   updateBlockHtml(props.block.id, previewRoot.value.innerHTML)
 }
 
-// Click on an <img> inside a section block opens prompts for src and alt.
-// Operators supply image URLs from Shopify's CDN (upload happens in Shopify
-// itself), so editing in place is just two text fields — no file picker here.
+// Click handlers for media inside a section block. Operators supply URLs from
+// Shopify (CDN images, YouTube embed URLs) — uploading is done in Shopify, so
+// in-place edits collapse to a couple of prompt() calls.
+//
+// Iframes swallow pointer events, so the wrapper is what catches the click;
+// CSS sets `pointer-events: none` on the iframe inside the editable preview.
 function onPreviewClick(e) {
+  const root = previewRoot.value
+  if (!root) return
   const el = e.target
-  if (!el || el.tagName !== 'IMG') return
-  e.preventDefault()
-  const nextSrc = window.prompt('画像 URL（Shopify CDN 推奨）', el.getAttribute('src') || '')
-  if (nextSrc === null) return
-  const nextAlt = window.prompt('alt テキスト（SEO 用、空欄可）', el.getAttribute('alt') || '')
-  if (nextAlt === null) return
-  el.setAttribute('src', nextSrc)
-  el.setAttribute('alt', nextAlt)
-  onPreviewInput()
+  if (!el) return
+
+  if (el.tagName === 'IMG') {
+    e.preventDefault()
+    const nextSrc = window.prompt('画像 URL（Shopify CDN 推奨）', el.getAttribute('src') || '')
+    if (nextSrc === null) return
+    const nextAlt = window.prompt('alt テキスト（SEO 用、空欄可）', el.getAttribute('alt') || '')
+    if (nextAlt === null) return
+    el.setAttribute('src', nextSrc)
+    el.setAttribute('alt', nextAlt)
+    onPreviewInput()
+    return
+  }
+
+  const videoWrap = el.closest?.('.pd-video__ratio')
+  if (videoWrap && root.contains(videoWrap)) {
+    e.preventDefault()
+    const iframe = videoWrap.querySelector('iframe')
+    if (!iframe) return
+    const nextSrc = window.prompt(
+      '埋め込み URL（例: https://www.youtube.com/embed/XXXX）',
+      iframe.getAttribute('src') || ''
+    )
+    if (nextSrc === null) return
+    iframe.setAttribute('src', nextSrc)
+    onPreviewInput()
+  }
 }
 
 onMounted(() => {
