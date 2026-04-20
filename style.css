@@ -447,7 +447,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
-  align-items: center;
+  align-items: start;
   max-width: 1280px;
   margin: 0 auto;
 }
@@ -1820,14 +1820,14 @@
    ============================================================ */
 
 /* ---- §3 pd-images ---- */
-@container (max-width: 767.98px) {
+@container (max-width: 639.98px) {
   .pd-images__grid[data-cols="2"],
   .pd-images__grid[data-cols="3"],
   .pd-images__grid[data-cols="4"] {
     grid-template-columns: repeat(1, 1fr);
   }
 }
-@container (min-width: 768px) and (max-width: 1024px) {
+@container (min-width: 640px) and (max-width: 960px) {
   .pd-images__grid[data-cols="3"],
   .pd-images__grid[data-cols="4"] {
     grid-template-columns: repeat(2, 1fr);
@@ -1869,15 +1869,15 @@
 }
 
 /* ---- §5 pd-feature: split ---- */
-@container (max-width: 767.98px) {
+@container (max-width: 649.98px) {
   .pd-feature--split .pd-feature__split {
     grid-template-columns: 1fr;
     gap: 40px;
   }
 }
-@container (min-width: 768px) {
+@container (min-width: 640px) {
   .pd-feature--split .pd-feature__split {
-    grid-template-columns: 1.05fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 64px;
   }
 }
@@ -1938,7 +1938,7 @@
 }
 
 /* ---- §5 pd-feature: stacked-media ---- */
-@container (max-width: 1023.98px) {
+@container (max-width: 767.98px) {
   .pd-feature--stacked-media .pd-feature__stack-rows {
     gap: 48px;
   }
@@ -1950,7 +1950,7 @@
     align-items: stretch;
   }
 }
-@container (min-width: 1024px) {
+@container (min-width: 768px) {
   .pd-feature--stacked-media .pd-feature__stack-rows {
     gap: 56px;
   }
@@ -1963,7 +1963,7 @@
 }
 
 /* ---- §5 pd-feature: hero-aside ---- */
-@container (max-width: 1023.98px) {
+@container (max-width: 767.98px) {
   .pd-feature--hero-aside .pd-feature__aside-layout {
     grid-template-columns: 1fr;
     gap: 0;
@@ -1979,7 +1979,7 @@
     padding: 40px 24px 56px;
   }
 }
-@container (min-width: 1024px) {
+@container (min-width: 768px) {
   .pd-feature--hero-aside .pd-feature__aside-layout {
     grid-template-columns: 1fr 1fr;
     gap: 48px;
