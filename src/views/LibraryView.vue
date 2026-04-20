@@ -9,6 +9,9 @@ import SpecsSection from '../components/sections/SpecsSection.vue'
 import StepsSection from '../components/sections/StepsSection.vue'
 import VideoSection from '../components/sections/VideoSection.vue'
 import CompareSection from '../components/sections/CompareSection.vue'
+import PackageSection from '../components/sections/PackageSection.vue'
+import TrustSection from '../components/sections/TrustSection.vue'
+import NoticeSection from '../components/sections/NoticeSection.vue'
 import LayoutSection from '../components/sections/LayoutSection.vue'
 import DividerSection from '../components/sections/DividerSection.vue'
 import { draftStore } from '../store/draft.js'
@@ -24,8 +27,11 @@ const NAV = [
   { num: '08', id: 'steps', label: 'Steps ステップ' },
   { num: '09', id: 'video', label: 'Video 動画' },
   { num: '10', id: 'compare', label: 'Compare 比較' },
-  { num: '11', id: 'layout', label: 'Layout レイアウト' },
-  { num: '12', id: 'divider', label: 'Divider 区切り線' }
+  { num: '11', id: 'package', label: 'Package 同梱物' },
+  { num: '12', id: 'trust', label: 'Trust 安心ポイント' },
+  { num: '13', id: 'notice', label: 'Notice 注意事項' },
+  { num: '14', id: 'layout', label: 'Layout レイアウト' },
+  { num: '15', id: 'divider', label: 'Divider 区切り線' }
 ]
 
 defineEmits(['open-draft'])
@@ -79,6 +85,9 @@ defineEmits(['open-draft'])
       <StepsSection />
       <VideoSection />
       <CompareSection />
+      <PackageSection />
+      <TrustSection />
+      <NoticeSection />
       <LayoutSection />
       <DividerSection />
     </main>

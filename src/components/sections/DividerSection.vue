@@ -14,7 +14,7 @@ const cards = computed(() =>
 <template>
   <section id="divider" class="tpl-section">
     <header class="tpl-section__head">
-      <span class="tpl-section__num">12</span>
+      <span class="tpl-section__num">15</span>
       <h3 class="tpl-section__title">Divider · 区切り線</h3>
       <p class="tpl-section__desc">
         セクション間に入れる区切り線です。中央テキスト・中央アイコン・左揃えテキストの 3 種類。プレビュー内でラベル文言を直接編集できます。

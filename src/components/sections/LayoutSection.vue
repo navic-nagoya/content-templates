@@ -23,7 +23,7 @@ const cards = computed(() =>
 <template>
   <section id="layout" class="tpl-section">
     <header class="tpl-section__head">
-      <span class="tpl-section__num">11</span>
+      <span class="tpl-section__num">14</span>
       <h3 class="tpl-section__title">Layout · レイアウトコンテナ</h3>
       <p class="tpl-section__desc">
         純粋なコンテナです。指定したカラム構成でコンテンツを並べるだけで、見た目の装飾はありません。プレビュー内のプレースホルダを直接編集するか、他のセクション HTML をそのまま差し込んでご利用ください。等分カラムは列数（2〜4）を切り替えられます。非対称 2 カラムはスイッチでメイン側を左右入れ替えられます。

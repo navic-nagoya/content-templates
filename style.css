@@ -871,6 +871,53 @@
   display: block;
 }
 
+/* --- variant: checklist (✓ mark + single-line text, 1–2 column list) --- */
+.pd-feature--checklist .pd-feature__check-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .pd-feature--checklist .pd-feature__check-list {
+    grid-template-columns: repeat(var(--cols-d, 2), 1fr);
+  }
+}
+
+.pd-feature--checklist .pd-feature__check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.pd-feature--checklist .pd-feature__check-mark {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--brand-color, #0b62a9);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.pd-feature--checklist .pd-feature__check-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+
 /* ============================================================
    6. 统计模板 pd-stats（tiles / rail）
    ============================================================ */
@@ -1092,6 +1139,72 @@
   width: 100%;
   max-width: 480px;
   object-fit: cover;
+}
+
+/* --- variant: horizontal (compact flow for 3–5 steps) --- */
+.pd-steps--horizontal .pd-steps__row {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .pd-steps--horizontal .pd-steps__row {
+    grid-template-columns: repeat(var(--cols-d, 4), 1fr);
+    gap: 0;
+    position: relative;
+  }
+}
+
+.pd-steps--horizontal .pd-steps__h-item {
+  position: relative;
+  padding: 0 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Arrow connector between adjacent steps (desktop / tablet only) */
+@media (min-width: 768px) {
+  .pd-steps--horizontal .pd-steps__h-item + .pd-steps__h-item::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -8px;
+    width: 16px;
+    height: 2px;
+    background: #d1d5db;
+  }
+  .pd-steps--horizontal .pd-steps__h-item + .pd-steps__h-item::after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 4px;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #d1d5db;
+    border-right: 2px solid #d1d5db;
+    transform: rotate(45deg);
+  }
+}
+
+.pd-steps--horizontal .pd-steps__h-item .pd-steps__num {
+  margin-bottom: 14px;
+}
+
+.pd-steps--horizontal .pd-steps__h-item h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.pd-steps--horizontal .pd-steps__h-item p {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.7;
 }
 
 /* ============================================================
@@ -1319,4 +1432,353 @@
 }
 .pd-divider--text-start .pd-divider__label {
   padding-left: 0;
+}
+
+/* ============================================================
+   13. 同梱物テンプレート pd-package
+   ============================================================ */
+.pd-section.pd-package {
+  padding: 32px 0;
+}
+
+/* --- variant: grid (thumbnail + name + qty + optional note) --- */
+.pd-package__grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .pd-package__grid {
+    grid-template-columns: repeat(var(--cols-t, 2), 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .pd-package__grid {
+    grid-template-columns: repeat(var(--cols-d, 4), 1fr);
+    gap: 24px;
+  }
+}
+
+.pd-package--grid .pd-package__item {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.pd-package--grid .pd-package__item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
+  border-color: transparent;
+}
+
+.pd-package--grid .pd-package__thumb {
+  background: #f7f7f7;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+.pd-package--grid .pd-package__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pd-package--grid .pd-package__info {
+  padding: 14px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pd-package--grid .pd-package__name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+.pd-package--grid .pd-package__qty {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--brand-color, #0b62a9);
+}
+.pd-package--grid .pd-package__note {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* --- variant: list (horizontal thumb + info + qty on the right) --- */
+.pd-package__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pd-package--list .pd-package__row {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 16px;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+}
+
+.pd-package--list .pd-package__row-thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f7f7f7;
+  flex-shrink: 0;
+}
+.pd-package--list .pd-package__row-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pd-package--list .pd-package__row-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.pd-package--list .pd-package__name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+.pd-package--list .pd-package__note {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.pd-package--list .pd-package__row-qty {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--brand-color, #0b62a9);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .pd-package--list .pd-package__row {
+    grid-template-columns: 56px 1fr auto;
+    gap: 12px;
+    padding: 10px 12px;
+  }
+  .pd-package--list .pd-package__row-thumb {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* ============================================================
+   14. 安心バッジ pd-trust
+   ============================================================ */
+.pd-section.pd-trust {
+  padding: 24px 0;
+}
+
+.pd-trust__grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .pd-trust__grid {
+    grid-template-columns: repeat(var(--cols-t, 3), 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .pd-trust__grid {
+    grid-template-columns: repeat(var(--cols-d, 6), 1fr);
+    gap: 20px;
+  }
+}
+
+.pd-trust__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.pd-trust__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(11, 98, 169, 0.08);
+  color: var(--brand-color, #0b62a9);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.pd-trust__icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  display: block;
+}
+
+.pd-trust__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.pd-trust__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+.pd-trust__sub {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* --- variant: band (lightweight inline row) --- */
+.pd-trust--band .pd-trust__item {
+  padding: 4px 0;
+}
+
+/* --- variant: cards (boxed, heavier presence) --- */
+.pd-trust--cards .pd-trust__item {
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.pd-trust--cards .pd-trust__item:hover {
+  box-shadow: 0 8px 20px rgba(17, 24, 39, 0.05);
+  border-color: transparent;
+}
+.pd-trust--cards .pd-trust__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--brand-color, #0b62a9);
+  color: #fff;
+}
+.pd-trust--cards .pd-trust__icon img {
+  width: 28px;
+  height: 28px;
+}
+.pd-trust--cards .pd-trust__title {
+  font-size: 15px;
+}
+
+/* ============================================================
+   15. 注意事項 pd-notice
+   ============================================================ */
+.pd-section.pd-notice {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 18px 20px;
+  border-radius: 10px;
+  border: 1px solid;
+}
+
+.pd-notice__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1;
+  color: #fff;
+  margin-top: 2px;
+}
+
+.pd-notice__body {
+  min-width: 0;
+}
+.pd-notice__title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.pd-notice__list {
+  list-style: disc;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pd-notice__list li {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* --- tone: info (blue) --- */
+.pd-notice--info {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+.pd-notice--info .pd-notice__icon {
+  background: #2563eb;
+}
+.pd-notice--info .pd-notice__title {
+  color: #1e3a8a;
+}
+.pd-notice--info .pd-notice__list li {
+  color: #1e40af;
+}
+
+/* --- tone: warn (amber) --- */
+.pd-notice--warn {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+.pd-notice--warn .pd-notice__icon {
+  background: #d97706;
+}
+.pd-notice--warn .pd-notice__title {
+  color: #92400e;
+}
+.pd-notice--warn .pd-notice__list li {
+  color: #78350f;
+}
+
+/* --- tone: caution (red) --- */
+.pd-notice--caution {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+.pd-notice--caution .pd-notice__icon {
+  background: #dc2626;
+}
+.pd-notice--caution .pd-notice__title {
+  color: #991b1b;
+}
+.pd-notice--caution .pd-notice__list li {
+  color: #7f1d1d;
 }
