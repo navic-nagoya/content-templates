@@ -419,6 +419,9 @@
   object-fit: contain;
   display: block;
 }
+.pd-feature--icons .pd-feature__icon:not(:has(img)) {
+  display: none;
+}
 .pd-feature--icons .pd-feature__item h4 {
   font-size: 17px;
   font-weight: 700;
@@ -489,6 +492,9 @@
   grid-template-columns: 40px 1fr;
   gap: 16px;
   align-items: flex-start;
+}
+.pd-feature--split .pd-feature__row:not(:has(.pd-feature__bullet)) {
+  grid-template-columns: 1fr;
 }
 .pd-feature--split .pd-feature__bullet {
   width: 36px;
