@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
 import RichTextEditor from './RichTextEditor.vue'
+import Icon from '../Icon.vue'
 import {
   draftStore,
   removeBlock,
@@ -111,10 +112,18 @@ watch(
       <span class="ed-block__kind">{{ block.kind === 'richtext' ? '本文テキスト' : (block.label || 'セクション') }}</span>
       <span v-if="block.badge" class="ed-block__badge">{{ block.badge }}</span>
       <span class="ed-block__spacer" />
-      <button type="button" class="ed-block__btn" :disabled="isFirst()" @click="moveBlock(block.id, -1)" title="上へ">↑</button>
-      <button type="button" class="ed-block__btn" :disabled="isLast()" @click="moveBlock(block.id, 1)" title="下へ">↓</button>
-      <button type="button" class="ed-block__btn" @click="duplicateBlock(block.id)" title="複製">⧉</button>
-      <button type="button" class="ed-block__btn ed-block__btn--danger" @click="confirmRemove" title="削除">🗑</button>
+      <button type="button" class="ed-block__btn" :disabled="isFirst()" @click="moveBlock(block.id, -1)" title="上へ">
+        <Icon name="arrow-up" />
+      </button>
+      <button type="button" class="ed-block__btn" :disabled="isLast()" @click="moveBlock(block.id, 1)" title="下へ">
+        <Icon name="arrow-down" />
+      </button>
+      <button type="button" class="ed-block__btn" @click="duplicateBlock(block.id)" title="複製">
+        <Icon name="copy" />
+      </button>
+      <button type="button" class="ed-block__btn ed-block__btn--danger" @click="confirmRemove" title="削除">
+        <Icon name="trash" />
+      </button>
     </div>
 
     <div

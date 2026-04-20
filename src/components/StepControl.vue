@@ -1,4 +1,6 @@
 <script setup>
+import Icon from './Icon.vue'
+
 // Like NumberControl but structure is changed only via +/- (no typing).
 const props = defineProps({
   modelValue: { type: Number, required: true },
@@ -28,7 +30,7 @@ function set(n) {
         aria-label="減らす"
         @click="set(modelValue - 1)"
       >
-        −
+        <Icon name="minus" :size="14" />
       </button>
       <span class="ctl-number__value">{{ modelValue }}</span>
       <button
@@ -37,7 +39,7 @@ function set(n) {
         aria-label="増やす"
         @click="set(modelValue + 1)"
       >
-        +
+        <Icon name="plus" :size="14" />
       </button>
     </span>
   </span>

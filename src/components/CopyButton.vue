@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import Icon from './Icon.vue'
 
 const props = defineProps({
   text: { type: String, required: true },
@@ -45,6 +46,10 @@ async function copy() {
     ]"
     @click="copy"
   >
-    {{ copied ? 'コピー済み ✓' : label }}
+    <template v-if="copied">
+      <Icon name="check" :size="14" />
+      <span>コピー済み</span>
+    </template>
+    <template v-else>{{ label }}</template>
   </button>
 </template>

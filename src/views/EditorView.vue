@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import BlockItem from '../components/editor/BlockItem.vue'
 import InsertBar from '../components/editor/InsertBar.vue'
 import CopyButton from '../components/CopyButton.vue'
+import Icon from '../components/Icon.vue'
 import { draftStore, clearDraft, combinedHtml, addRichTextBlock } from '../store/draft.js'
 
 defineEmits(['close-drawer'])
@@ -25,7 +26,7 @@ function startWithText() {
   <div class="ed-shell">
     <header class="ed-toolbar">
       <div class="ed-toolbar__title">
-        <h2>下書き · 商品説明の組み立て</h2>
+        <h2>エディター · 商品説明の組み立て</h2>
         <p class="ed-toolbar__hint">
           ライブラリで集めたセクションを並び替え、間に本文テキストを挿入できます。
           完成したら「全 HTML をコピー」して Shopify の HTML モードに貼り付けてください。
@@ -57,7 +58,8 @@ function startWithText() {
           ライブラリへ戻る
         </button>
         <button type="button" class="btn btn--ghost" @click="startWithText">
-          ＋ テキストブロックを追加
+          <Icon name="plus" :size="14" />
+          <span>テキストブロックを追加</span>
         </button>
       </div>
     </div>

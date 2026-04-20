@@ -11,6 +11,7 @@ import { TableRow } from '@tiptap/extension-table-row'
 import { TableCell } from '@tiptap/extension-table-cell'
 import { TableHeader } from '@tiptap/extension-table-header'
 import { Paragraph } from '@tiptap/extension-paragraph'
+import Icon from '../Icon.vue'
 
 // Custom block node that mirrors the HTML shape used by the video template
 // (`<div class="pd-video__ratio"><iframe ...></div>`). Defining it as a real
@@ -240,13 +241,13 @@ const tableActive = computed(() => isActive('table'))
       <span class="rte__sep" />
 
       <button type="button" :class="{ 'is-active': isActive('bold') }" @click="chain()?.toggleBold().run()" title="太字">
-        <b>B</b>
+        <Icon name="text-b" />
       </button>
       <button type="button" :class="{ 'is-active': isActive('italic') }" @click="chain()?.toggleItalic().run()" title="斜体">
-        <i>I</i>
+        <Icon name="text-italic" />
       </button>
       <button type="button" :class="{ 'is-active': isActive('underline') }" @click="chain()?.toggleUnderline().run()" title="下線">
-        <u>U</u>
+        <Icon name="text-underline" />
       </button>
 
       <span class="rte__sep" />
@@ -260,43 +261,61 @@ const tableActive = computed(() => isActive('table'))
             @input="setColor($event.target.value)"
           />
         </label>
-        <button type="button" class="rte__color-clear" title="色を解除" @click="setColor('')">×</button>
+        <button type="button" class="rte__color-clear" title="色を解除" @click="setColor('')">
+          <Icon name="x" :size="12" />
+        </button>
       </span>
 
       <span class="rte__sep" />
 
       <button type="button" :class="{ 'is-active': isActive('link') }" @click="promptLink" title="リンク">
-        🔗
+        <Icon name="link" />
       </button>
-      <button type="button" @click="promptImage" title="画像">🖼</button>
-      <button type="button" @click="promptVideo" title="動画 (iframe)">🎬</button>
+      <button type="button" @click="promptImage" title="画像">
+        <Icon name="image" />
+      </button>
+      <button type="button" @click="promptVideo" title="動画 (iframe)">
+        <Icon name="video" />
+      </button>
 
       <span class="rte__sep" />
 
       <button type="button" :class="{ 'is-active': isActive('bulletList') }" @click="chain()?.toggleBulletList().run()" title="箇条書き">
-        ・
+        <Icon name="list-dashes" />
       </button>
       <button type="button" :class="{ 'is-active': isActive('orderedList') }" @click="chain()?.toggleOrderedList().run()" title="番号付き">
-        1.
+        <Icon name="list-numbers" />
       </button>
       <button type="button" :class="{ 'is-active': isActive('blockquote') }" @click="chain()?.toggleBlockquote().run()" title="引用">
-        ❝
+        <Icon name="quotes" />
       </button>
 
       <span class="rte__sep" />
 
-      <button type="button" @click="changeIndent(1)" title="インデント">→|</button>
-      <button type="button" @click="changeIndent(-1)" title="解除">|←</button>
+      <button type="button" @click="changeIndent(1)" title="インデント">
+        <Icon name="text-indent" />
+      </button>
+      <button type="button" @click="changeIndent(-1)" title="解除">
+        <Icon name="text-outdent" />
+      </button>
 
       <span class="rte__sep" />
 
-      <button type="button" @click="insertTable" title="表を挿入">⊞</button>
+      <button type="button" @click="insertTable" title="表を挿入">
+        <Icon name="table" />
+      </button>
       <template v-if="tableActive">
-        <button type="button" @click="chain()?.addRowAfter().run()" title="下に行追加">行+</button>
-        <button type="button" @click="chain()?.addColumnAfter().run()" title="右に列追加">列+</button>
+        <button type="button" @click="chain()?.addRowAfter().run()" title="下に行追加">
+          <Icon name="rows-plus-bottom" />
+        </button>
+        <button type="button" @click="chain()?.addColumnAfter().run()" title="右に列追加">
+          <Icon name="columns-plus-right" />
+        </button>
         <button type="button" @click="chain()?.deleteRow().run()" title="行削除">行−</button>
         <button type="button" @click="chain()?.deleteColumn().run()" title="列削除">列−</button>
-        <button type="button" @click="chain()?.deleteTable().run()" title="表削除">表×</button>
+        <button type="button" @click="chain()?.deleteTable().run()" title="表削除">
+          <Icon name="trash" />
+        </button>
       </template>
     </div>
 

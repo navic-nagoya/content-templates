@@ -1,6 +1,7 @@
 <script setup>
 import { computed, nextTick, onMounted, ref, watch } from "vue";
 import CopyButton from "./CopyButton.vue";
+import Icon from "./Icon.vue";
 import { highlightShopifyHtml } from "../utils/highlight-html.js";
 import { addSectionBlock } from "../store/draft.js";
 
@@ -107,7 +108,11 @@ function addToDraft() {
         :class="{ 'is-copied': added }"
         @click="addToDraft"
       >
-        {{ added ? '追加しました ✓' : '下書きに追加' }}
+        <template v-if="added">
+          <Icon name="check" :size="14" />
+          <span>追加しました</span>
+        </template>
+        <template v-else>下書きに追加</template>
       </button>
       <CopyButton :text="effectiveHtml" label="コードをコピー" variant="ghost" />
     </div>

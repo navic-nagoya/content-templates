@@ -1,4 +1,5 @@
 <script setup>
+import Icon from '../Icon.vue'
 import { addRichTextBlock } from '../../store/draft.js'
 
 const props = defineProps({
@@ -15,9 +16,13 @@ function insertText() {
 <template>
   <div class="ed-insert">
     <span class="ed-insert__line" />
-    <button type="button" class="ed-insert__btn" @click="insertText">＋ テキスト挿入</button>
+    <button type="button" class="ed-insert__btn" @click="insertText">
+      <Icon name="plus" :size="12" />
+      <span>テキスト挿入</span>
+    </button>
     <button type="button" class="ed-insert__btn ed-insert__btn--ghost" @click="$emit('go-library')">
-      ＋ ライブラリから追加
+      <Icon name="plus" :size="12" />
+      <span>ライブラリから追加</span>
     </button>
     <span class="ed-insert__line" />
   </div>

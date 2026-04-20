@@ -1,4 +1,6 @@
 <script setup>
+import Icon from './Icon.vue'
+
 const props = defineProps({
   modelValue: { type: Number, required: true },
   min: { type: Number, default: 1 },
@@ -32,7 +34,7 @@ function onInput(e) {
         @click="set(modelValue - 1)"
         aria-label="減らす"
       >
-        −
+        <Icon name="minus" :size="14" />
       </button>
       <input
         type="number"
@@ -47,7 +49,7 @@ function onInput(e) {
         @click="set(modelValue + 1)"
         aria-label="増やす"
       >
-        +
+        <Icon name="plus" :size="14" />
       </button>
     </span>
   </span>

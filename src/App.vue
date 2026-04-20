@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import LibraryView from './views/LibraryView.vue'
 import EditorView from './views/EditorView.vue'
+import Icon from './components/Icon.vue'
 import { draftStore } from './store/draft.js'
 
 const drawerOpen = ref(false)
@@ -38,11 +39,11 @@ watch(drawerOpen, (open) => {
           class="app-cart"
           :class="{ 'is-active': drawerOpen }"
           :aria-expanded="drawerOpen"
-          aria-controls="draft-drawer"
+          aria-controls="editor-drawer"
           @click="openDrawer"
         >
-          <span class="app-cart__icon" aria-hidden="true">🛒</span>
-          <span>下書き</span>
+          <Icon name="article" :size="16" />
+          <span>エディター</span>
           <span v-if="count" class="app-cart__count">{{ count }}</span>
         </button>
       </div>
@@ -60,11 +61,11 @@ watch(drawerOpen, (open) => {
     <Transition name="drawer-slide">
       <aside
         v-show="drawerOpen"
-        id="draft-drawer"
+        id="editor-drawer"
         class="app-drawer"
         role="dialog"
         aria-modal="true"
-        aria-label="下書き"
+        aria-label="エディター"
       >
         <button
           type="button"
@@ -73,7 +74,7 @@ watch(drawerOpen, (open) => {
           title="閉じる (Esc)"
           aria-label="閉じる"
         >
-          ×
+          <Icon name="x" :size="20" />
         </button>
         <EditorView @close-drawer="closeDrawer" />
       </aside>
