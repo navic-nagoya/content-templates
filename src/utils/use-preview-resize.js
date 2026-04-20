@@ -1,5 +1,5 @@
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import { previewState } from '../store/previewMode.js'
+import { previewState, PREVIEW_CHROME } from '../store/previewMode.js'
 
 // Drag-to-resize + live-width readout for a preview container. Only active in
 // fluid mode — the fixed-width modes keep their CSS-driven width. On pointer
@@ -14,7 +14,8 @@ import { previewState } from '../store/previewMode.js'
 // The ref returned by this composable is meant to be assigned via `ref=` on
 // the preview element the user resizes.
 
-const MIN_WIDTH = 280
+const MIN_SECTION_WIDTH = 280
+const MIN_PREVIEW_WIDTH = MIN_SECTION_WIDTH + PREVIEW_CHROME
 
 export function usePreviewResize() {
   const previewEl = ref(null)
@@ -53,7 +54,7 @@ export function usePreviewResize() {
 
   function onPointerMove(e) {
     if (!drag) return
-    const next = Math.max(MIN_WIDTH, drag.startWidth + (e.clientX - drag.startX))
+    const next = Math.max(MIN_PREVIEW_WIDTH, drag.startWidth + (e.clientX - drag.startX))
     drag.el.style.width = `${next}px`
   }
 

@@ -794,7 +794,8 @@ body {
   flex: 0 0 auto;
   width: 100%;
   max-width: calc(100% - 10px);
-  min-width: 280px;
+  /* 280px section + 52px wrapper padding — keeps the readout's floor at 280. */
+  min-width: 332px;
   margin-inline: 0;
 }
 .tpl-card__canvas.is-resizing .tpl-card__preview {
@@ -1245,7 +1246,8 @@ body {
   flex: 0 0 auto;
   width: 100%;
   max-width: calc(100% - 10px);
-  min-width: 280px;
+  /* 280px section + 52px wrapper padding — keeps the readout's floor at 280. */
+  min-width: 332px;
   margin-inline: 0;
 }
 .ed-block__canvas.is-resizing .ed-block__preview {
