@@ -972,7 +972,7 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
-  width: min(680px, 100vw);
+  width: 80vw;
   background: var(--bg);
   z-index: 70;
   box-shadow: var(--shadow-drawer);
