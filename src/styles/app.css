@@ -924,7 +924,12 @@ body {
 }
 
 /* Gallery-only: outline layout cells so the empty container is visible in
-   the preview. Not added to style.css — the Shopify output stays clean. */
+   the preview, and stretch cells so cells in the same row share height
+   (driven by the tallest cell). Not added to style.css — the Shopify
+   output stays clean. */
+.tpl-card__preview .pd-layout__grid {
+  align-items: stretch;
+}
 .tpl-card__preview .pd-layout__cell {
   border: 1px dashed var(--line-strong);
   border-radius: var(--r-sm);
