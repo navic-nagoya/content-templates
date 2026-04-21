@@ -432,6 +432,50 @@ body {
   width: 100%;
 }
 
+/* Skeleton shown while an async section chunk is being fetched. Keeps the
+   grid column filled so the sidebar doesn't visually re-center during the
+   loading gap. */
+.app-section-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 60vh;
+}
+.app-section-skeleton__bar,
+.app-section-skeleton__block {
+  border-radius: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--line-soft) 0%,
+    rgba(28, 26, 22, 0.09) 50%,
+    var(--line-soft) 100%
+  );
+  background-size: 200% 100%;
+  animation: app-section-skeleton-shimmer 1.4s ease-in-out infinite;
+}
+.app-section-skeleton__bar {
+  height: 14px;
+}
+.app-section-skeleton__block {
+  margin-top: 16px;
+  height: 280px;
+  border-radius: 6px;
+}
+@keyframes app-section-skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .app-section-skeleton__bar,
+  .app-section-skeleton__block {
+    animation: none;
+  }
+}
+
 .app-header {
   margin-bottom: 48px;
 }
@@ -1919,10 +1963,12 @@ body {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+  justify-content: stretch;
 }
 .home-grid__card {
   display: block;
   position: relative;
+  height: 100%;
   padding: 24px 22px 48px;
   background: var(--bg-elevated);
   border: 1px solid var(--line);
@@ -1969,7 +2015,9 @@ body {
   bottom: 18px;
   font-size: 16px;
   color: var(--ink-faint);
-  transition: transform 0.18s var(--ease-out), color 0.16s var(--ease-out);
+  transition:
+    transform 0.18s var(--ease-out),
+    color 0.16s var(--ease-out);
 }
 .home-grid__card:hover .home-grid__arrow {
   color: var(--accent);

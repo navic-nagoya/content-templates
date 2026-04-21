@@ -24,7 +24,17 @@ const SectionComponent = computed(() => {
 
     <main class="app-main">
       <template v-if="current">
-        <component :is="SectionComponent" :key="current.id" />
+        <Suspense :timeout="0">
+          <component :is="SectionComponent" :key="current.id" />
+          <template #fallback>
+            <div class="app-section-skeleton" aria-hidden="true">
+              <div class="app-section-skeleton__bar" style="width: 38%" />
+              <div class="app-section-skeleton__bar" style="width: 72%" />
+              <div class="app-section-skeleton__bar" style="width: 58%" />
+              <div class="app-section-skeleton__block" />
+            </div>
+          </template>
+        </Suspense>
       </template>
       <template v-else>
         <header class="app-header">
