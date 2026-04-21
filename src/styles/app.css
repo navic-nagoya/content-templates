@@ -923,16 +923,41 @@ body {
   margin: 0;
 }
 
-/* Gallery-only: outline layout cells so the empty container is visible in
-   the preview, and stretch cells so cells in the same row share height
-   (driven by the tallest cell). Not added to style.css — the Shopify
-   output stays clean. */
-.tpl-card__preview .pd-layout__grid {
+/* Editor-only affordance for the layout container: dashed cell outlines,
+   equal-height cells per row, and a small numeric label per cell so the
+   "this is a container — put sections inside" intent is visible in both
+   the gallery preview and the editor draft. Not added to style.css — the
+   Shopify output stays clean. */
+:is(.tpl-card__preview, .ed-block__preview) .pd-layout__grid {
   align-items: stretch;
+  counter-reset: pd-layout-cell;
 }
-.tpl-card__preview .pd-layout__cell {
+:is(.tpl-card__preview, .ed-block__preview) .pd-layout__cell {
+  position: relative;
   border: 1px dashed var(--line-strong);
   border-radius: var(--r-sm);
+  counter-increment: pd-layout-cell;
+}
+:is(.tpl-card__preview, .ed-block__preview) .pd-layout__cell::before {
+  content: counter(pd-layout-cell);
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+  color: var(--ink-subtle);
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  pointer-events: none;
+  user-select: none;
 }
 
 .tpl-card__code {
