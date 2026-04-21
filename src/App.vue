@@ -74,6 +74,13 @@ watch(drawerOpen, (open) => {
       <component :is="Component" @open-draft="openDrawer" />
     </RouterView>
 
+    <footer class="app-footer">
+      <div class="app-footer__inner">
+        <span class="app-footer__line">設計・開発　黑石</span>
+        <span class="app-footer__line">&copy; Navic Inc.</span>
+      </div>
+    </footer>
+
     <Transition name="drawer-fade">
       <div
         v-if="drawerOpen"

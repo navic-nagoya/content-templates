@@ -1,6 +1,6 @@
 <script setup>
-import { RouterLink } from 'vue-router'
-import { SECTIONS } from '../router/sections.js'
+import { RouterLink } from "vue-router";
+import { SECTIONS } from "../router/sections.js";
 </script>
 
 <template>
@@ -10,7 +10,9 @@ import { SECTIONS } from '../router/sections.js'
         <h1>Shopify Editor</h1>
         <span class="app-sidebar__seal" aria-hidden="true">編</span>
       </div>
-      <p class="app-sidebar__sub">Shopify 商品詳細ページ テンプレートギャラリー</p>
+      <p class="app-sidebar__sub">
+        Shopify 商品詳細ページ テンプレートギャラリー
+      </p>
     </RouterLink>
     <nav>
       <RouterLink
@@ -23,11 +25,5 @@ import { SECTIONS } from '../router/sections.js'
         <span>{{ n.label }}</span>
       </RouterLink>
     </nav>
-    <div class="app-sidebar__footer">
-      運用フロー：<br />
-      ① 各テンプレートの「下書きに追加」で右上のエディターに集める<br />
-      ② エディターを開いて並び替え・テキスト挿入<br />
-      ③ 「全 HTML をコピー」して Shopify の HTML モードに貼り付け
-    </div>
   </aside>
 </template>

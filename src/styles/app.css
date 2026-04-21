@@ -276,13 +276,36 @@ body {
   color: var(--ink);
 }
 
+/* ---------------- Footer (credits / ownership) ---------------- */
+.app-footer {
+  border-top: 1px solid var(--line-soft);
+  background: transparent;
+}
+.app-footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  font-family: var(--font-serif);
+  font-size: 12px;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+}
+.app-footer__line {
+  display: inline-flex;
+  align-items: center;
+}
+
 /* ---------------- Library shell (sidebar + main) ---------------- */
 .app-shell {
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
   max-width: 1280px;
   margin: 0 auto;
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh - 56px - 48px);
 }
 
 /* ---------------- Sidebar ---------------- */
@@ -414,16 +437,6 @@ body {
 }
 .app-sidebar__brand-link:hover h1 {
   color: var(--accent);
-}
-
-.app-sidebar__footer {
-  margin-top: 32px;
-  padding-top: 20px;
-  border-top: 1px solid var(--line-soft);
-  font-size: 11.5px;
-  color: var(--ink-muted);
-  line-height: 1.85;
-  letter-spacing: 0.01em;
 }
 
 /* ---------------- Main content area ---------------- */
@@ -1732,6 +1745,9 @@ body {
     padding: 32px 24px 60px;
   }
   .app-topbar__inner {
+    padding: 12px 20px;
+  }
+  .app-footer__inner {
     padding: 12px 20px;
   }
   .ed-shell {
