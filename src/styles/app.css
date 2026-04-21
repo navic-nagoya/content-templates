@@ -923,6 +923,13 @@ body {
   margin: 0;
 }
 
+/* Gallery-only: outline layout cells so the empty container is visible in
+   the preview. Not added to style.css — the Shopify output stays clean. */
+.tpl-card__preview .pd-layout__cell {
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-sm);
+}
+
 .tpl-card__code {
   background: var(--bg-inverse);
   font-family: var(--font-mono);
