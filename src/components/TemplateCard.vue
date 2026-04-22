@@ -76,47 +76,56 @@ function addToDraft() {
 <template>
   <div class="tpl-card">
     <div class="tpl-card__head">
-      <h4 class="tpl-card__name">{{ name }}</h4>
-      <span v-if="badge" class="tpl-card__badge">{{ badge }}</span>
-
-      <div class="tpl-card__controls">
-        <slot name="controls" />
-      </div>
-
-      <div class="tpl-card__tabs" role="tablist" aria-label="表示切替">
+      <div class="tpl-card__head-row tpl-card__head-row--identity">
+        <h4 class="tpl-card__name">{{ name }}</h4>
+        <span v-if="badge" class="tpl-card__badge">{{ badge }}</span>
         <button
           type="button"
-          role="tab"
-          :aria-selected="tab === 'preview'"
-          :class="{ 'is-active': tab === 'preview' }"
-          @click="tab = 'preview'"
+          class="btn btn--primary tpl-card__action"
+          :class="{ 'is-copied': added }"
+          @click="addToDraft"
         >
-          プレビュー
-        </button>
-        <button
-          type="button"
-          role="tab"
-          :aria-selected="tab === 'code'"
-          :class="{ 'is-active': tab === 'code' }"
-          @click="tab = 'code'"
-        >
-          コード
+          <template v-if="added">
+            <Icon name="check" :size="14" />
+            <span>追加しました</span>
+          </template>
+          <template v-else>下書きに追加</template>
         </button>
       </div>
 
-      <button
-        type="button"
-        class="btn btn--primary"
-        :class="{ 'is-copied': added }"
-        @click="addToDraft"
-      >
-        <template v-if="added">
-          <Icon name="check" :size="14" />
-          <span>追加しました</span>
-        </template>
-        <template v-else>下書きに追加</template>
-      </button>
-      <CopyButton :text="effectiveHtml" label="コードをコピー" variant="ghost" />
+      <div class="tpl-card__head-row tpl-card__head-row--tools">
+        <div class="tpl-card__controls">
+          <slot name="controls" />
+        </div>
+        <div class="tpl-card__head-right">
+          <div class="tpl-card__tabs" role="tablist" aria-label="表示切替">
+            <button
+              type="button"
+              role="tab"
+              :aria-selected="tab === 'preview'"
+              :class="{ 'is-active': tab === 'preview' }"
+              @click="tab = 'preview'"
+            >
+              プレビュー
+            </button>
+            <button
+              type="button"
+              role="tab"
+              :aria-selected="tab === 'code'"
+              :class="{ 'is-active': tab === 'code' }"
+              @click="tab = 'code'"
+            >
+              コード
+            </button>
+          </div>
+          <CopyButton
+            :text="effectiveHtml"
+            label="コードをコピー"
+            variant="ghost"
+            icon-only
+          />
+        </div>
+      </div>
     </div>
 
     <!-- Editable preview: DOM is driven by innerHTML so contenteditable + Vue stay in sync.

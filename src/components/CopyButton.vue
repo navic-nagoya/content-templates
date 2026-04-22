@@ -5,7 +5,8 @@ import Icon from './Icon.vue'
 const props = defineProps({
   text: { type: String, required: true },
   label: { type: String, default: 'コードをコピー' },
-  variant: { type: String, default: 'primary' } // 'primary' | 'ghost'
+  variant: { type: String, default: 'primary' }, // 'primary' | 'ghost'
+  iconOnly: { type: Boolean, default: false }
 })
 
 const copied = ref(false)
@@ -42,11 +43,17 @@ async function copy() {
     class="btn"
     :class="[
       variant === 'primary' ? 'btn--primary' : 'btn--ghost',
+      iconOnly ? 'btn--icon' : '',
       copied ? 'is-copied' : ''
     ]"
+    :title="iconOnly ? (copied ? 'コピー済み' : label) : null"
+    :aria-label="iconOnly ? label : null"
     @click="copy"
   >
-    <template v-if="copied">
+    <template v-if="iconOnly">
+      <Icon :name="copied ? 'check' : 'clipboard-text'" :size="16" />
+    </template>
+    <template v-else-if="copied">
       <Icon name="check" :size="14" />
       <span>コピー済み</span>
     </template>
