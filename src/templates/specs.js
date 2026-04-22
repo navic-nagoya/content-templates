@@ -11,6 +11,19 @@ const SINGLE_ROWS = [
   ['保証', '3年公式保証']
 ]
 
+const GALLERY_IMAGES = [
+  'https://placehold.co/800x600',
+  'https://placehold.co/400x400',
+  'https://placehold.co/400x400'
+]
+
+export function defaultSpecsGalleryImage(i) {
+  return {
+    src: GALLERY_IMAGES[i % GALLERY_IMAGES.length],
+    alt: '商品画像'
+  }
+}
+
 const COMPARE_ROWS = [
   ['カラー', ['マットブラック', 'パールホワイト', 'スターグレー', 'トワイライトゴールド']],
   ['サイズ', ['120 × 60 × 8 mm', '130 × 65 × 9 mm', '115 × 58 × 7 mm', '125 × 62 × 8 mm']],
@@ -58,7 +71,41 @@ ${indent(tds, 2)}
 </tr>`
 }
 
-export function renderSpecs({ variant = 'single', single, compare }) {
+export function renderSpecs({ variant = 'single', single, compare, gallery }) {
+  if (variant === 'withImages') {
+    const rows = (gallery?.rows ?? single?.rows ?? defaultSpecsSingle().rows)
+    const rawImages = gallery?.images?.length
+      ? gallery.images
+      : repeat(2, (i) => defaultSpecsGalleryImage(i))
+    const images = rawImages.slice(0, 3)
+    const head = `<tr>
+  <th>スペック</th>
+  <th>パラメータ</th>
+</tr>`
+    const body = rows.map((r) => renderRow([r.key, r.value])).join('\n')
+    const imgsHtml = images
+      .map((img) => `<img src="${esc(img.src)}" alt="${esc(img.alt || '')}" />`)
+      .join('\n')
+
+    return `<section class="pd-section pd-specs pd-specs--gallery">
+  <div class="pd-specs__gallery">
+    <div class="pd-specs__gallery-images" data-count="${images.length}">
+${indent(imgsHtml, 6)}
+    </div>
+    <div class="pd-specs__wrap">
+      <table class="pd-specs__table">
+        <thead>
+${indent(head, 10)}
+        </thead>
+        <tbody>
+${indent(body, 10)}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>`
+  }
+
   if (variant === 'compare') {
     const data = compare || defaultSpecsCompare(3)
     const headRow = `<tr>

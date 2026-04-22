@@ -6,6 +6,7 @@ import StepControl from '../StepControl.vue'
 import {
   defaultSpecsCompare,
   defaultSpecsCompareRow,
+  defaultSpecsGalleryImage,
   defaultSpecsSingle,
   defaultSpecsSingleRow,
   renderSpecs
@@ -14,6 +15,7 @@ import {
 const variant = ref('single')
 const VARIANTS = [
   { id: 'single', label: '単品仕様' },
+  { id: 'withImages', label: '画像付き' },
   { id: 'compare', label: '複数比較' }
 ]
 
@@ -35,6 +37,39 @@ const singleRowCount = ref(singleRows.value.length)
 const productCount = ref(3)
 const compareData = ref(cloneCompare(productCount.value))
 const compareRowCount = ref(compareData.value.rows.length)
+
+const galleryImageCount = ref(2)
+const galleryImages = ref(
+  Array.from({ length: galleryImageCount.value }, (_, i) => defaultSpecsGalleryImage(i))
+)
+const galleryRowCount = ref(6)
+const galleryRows = ref(cloneSingleRows().slice(0, galleryRowCount.value))
+
+function syncGalleryState() {
+  const n = Math.max(1, Math.min(3, galleryImageCount.value))
+  if (galleryImages.value.length < n) {
+    galleryImages.value = [
+      ...galleryImages.value,
+      ...Array.from({ length: n - galleryImages.value.length }, (_, i) =>
+        defaultSpecsGalleryImage(galleryImages.value.length + i)
+      )
+    ]
+  } else if (galleryImages.value.length > n) {
+    galleryImages.value = galleryImages.value.slice(0, n)
+  }
+
+  const rc = galleryRowCount.value
+  if (galleryRows.value.length < rc) {
+    galleryRows.value = [
+      ...galleryRows.value,
+      ...Array.from({ length: rc - galleryRows.value.length }, (_, i) =>
+        defaultSpecsSingleRow(galleryRows.value.length + i)
+      )
+    ]
+  } else if (galleryRows.value.length > rc) {
+    galleryRows.value = galleryRows.value.slice(0, rc)
+  }
+}
 
 function syncSingleRows() {
   const n = singleRowCount.value
@@ -80,8 +115,21 @@ const html = computed(() => {
     syncCompareState()
     return renderSpecs({ variant: 'compare', compare: compareData.value })
   }
+  if (variant.value === 'withImages') {
+    syncGalleryState()
+    return renderSpecs({
+      variant: 'withImages',
+      gallery: { images: galleryImages.value, rows: galleryRows.value }
+    })
+  }
   syncSingleRows()
   return renderSpecs({ variant: 'single', single: { rows: singleRows.value } })
+})
+
+const cardName = computed(() => {
+  if (variant.value === 'compare') return '複数商品比較仕様表'
+  if (variant.value === 'withImages') return '画像付き仕様表'
+  return '単品仕様表'
 })
 </script>
 
@@ -96,7 +144,7 @@ const html = computed(() => {
     </header>
 
     <TemplateCard
-      :name="variant === 'single' ? '単品仕様表' : '複数商品比較仕様表'"
+      :name="cardName"
       badge="pd-specs"
       :html="html"
     >
@@ -109,6 +157,20 @@ const html = computed(() => {
           :max="16"
           label="項目数"
         />
+        <template v-if="variant === 'withImages'">
+          <StepControl
+            v-model="galleryImageCount"
+            :min="1"
+            :max="3"
+            label="画像数"
+          />
+          <StepControl
+            v-model="galleryRowCount"
+            :min="1"
+            :max="12"
+            label="項目数"
+          />
+        </template>
         <template v-if="variant === 'compare'">
           <StepControl
             v-model="productCount"
