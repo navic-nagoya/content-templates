@@ -9,12 +9,24 @@ import { highlightShopifyHtml } from '../utils/highlight-html.js'
 // simulator the rest of the gallery uses — no Shopify round-trip needed.
 
 const STORAGE_KEY = 'shopify-editor.htmlPreview.v1'
+const VIEW_MODE_KEY = 'shopify-editor.htmlPreview.viewMode.v1'
+
+const VIEW_MODES = [
+  { id: 'code', label: 'コード', hint: '編集に集中' },
+  { id: 'split', label: '並列', hint: 'コード + プレビュー' },
+  { id: 'preview', label: 'プレビュー', hint: '画面を広く' }
+]
 
 const html = ref('')
+const viewMode = ref('split')
 
 try {
   const saved = localStorage.getItem(STORAGE_KEY)
   if (saved) html.value = saved
+  const savedMode = localStorage.getItem(VIEW_MODE_KEY)
+  if (savedMode && VIEW_MODES.some((m) => m.id === savedMode)) {
+    viewMode.value = savedMode
+  }
 } catch {
   /* ignore */
 }
@@ -22,6 +34,14 @@ try {
 watch(html, (next) => {
   try {
     localStorage.setItem(STORAGE_KEY, next)
+  } catch {
+    /* ignore */
+  }
+})
+
+watch(viewMode, (next) => {
+  try {
+    localStorage.setItem(VIEW_MODE_KEY, next)
   } catch {
     /* ignore */
   }
@@ -120,10 +140,30 @@ watch(html, (next) => {
         Shopify に貼ってから何度も保存・再読込せずに、ここで仕上げてからコピーできます。
         画面右上の「流動 / PC / タブレット / スマホ」でデバイス幅も切り替えられます。
       </p>
+      <div class="preview-view__tabs" role="tablist" aria-label="表示モード">
+        <button
+          v-for="m in VIEW_MODES"
+          :key="m.id"
+          type="button"
+          role="tab"
+          :aria-selected="viewMode === m.id"
+          :title="m.hint"
+          :class="['preview-view__tab', { 'is-active': viewMode === m.id }]"
+          @click="viewMode = m.id"
+        >
+          {{ m.label }}
+        </button>
+      </div>
     </header>
 
-    <div class="preview-view__layout">
-      <section class="preview-view__panel preview-view__panel--input">
+    <div
+      class="preview-view__layout"
+      :class="`preview-view__layout--${viewMode}`"
+    >
+      <section
+        v-show="viewMode !== 'preview'"
+        class="preview-view__panel preview-view__panel--input"
+      >
         <div class="preview-view__panel-head">
           <h3>HTML 入力</h3>
           <span class="preview-view__count">{{ charCount.toLocaleString() }} 文字</span>
@@ -181,7 +221,10 @@ watch(html, (next) => {
         </div>
       </section>
 
-      <section class="preview-view__panel preview-view__panel--preview">
+      <section
+        v-show="viewMode !== 'code'"
+        class="preview-view__panel preview-view__panel--preview"
+      >
         <div class="preview-view__panel-head">
           <h3>プレビュー</h3>
           <span class="preview-view__hint">style.css 適用済み</span>
