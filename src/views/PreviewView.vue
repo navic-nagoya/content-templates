@@ -1,6 +1,5 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue'
-import Icon from '../components/Icon.vue'
 import { usePreviewResize } from '../utils/use-preview-resize.js'
 import { highlightShopifyHtml } from '../utils/highlight-html.js'
 
@@ -87,38 +86,6 @@ function onTabKey(e) {
   })
 }
 
-function clearAll() {
-  if (!html.value) return
-  if (window.confirm('入力した HTML をすべて削除しますか？')) {
-    html.value = ''
-  }
-}
-
-const SAMPLE = `<section class="pd-section pd-hgroup">
-  <p class="pd-hgroup__eyebrow">サンプル見出し</p>
-  <h2 class="pd-hgroup__title">ここに商品タイトル</h2>
-  <p class="pd-hgroup__sub">ここにサブタイトル / 補足説明</p>
-</section>`
-
-function fillSample() {
-  if (html.value && !window.confirm('現在の内容を上書きしてサンプルを挿入しますか？')) return
-  html.value = SAMPLE
-}
-
-const copied = ref(false)
-let copiedTimer = null
-async function copyHtml() {
-  if (!html.value) return
-  try {
-    await navigator.clipboard.writeText(html.value)
-    copied.value = true
-    clearTimeout(copiedTimer)
-    copiedTimer = setTimeout(() => (copied.value = false), 1400)
-  } catch {
-    /* ignore */
-  }
-}
-
 // Re-sync the preview DOM whenever the input changes. We render via innerHTML
 // (not v-html) so that the ResizeObserver inside `usePreviewResize` keeps
 // firing as `.pd-section` is replaced.
@@ -183,41 +150,6 @@ watch(html, (next) => {
             @scroll="syncScroll"
             @keydown="onTabKey"
           ></textarea>
-        </div>
-        <div class="preview-view__actions">
-          <button
-            type="button"
-            class="btn btn--ghost btn--sm"
-            @click="fillSample"
-          >
-            <Icon name="plus" :size="14" />
-            <span>サンプルを挿入</span>
-          </button>
-          <button
-            type="button"
-            class="btn btn--ghost btn--sm"
-            :disabled="!html"
-            @click="clearAll"
-          >
-            <Icon name="trash" :size="14" />
-            <span>クリア</span>
-          </button>
-          <button
-            type="button"
-            class="btn btn--primary btn--sm"
-            :class="{ 'is-copied': copied }"
-            :disabled="!html"
-            @click="copyHtml"
-          >
-            <template v-if="copied">
-              <Icon name="check" :size="14" />
-              <span>コピーしました</span>
-            </template>
-            <template v-else>
-              <Icon name="copy" :size="14" />
-              <span>HTML をコピー</span>
-            </template>
-          </button>
         </div>
       </section>
 
