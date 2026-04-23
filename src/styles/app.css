@@ -2180,9 +2180,9 @@ body {
 }
 
 /* ---------------- HTML preview sandbox (/preview) ---------------- */
+/* Full-bleed: matches the topbar's edge-to-edge background so the page
+   doesn't visually narrow under the bar on wide displays. */
 .preview-view {
-  max-width: 1600px;
-  margin: 0 auto;
   padding: 48px 32px 96px;
 }
 .preview-view__head {
