@@ -966,8 +966,10 @@ body {
   box-shadow: inset 0 0 0 2px var(--accent-tint-strong);
 }
 /* The live preview re-uses `.pd-section` spacing from style.css; trim the
-   huge 48px vertical margin so cards stay compact inside the gallery. */
-.tpl-card__preview .pd-section {
+   huge 48px vertical margin so cards stay compact inside the gallery.
+   Scoped to `.tpl-card` so the standalone `/preview` sandbox (which reuses
+   `.tpl-card__preview` for sizing) keeps real margins for accurate output. */
+.tpl-card .tpl-card__preview .pd-section {
   margin: 0;
 }
 
