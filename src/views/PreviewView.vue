@@ -2,6 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import Icon from '../components/Icon.vue'
 import { usePreviewResize } from '../utils/use-preview-resize.js'
+import { highlightShopifyHtml } from '../utils/highlight-html.js'
 
 // Free-form HTML sandbox. Operators paste a snippet they're about to push to
 // Shopify and see it rendered with the real `style.css` + the same preview-mode
@@ -29,6 +30,42 @@ watch(html, (next) => {
 const { previewEl, width, isFluid, isResizing, onPointerDown } = usePreviewResize()
 
 const charCount = computed(() => html.value.length)
+
+// Tokenized HTML for the highlight overlay. Add a trailing space so a
+// final newline still produces a layout line in the <pre>, keeping the
+// overlay's height in sync with the textarea.
+const highlightedHtml = computed(() =>
+  highlightShopifyHtml(html.value.endsWith('\n') ? html.value + ' ' : html.value)
+)
+
+const editorEl = ref(null)
+const highlightEl = ref(null)
+function syncScroll() {
+  if (!editorEl.value || !highlightEl.value) return
+  highlightEl.value.scrollTop = editorEl.value.scrollTop
+  highlightEl.value.scrollLeft = editorEl.value.scrollLeft
+}
+
+// Re-sync after highlight DOM is rebuilt (line wrap can shift scrollTop slightly).
+watch(highlightedHtml, () => {
+  requestAnimationFrame(syncScroll)
+})
+
+// Tab key inserts two spaces instead of moving focus — matches a code editor.
+function onTabKey(e) {
+  if (e.key !== 'Tab' || e.ctrlKey || e.metaKey || e.altKey) return
+  e.preventDefault()
+  const el = editorEl.value
+  if (!el) return
+  const start = el.selectionStart
+  const end = el.selectionEnd
+  const before = html.value.slice(0, start)
+  const after = html.value.slice(end)
+  html.value = `${before}  ${after}`
+  requestAnimationFrame(() => {
+    el.selectionStart = el.selectionEnd = start + 2
+  })
+}
 
 function clearAll() {
   if (!html.value) return
@@ -91,12 +128,22 @@ watch(html, (next) => {
           <h3>HTML 入力</h3>
           <span class="preview-view__count">{{ charCount.toLocaleString() }} 文字</span>
         </div>
-        <textarea
-          v-model="html"
-          class="preview-view__textarea"
-          spellcheck="false"
-          placeholder="ここに HTML を貼り付けてください。&#10;例：&lt;section class=&quot;pd-section pd-feature&quot;&gt;...&lt;/section&gt;"
-        ></textarea>
+        <div class="preview-view__editor">
+          <pre
+            ref="highlightEl"
+            class="preview-view__highlight hljs"
+            aria-hidden="true"
+          ><code v-html="highlightedHtml"></code></pre>
+          <textarea
+            ref="editorEl"
+            v-model="html"
+            class="preview-view__textarea"
+            spellcheck="false"
+            placeholder="ここに HTML を貼り付けてください。&#10;例：&lt;section class=&quot;pd-section pd-feature&quot;&gt;...&lt;/section&gt;"
+            @scroll="syncScroll"
+            @keydown="onTabKey"
+          ></textarea>
+        </div>
         <div class="preview-view__actions">
           <button
             type="button"
