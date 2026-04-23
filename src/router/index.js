@@ -16,6 +16,11 @@ const routes = [
     component: () => import('../views/ComponentView.vue'),
     props: true
   },
+  {
+    path: '/preview',
+    name: 'preview',
+    component: () => import('../views/PreviewView.vue')
+  },
   // Fallback: unknown routes land on the homepage.
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ]

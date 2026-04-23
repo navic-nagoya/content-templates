@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import { RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 import EditorView from './views/EditorView.vue'
 import Icon from './components/Icon.vue'
 import { draftStore } from './store/draft.js'
@@ -34,7 +34,19 @@ watch(drawerOpen, (open) => {
   <div class="app-root">
     <div class="app-topbar">
       <div class="app-topbar__inner">
-        <RouterLink to="/" class="app-topbar__brand">Shopify Editor</RouterLink>
+        <div class="app-topbar__group app-topbar__group--start">
+          <RouterLink to="/" class="app-topbar__brand">Shopify Editor</RouterLink>
+          <RouterLink
+            to="/preview"
+            class="app-topbar__link"
+            active-class="is-active"
+            title="任意の HTML を貼り付けてプレビュー"
+          >
+            <Icon name="clipboard-text" :size="14" />
+            <span>HTML プレビュー</span>
+          </RouterLink>
+        </div>
+        <div class="app-topbar__group app-topbar__group--end">
         <div
           class="app-preview-modes"
           role="tablist"
@@ -67,6 +79,7 @@ watch(drawerOpen, (open) => {
           <span>エディター</span>
           <span v-if="count" class="app-cart__count">{{ count }}</span>
         </button>
+        </div>
       </div>
     </div>
 
