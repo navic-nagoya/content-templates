@@ -939,11 +939,9 @@ body {
 .tpl-card__canvas.is-resizing .tpl-card__preview {
   transition: none;
 }
-/* Container-type lives on `.pd-section` itself (style.css), so all we need
-   to do here is force the preview width to match the simulated device —
-   the nested `.pd-section` will follow and its @container rules will fire.
-   Using `width` (not `max-width`) ensures even the desktop preset (1280px)
-   keeps its full width inside narrower gallery cards; the canvas scrolls. */
+/* Force the preview width to match the simulated device. Using `width` (not
+   `max-width`) ensures even the desktop preset (1280px) keeps its full width
+   inside narrower gallery cards; the canvas scrolls. */
 :root:not([data-preview-mode="fluid"]) .tpl-card__preview {
   width: var(--preview-max-w, auto);
   outline: 1px solid var(--line-strong);
@@ -1851,9 +1849,8 @@ body {
 
 /* ---------------- Fluid-mode resize handle + width readout ----------------
    Siblings of the preview element in fluid mode: drag the handle to narrow
-   the preview and watch @container queries react. Width readout is fed by
-   a ResizeObserver in the composable so it also tracks window/canvas
-   resizes, not just user drags. */
+   the preview. Width readout is fed by a ResizeObserver in the composable
+   so it also tracks window/canvas resizes, not just user drags. */
 .preview-resizer {
   flex: 0 0 10px;
   align-self: stretch;
